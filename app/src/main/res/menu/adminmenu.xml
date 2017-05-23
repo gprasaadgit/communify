@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/CreateCommunity"
+        android:title="Create Community"
+        />
+
+    <item android:id="@+id/ViewCommunity"
+        android:title="ViewCommunity"
+        />
+    <item android:id="@+id/Residents"
+        android:title="Invite Residents"
+        />
+
+    <item android:id="@+id/CreatePosts"
+        android:title="Create Posts"
+        />
+    <item android:id="@+id/CreatePolls"
+        android:title="Create Polls"
+        />
+
+
+    <item android:id="@+id/Polls"
+        android:title="View Polls"
+        />
+
+    <item android:id="@+id/Posts"
+        android:title="View Posts"
+        />
+    <item android:id="@+id/ViewResidents"
+        android:title="View Residents"
+        />
+    <item android:id="@+id/Signout"
+        android:title="Signout"
+        />
+</menu>

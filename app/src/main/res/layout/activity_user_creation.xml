@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_community"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bng"
+
+    tools:context="com.gap22.community.apartment.UserCreation">
+
+    <TableLayout
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/Email"
+
+                android:hint="Enter Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/password"
+
+                android:hint="Enter Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="textPassword"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/Title"
+
+                android:hint="Enter Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+
+            <EditText
+                android:id = "@+id/firstname"
+
+                android:hint="Enter FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/Lastnmae"
+
+                android:hint="Enter LastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/Occupation"
+
+                android:hint="Enter Occupation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow> <TableRow android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="15dp">
+
+
+
+        <Spinner
+            android:id = "@+id/ResidenceStatus"
+
+            android:prompt="@string/prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/Status"
+            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:fontFamily="monospace"
+            android:typeface="monospace"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textStyle="normal|bold" />
+    </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+
+            <EditText
+                android:id = "@+id/Unit"
+
+                android:hint="Enter Unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/NumAdults"
+
+                android:hint="Enter No. of Adults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="number" style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/NumChildren"
+
+                android:hint="Enter No. of Child"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="number" style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <EditText
+                android:id = "@+id/NumInfants"
+
+                android:hint="Enter No. of Infants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:inputType="number" style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <TextView
+                android:id = "@+id/UploadImage"
+
+                android:hint="Upload Image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+               style="@android:style/Widget.DeviceDefault.EditText"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:fontFamily="monospace"
+                android:typeface="monospace"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textStyle="normal|bold" />
+        </TableRow>
+
+
+        <TableRow android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="15dp">
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id ="@+id/create"
+                android:textColor="@android:color/black"
+                android:text ="Create" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>
+

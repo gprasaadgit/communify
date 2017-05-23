@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "937149995672",
+    "firebase_url": "https://communify-4b71c.firebaseio.com",
+    "project_id": "communify-4b71c",
+    "storage_bucket": "communify-4b71c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937149995672:android:5750d9b239779985",
+        "android_client_info": {
+          "package_name": "com.example.shiva.apartmentcommunication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937149995672-jb1sue6tn4bb2i77rr54p8chr59m6ikn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shiva.apartmentcommunication",
+            "certificate_hash": "32138257205cb080f4e23d66918610af453f7f9c"
+          }
+        },
+        {
+          "client_id": "937149995672-18ao5p8214346drarf7gbnge9580p6c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV8ZRLKWH5UE8GyK37XiNaqFdvR50BiH0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937149995672-18ao5p8214346drarf7gbnge9580p6c1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937149995672:android:4d32021bfd4a7237",
+        "android_client_info": {
+          "package_name": "com.gap22.community.apartment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937149995672-fb3vkatsad13jtgrph2rpj2g3mm1tr64.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gap22.community.apartment",
+            "certificate_hash": "32138257205cb080f4e23d66918610af453f7f9c"
+          }
+        },
+        {
+          "client_id": "937149995672-18ao5p8214346drarf7gbnge9580p6c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV8ZRLKWH5UE8GyK37XiNaqFdvR50BiH0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937149995672-18ao5p8214346drarf7gbnge9580p6c1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

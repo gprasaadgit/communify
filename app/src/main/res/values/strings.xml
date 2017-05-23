@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">"Communify "</string>
+    <string name="title_activity_update">UpdateActivity</string>
+    <string name="title_activity_view_posts">ViewPosts</string>
+    <string name="prompt">Residence Status</string>
+    <string-array name="Status">
+        <item>Owner</item>
+        <item>Tenant</item>
+
+    </string-array>
+</resources>

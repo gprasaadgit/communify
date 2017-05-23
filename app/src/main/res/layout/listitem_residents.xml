@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ImageView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="0.5"
+    android:id = "@+id/img"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:id = "@+id/unit"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:text="hello"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:id = "@+id/Name"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:text="hello"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.25"
+        android:id = "@+id/status"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:text="hello"/>
+
+</LinearLayout>
