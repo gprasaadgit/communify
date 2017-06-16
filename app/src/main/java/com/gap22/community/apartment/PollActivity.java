@@ -1,8 +1,6 @@
 package com.gap22.community.apartment;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -20,9 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
+
+import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollActivity extends AppCompatActivity {
     private EditText Question,Option1,Option2,Option3;
@@ -101,7 +99,7 @@ p.setOption1(option);
 
 
         Toast.makeText(PollActivity.this, "Poll Created", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ViewPolls.class));
+        startActivity(new Intent(this, CoreOperation.class));
         finish();
 
     }
@@ -120,7 +118,7 @@ p.setOption1(option);
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -128,7 +126,7 @@ p.setOption1(option);
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -152,8 +150,8 @@ p.setOption1(option);
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
 

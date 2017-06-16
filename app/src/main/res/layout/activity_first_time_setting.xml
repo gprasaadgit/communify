@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_up_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/sign_up_image_panel"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@drawable/top_common_bg"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_photo" />
+
+        <!--<ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="154dp"
+            android:layout_height="151dp"
+            app:srcCompat="@drawable/communify_sign_up_icon" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0.58"
+        android:background="@drawable/login_transp_bg"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.60">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/tview_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_occupation"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_occupation"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_occupation_hint"
+                        android:inputType="text"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_residence"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_residence"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow android:background="@drawable/bottom_gray_border">
+
+                    <Spinner
+                        android:id="@+id/spin_residence"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:dropDownWidth="fill_parent"
+                        android:spinnerMode="dropdown"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tview_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_unit"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_unit"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_unit_unit"
+                        android:inputType="number"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tview_adults"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_adults"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_adults"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_adults_hint"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="15sp" />
+                </TableRow>
+
+
+
+                <TableRow android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tview_child"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_child"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_child"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_child_hint"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tview_infants"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_infants"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_infants"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_infants_hint"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="15sp" />
+                </TableRow>
+
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="@string/act_firstlogset_proceed"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</LinearLayout>

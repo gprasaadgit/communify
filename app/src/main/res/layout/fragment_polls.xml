@@ -1,0 +1,35 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gap22.community.apartment.fragment.PollsFragment">
+
+    <LinearLayout
+        android:id="@+id/frag_poll_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+        <ListView
+            android:layout_height="wrap_content"
+            android:id="@+id/listView2"
+            android:divider="#FFFFFF"
+            android:dividerHeight="4px"
+            android:layout_width="match_parent">
+        </ListView>
+
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        app:elevation="3dp"
+        app:backgroundTint="@color/colorPurple1"
+        android:src="@drawable/ic_poll" />
+</FrameLayout>

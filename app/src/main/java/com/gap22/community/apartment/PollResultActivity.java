@@ -1,11 +1,9 @@
 package com.gap22.community.apartment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static android.R.attr.key;
+import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollResultActivity extends AppCompatActivity {
 
@@ -41,7 +39,7 @@ public class PollResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_poll_result);
         fireauth = FirebaseAuth.getInstance();
         mpolls = FirebaseDatabase.getInstance().getReference("poll");
-        mpollresults=FirebaseDatabase.getInstance().getReference("pollResults");
+        mpollresults= FirebaseDatabase.getInstance().getReference("pollResults");
         Question =(TextView)findViewById(R.id.Question);
         Option1 =(RadioButton)findViewById(R.id.radioOption1);
         Option2 =(RadioButton)findViewById(R.id.radioOption2);
@@ -93,7 +91,7 @@ public class PollResultActivity extends AppCompatActivity {
                 mpollresults.child(pollId).child(fireauth.getCurrentUser().getUid()).setValue(resultvalue);
                 mpolls.child(pollId).child(resultvalue).child("count").setValue(finalcount);
                 Toast.makeText(PollResultActivity.this, "Poll Response Submitted", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PollResultActivity.this, ViewPolls.class));
+                startActivity(new Intent(PollResultActivity.this, CoreOperation.class));
                 finish();
 
             }
@@ -119,7 +117,7 @@ public class PollResultActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -127,7 +125,7 @@ public class PollResultActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -151,8 +149,8 @@ public class PollResultActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Residents:

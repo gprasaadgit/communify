@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.gap22.community.apartment.R.id.ViewResidents;
 import static com.gap22.community.apartment.R.id.pincode;
 
 public class ViewCommunityUser extends AppCompatActivity {
@@ -67,7 +68,7 @@ public class ViewCommunityUser extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -75,7 +76,7 @@ public class ViewCommunityUser extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -99,8 +100,8 @@ public class ViewCommunityUser extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Residents:

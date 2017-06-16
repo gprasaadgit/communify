@@ -1,6 +1,5 @@
 package com.gap22.community.apartment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class ViewCommunity extends AppCompatActivity {
     EditText name,buildername,seceretary,city,state,address,address2,pincode,taxid;
@@ -65,7 +66,7 @@ click();
                 if (dataSnapshot.exists()) {
                     // TODO: handle the case where the data already exists
                     {
-                    Community    cmt = dataSnapshot.getValue(Community.class);
+                    Community cmt = dataSnapshot.getValue(Community.class);
 
                         name.setText(cmt.getName());
                         buildername.setText(cmt.getBuilder());
@@ -195,7 +196,7 @@ public void click()
 
         mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(c);
         Toast.makeText(ViewCommunity.this,"Community Details Updated",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ViewPostActivity.class));
+        startActivity(new Intent(this, CoreOperation.class));
         finish();
 
     }
@@ -205,7 +206,7 @@ public void click()
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -213,7 +214,7 @@ public void click()
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -237,8 +238,8 @@ public void click()
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Residents:

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">"Communify "</string>
+    <string name="main_panel_title">Collabrate &amp; Communicate</string>
     <string name="title_activity_update">UpdateActivity</string>
     <string name="title_activity_view_posts">ViewPosts</string>
     <string name="prompt">Residence Status</string>
@@ -8,4 +9,63 @@
         <item>Tenant</item>
 
     </string-array>
+
+    <!-- Sign In Form Strings -->
+    <string name="act_signin_sign_in">Sign In</string>
+    <string name="act_signin_password">Password</string>
+    <string name="act_signin_password_hint">Enter the password</string>
+    <string name="act_signin_user_name">Username</string>
+    <string name="act_signin_sign_up">Sign In</string>
+    <string name="act_signin_cancel">Cancel</string>
+    <string name="act_signin_user_name_hint">Enter your user name</string>
+    <string name="act_signin_dont_have_account">Don\'t have an account?</string>
+
+    <!-- Sign Up Form Strings -->
+    <string name="act_signup_email_id">Email</string>
+    <string name="act_signup_email_id_hint">Provide your email</string>
+    <string name="act_signup_password">Password</string>
+    <string name="act_signup_password_hint">Provide your password</string>
+    <string name="act_signup_firstname">First Name</string>
+    <string name="act_signup_firstname_hint">Provide yor first name</string>
+    <string name="act_signup_lastname">Last Name</string>
+    <string name="act_signup_lastname_hint">Provide your last name</string>
+    <string name="act_signup_title">Title</string>
+    <string name="act_signup_title_hint">Select title</string>
+    <string name="act_signup_sign_up">Sign Up</string>
+    <string name="act_signup_cancel">Cancel</string>
+    <string-array name="act_signup_title_collection">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Dr</item>
+        <item>Jr</item>
+    </string-array>
+    <string name="title_activity_first_time_settings">FirstTimeSettings</string>
+
+    <!-- Sign Up Form Strings -->
+    <string name="act_firstlogset_proceed">Proceed</string>
+    <string name="act_firstlogset_occupation">Occupation</string>
+    <string name="act_firstlogset_occupation_hint">Enter occupation</string>
+    <string name="act_firstlogset_unit">Unit</string>
+    <string name="act_firstlogset_residence">ResidenceStatus</string>
+    <string name="act_firstlogset_unit_unit">Enter unit</string>
+    <string name="act_firstlogset_adults">No Of Adults</string>
+    <string name="act_firstlogset_adults_hint">Enter No Of Adults</string>
+    <string name="act_firstlogset_child">No Of Child</string>
+    <string name="act_firstlogset_child_hint">Enter No Of Child</string>
+    <string name="act_firstlogset_infants">No Of Infants</string>
+    <string name="act_firstlogset_infants_hint">Enter No Of Infants</string>
+    <string name="core_hint_com">Hello Community</string>
+    <string name="core_hint_poll">Hello Poll</string>
+    <string name="core_hint_post">Hello Post</string>
+    <string name="action_settings"></string>
+    <string name="title_activity_menu"></string>
+
+
+
+    <string name="frag_tv_post_title">Title</string>
+    <string name="frag_tv_post_title_hint">Enter post title</string>
+    <string name="frag_tv_post_attachment">Attachment</string>
+    <string name="frag_tv_post_attachment_hint">Attach file (Optional)</string>
+    <string name="frag_tv_post_message">Message</string>
+    <string name="frag_tv_post_message_hint">Your message here</string>
 </resources>

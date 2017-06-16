@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_gray_border"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:paddingBottom="15dip">
+
+    <!--  ListRow Left sied Thumbnail image -->
+    <LinearLayout android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip">
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:cpb_progress="28"
+            app:cpb_background_progressbar_color="#FFCDD2"
+            app:cpb_background_progressbar_width="5dp"
+            app:cpb_progressbar_color="#F44336"
+            app:cpb_progressbar_width="10dp" />
+
+    </LinearLayout>
+
+    <!-- Title Of Song-->
+
+
+    <!-- Artist Name -->
+    <TextView
+        android:id="@+id/artist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:textSize="13dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="25dp"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/colorShortDesc"
+        android:text="Are you willing to provide sheltering Pro Bono or at a reduced fee to those people that do not have the financial resources to pay because of the disaster? " />
+
+    <!-- Rightend Duration -->
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/title"
+        android:gravity="right"
+        android:text="Close by Aug 8"
+        android:layout_marginRight="5dip"
+        android:textSize="9dip"
+        android:textColor="@color/colorGray"
+        android:textStyle="bold"/>
+
+    <!-- Rightend Arrow -->
+    <ImageView android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/navigate_arrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

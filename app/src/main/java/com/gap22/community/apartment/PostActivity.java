@@ -1,6 +1,5 @@
 package com.gap22.community.apartment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.gap22.community.apartment.R.id.ViewResidents;
+
 public class PostActivity extends AppCompatActivity {
 
     private DatabaseReference mposts,mauthor;
@@ -34,19 +35,20 @@ public class PostActivity extends AppCompatActivity {
         fireauth = FirebaseAuth.getInstance();
 
         mposts = FirebaseDatabase.getInstance().getReference("post");
-        mauthor=FirebaseDatabase.getInstance().getReference("author");
+        mauthor= FirebaseDatabase.getInstance().getReference("author");
         Title =(EditText) findViewById(R.id.Title);
         Posts =(EditText) findViewById(R.id.Body);
         create =(Button) findViewById(R.id.create);
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Posts p = new Posts();
+                com.gap22.community.apartment.Database.Posts p = new Posts();
 
                 p.setAuthor(fireauth.getCurrentUser().getUid());
                 p.setBody(Posts.getText().toString());
                 p.setTitle(Title.getText().toString());
                 p.setType("Announcement");
+                p.setResponses(0);
 
                 if(validate(p)) {
                     createPosts(p);
@@ -55,7 +57,7 @@ public class PostActivity extends AppCompatActivity {
         });
 
     }
-    public boolean validate(Posts p)
+    public boolean validate(com.gap22.community.apartment.Database.Posts p)
     {
 
         if(TextUtils.isEmpty(p.getTitle()))
@@ -71,7 +73,7 @@ public class PostActivity extends AppCompatActivity {
 
         return true;
     }
-    public void createPosts(Posts p)
+    public void createPosts(com.gap22.community.apartment.Database.Posts p)
     {
 
         String key = mposts.push().getKey();
@@ -82,7 +84,7 @@ public class PostActivity extends AppCompatActivity {
 
         mauthor.child(fireauth.getCurrentUser().getUid()).child("posts").child(key).setValue("true");
         Toast.makeText(PostActivity.this, "Post Created", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ViewPostActivity.class));
+        startActivity(new Intent(this, CoreOperation.class));
         finish();
 
     }
@@ -101,7 +103,7 @@ public class PostActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -109,7 +111,7 @@ public class PostActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -128,8 +130,8 @@ public class PostActivity extends AppCompatActivity {
                 startActivity(new Intent(this, PollActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
 

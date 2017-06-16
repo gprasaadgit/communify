@@ -4,9 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.gap22.community.apartment.Database.Community;
 import com.gap22.community.apartment.Database.Member;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +28,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+
+import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PostResponse extends AppCompatActivity {
 
@@ -123,12 +124,40 @@ Response.setOnClickListener(new View.OnClickListener() {
                             Output.put("name","Admin");
                         }
 
-                        mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(Output);
-                        responsecount = responsecount +1;
-                        mpost.child("responses").setValue(responsecount);
-                        Toast.makeText(PostResponse.this,"Response Submitted Succesfully",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(PostResponse.this, ViewPostActivity.class));
-                        finish();
+                        mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists())
+                                {
+
+                                }
+                                else
+                                {
+                                    responsecount = responsecount +1;
+                                }
+                                mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(Output);
+
+                                mpost.child("responses").setValue(responsecount);
+                                Toast.makeText(PostResponse.this,"Response Submitted Succesfully",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(PostResponse.this, CoreOperation.class));
+                                finish();
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
+
+
+
+
+
+
                     }
 
                     @Override
@@ -137,7 +166,7 @@ Response.setOnClickListener(new View.OnClickListener() {
                     }
                 });
 
-
+               
 
 
             } // End of onClick(DialogInterface dialog, int whichButton)
@@ -174,7 +203,7 @@ Response.setOnClickListener(new View.OnClickListener() {
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -182,7 +211,7 @@ Response.setOnClickListener(new View.OnClickListener() {
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -206,8 +235,8 @@ Response.setOnClickListener(new View.OnClickListener() {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Residents:

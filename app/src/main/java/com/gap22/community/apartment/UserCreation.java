@@ -2,12 +2,10 @@ package com.gap22.community.apartment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,8 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import static com.gap22.community.apartment.R.id.unit;
 
 public class UserCreation extends AppCompatActivity {
     private EditText email, pwd, firstname, lastname, title, occupation, noofAdults, noofChild, noofInfants, unit;

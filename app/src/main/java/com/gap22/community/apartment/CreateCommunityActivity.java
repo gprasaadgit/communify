@@ -1,9 +1,9 @@
 package com.gap22.community.apartment;
 
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.app.AlertDialog;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Database.Community;
@@ -24,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static com.gap22.community.apartment.R.id.ViewResidents;
 
 
 public class CreateCommunityActivity extends AppCompatActivity {
@@ -64,7 +65,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
                                         // if this button is clicked, close
                                         // current activity
 
-                                        startActivity(new Intent(CreateCommunityActivity.this, ViewPostActivity.class));
+                                        startActivity(new Intent(CreateCommunityActivity.this, CoreOperation.class));
                                         finish();
 
                                     }
@@ -201,7 +202,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.Polls:
-                startActivity(new Intent(this, ViewPolls.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Community:
@@ -209,7 +210,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.Posts:
-                startActivity(new Intent(this, ViewPostActivity.class));
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.CreateCommunity:
@@ -228,8 +229,8 @@ public class CreateCommunityActivity extends AppCompatActivity {
                 startActivity(new Intent(this, PollActivity.class));
                 finish();
                 return true;
-            case R.id.ViewResidents:
-                startActivity(new Intent(this, ViewResidents.class));
+            case ViewResidents:
+                startActivity(new Intent(this, CoreOperation.class));
                 finish();
                 return true;
             case R.id.Signout:
