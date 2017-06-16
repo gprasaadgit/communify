@@ -201,7 +201,32 @@
                         android:textSize="15sp" />
                 </TableRow>
 
-
+                <TableRow android:layout_marginTop="15dp">
+                    <TextView
+                        android:id="@+id/tview_unit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/act_firstlogset_unit"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp" />
+                </TableRow>
+                <TableRow android:background="@drawable/bottom_gray_border">
+                    <EditText
+                        android:id="@+id/et_unit"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/act_firstlogset_unit_unit"
+                        android:inputType="number"
+                        android:textSize="15sp" />
+                </TableRow>
             </TableLayout>
 
         </ScrollView>

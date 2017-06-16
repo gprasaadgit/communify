@@ -25,7 +25,7 @@ import static com.gap22.community.apartment.R.id.img_user_image;
 
 public class OptionalSignup extends AppCompatActivity {
 
-    private EditText occupation, noofAdults, noofChild, noofInfants, unit;
+    private EditText occupation, noofAdults, noofChild, noofInfants;
     Button Create;
     private DatabaseReference mDatabase;
     private FirebaseAuth fireauth;
@@ -44,7 +44,7 @@ public class OptionalSignup extends AppCompatActivity {
         fireauth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("member");
         occupation = (EditText) findViewById(R.id.et_occupation);
-        unit = (EditText) findViewById(R.id.et_unit);
+
         noofAdults = (EditText) findViewById(R.id.et_adults);
         noofChild = (EditText) findViewById(R.id.et_child);
         noofInfants = (EditText) findViewById(R.id.et_infants);
@@ -64,7 +64,7 @@ public class OptionalSignup extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child(userid).child("unit").setValue(unit.getText().toString());
+
                 mDatabase.child(userid).child("residencestatus").setValue(residence.getSelectedItem().toString());
                 mDatabase.child(userid).child("occupation").setValue(occupation.getText().toString());
              if(!TextUtils.isEmpty(noofAdults.getText().toString()))

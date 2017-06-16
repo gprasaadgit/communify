@@ -46,7 +46,7 @@ public class SignUp extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth fireauth;
     private ProgressDialog progress;
-    private EditText email, pwd, firstname, lastname;
+    private EditText email, pwd, firstname, lastname, unit;
     private Spinner title;
     private ImageView userimg;
     Uri uri;
@@ -75,11 +75,13 @@ public class SignUp extends AppCompatActivity {
               title =(Spinner) findViewById(R.id.spin_title);
                 firstname = (EditText) findViewById(R.id.et_firstname);
                 lastname = (EditText) findViewById(R.id.et_lastname);
+                unit = (EditText) findViewById(R.id.et_unit);
                 final Member m = new Member();
                 m.setEmail(email.getText().toString());
                 m.setTitle(title.getSelectedItem().toString());
                 m.setFirstname(firstname.getText().toString());
                 m.setLastname(lastname.getText().toString());
+                m.setUnit(unit.getText().toString());
 
                 m.setStatus(1);
                 if (validate(m)) {
@@ -243,6 +245,10 @@ public class SignUp extends AppCompatActivity {
 
         if (TextUtils.isEmpty(m.getLastname())) {
             Toast.makeText(SignUp.this, "Please Enter LastName", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(m.getUnit())) {
+            Toast.makeText(SignUp.this, "Please Enter Unit", Toast.LENGTH_SHORT).show();
             return false;
         }
         if(uri == null)
