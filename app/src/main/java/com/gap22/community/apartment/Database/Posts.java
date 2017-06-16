@@ -54,4 +54,13 @@ public class Posts {
     }
 
     private String type;
+    private long Date;
+
+    public long getDate() {
+        return Date;
+    }
+
+    public void setDate(long date) {
+        Date = date;
+    }
 }

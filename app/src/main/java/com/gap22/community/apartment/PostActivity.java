@@ -48,6 +48,7 @@ public class PostActivity extends AppCompatActivity {
                 p.setBody(Posts.getText().toString());
                 p.setTitle(Title.getText().toString());
                 p.setType("Announcement");
+                p.setDate(System.currentTimeMillis());
                 p.setResponses(0);
 
                 if(validate(p)) {

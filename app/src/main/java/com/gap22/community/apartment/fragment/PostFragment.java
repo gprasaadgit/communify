@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class PostFragment extends Fragment {
 
@@ -87,7 +89,24 @@ public class PostFragment extends Fragment {
                 Posts p = (Posts) model;
                 ((TextView) v.findViewById(R.id.title)).setText(p.getTitle());
                 ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody());
-                ((TextView) v.findViewById(R.id.no_of_likes)).setText("Responses:"+p.getResponses());
+
+                if(p.getDate()!= 0)
+                {
+
+
+                    long diffInMillisec = System.currentTimeMillis() - p.getDate();
+                    long diffInSec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
+                   long seconds = diffInSec % 60;
+                    diffInSec/= 60;
+                   long minutes =diffInSec % 60;
+                    diffInSec /= 60;
+                  long  hours = diffInSec % 24;
+                    diffInSec /= 24;
+                  long  days = diffInSec;
+                    ((TextView) v.findViewById(R.id.no_of_likes)).setText(days +"Days ,"+hours+"hours,"+minutes+"minutes");
+                }
+
+
 
                /* if(p.)
                 StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+p.getAuthor()+".jpg");
