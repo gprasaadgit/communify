@@ -1,7 +1,5 @@
 package com.gap22.community.apartment.Database;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 
 /**
@@ -61,4 +59,14 @@ public class Poll {
 
     private String Question;
     private String status;
+
+    public long getDate() {
+        return Date;
+    }
+
+    public void setDate(long date) {
+        Date = date;
+    }
+
+    private long Date;
 }

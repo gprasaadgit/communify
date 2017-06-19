@@ -55,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
         progress = new ProgressDialog(this);
         fireauth = FirebaseAuth.getInstance();
 
-        if (fireauth.getCurrentUser() != null) {
+       /* if (fireauth.getCurrentUser() != null) {
             // User is logged in
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
             startActivity(intent_coreOper);
             overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-        }
+        }*/
 
         newuser.setOnClickListener(new View.OnClickListener() {
             @Override

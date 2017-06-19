@@ -58,6 +58,7 @@ p.setOption1(option);
                 p.setOption3(option3);
                 p.setQuestion(Question.getText().toString());
                 p.setStatus("Active");
+                p.setDate(System.currentTimeMillis());
                 if(validate(p)) {
                     createPoll(p);
                 }
