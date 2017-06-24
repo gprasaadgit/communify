@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Apartment.iml" filepath="$PROJECT_DIR$/Apartment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommunifyGit.iml" filepath="$PROJECT_DIR$/CommunifyGit.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
