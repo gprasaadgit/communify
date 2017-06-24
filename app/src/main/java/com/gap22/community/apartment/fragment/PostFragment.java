@@ -103,7 +103,7 @@ public class PostFragment extends Fragment {
                   long  hours = diffInSec % 24;
                     diffInSec /= 24;
                   long  days = diffInSec;
-                    ((TextView) v.findViewById(R.id.no_of_likes)).setText(days +"Days ,"+hours+"hours,"+minutes+"minutes");
+                    ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
                 }
 
 

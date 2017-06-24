@@ -9,8 +9,8 @@
         android:id="@+id/frag_poll_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
-        android:gravity="center_vertical|center_horizontal"
+        android:padding="10dp"
+        android:gravity="top"
         android:orientation="vertical">
         <ListView
             android:layout_height="wrap_content"
@@ -19,8 +19,6 @@
             android:dividerHeight="4px"
             android:layout_width="match_parent">
         </ListView>
-
-
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -36,8 +36,8 @@ public class PostActivity extends AppCompatActivity {
 
         mposts = FirebaseDatabase.getInstance().getReference("post");
         mauthor= FirebaseDatabase.getInstance().getReference("author");
-        Title =(EditText) findViewById(R.id.Title);
-        Posts =(EditText) findViewById(R.id.Body);
+        Title = (EditText) findViewById(R.id.et_title);
+        Posts = (EditText) findViewById(R.id.et_description);
         create =(Button) findViewById(R.id.create);
         create.setOnClickListener(new View.OnClickListener() {
             @Override

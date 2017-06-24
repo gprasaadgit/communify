@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_gray_border"
     android:orientation="horizontal"
-    android:padding="5dip"
-    android:paddingBottom="15dip">
+    android:paddingTop="10dip"
+    android:paddingBottom="10dip">
 
     <!--  ListRow Left sied Thumbnail image -->
     <LinearLayout android:id="@+id/thumbnail"
@@ -30,22 +28,94 @@
     </LinearLayout>
 
     <!-- Title Of Song-->
-
-
-    <!-- Artist Name -->
     <TextView
-        android:id="@+id/artist"
-        android:layout_width="fill_parent"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Are you willing to..."
+        android:textColor="@color/colorPrimaryDark"
+        android:typeface="sans"
+        android:textSize="14dip"
+        android:layout_marginRight="100dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/progress_title_1"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:textSize="12dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="25dp"
         android:layout_below="@id/title"
-        android:textSize="13dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/colorShortDesc"
+        android:text="Yes" />
+
+    <ProgressBar
+        android:id="@+id/pb_option1"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="false"
+        android:layout_below="@id/title"
+        android:layout_toRightOf="@+id/progress_title_1"
+        android:max="100"
+        android:layout_marginRight="30dp"
+        android:progressTint="@color/colorGray1"
+        android:progress="53" />
+
+    <TextView
+        android:id="@+id/progress_title_2"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:textSize="12dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="25dp"
+        android:layout_below="@id/pb_option1"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/colorShortDesc"
+        android:text="No" />
+
+    <ProgressBar
+        android:id="@+id/pb_option2"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="false"
+        android:layout_below="@id/pb_option1"
+        android:layout_toRightOf="@+id/progress_title_2"
+        android:max="100"
+        android:layout_marginRight="30dp"
+        android:progressTint="@color/colorGray1"
+        android:progress="72" />
+
+    <TextView
+        android:id="@+id/progress_title_3"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:textSize="12dip"
         android:layout_marginTop="1dip"
         android:layout_marginRight="25dp"
         android:layout_toRightOf="@+id/thumbnail"
+        android:layout_below="@id/pb_option2"
         android:textColor="@color/colorShortDesc"
-        android:text="Are you willing to provide sheltering Pro Bono or at a reduced fee to those people that do not have the financial resources to pay because of the disaster? " />
+        android:text="May Be" />
 
-    <!-- Rightend Duration -->
+    <ProgressBar
+        android:id="@+id/pb_option3"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminate="false"
+        android:layout_below="@id/pb_option2"
+        android:layout_toRightOf="@+id/progress_title_3"
+        android:max="100"
+        android:layout_marginRight="30dp"
+        android:progressTint="@color/colorGray1"
+        android:progress="72" />
+
     <TextView
         android:id="@+id/duration"
         android:layout_width="wrap_content"
@@ -59,7 +129,6 @@
         android:textColor="@color/colorGray"
         android:textStyle="bold"/>
 
-    <!-- Rightend Arrow -->
     <ImageView android:layout_width="20dp"
         android:layout_height="20dp"
         android:src="@drawable/navigate_arrow"

@@ -88,7 +88,7 @@ public class PollsFragment extends Fragment {
                 progress.dismiss();
                 Poll p = (Poll) model;
 
-                ((TextView) v.findViewById(R.id.artist)).setText(p.getQuestion());
+                ((TextView) v.findViewById(R.id.title)).setText(p.getQuestion());
               /*  if (p.getStatus().equalsIgnoreCase("Active")) {
                     ((TextView) v.findViewById(R.id.textView2)).setText("OPEN");
                 }

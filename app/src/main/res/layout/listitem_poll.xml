@@ -21,9 +21,6 @@
         android:textStyle="bold">
     </TextView>
 
-
-
-
     <TextView
         android:text="TextView"
         android:id="@+id/textView3"

@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dip" >
+    android:background="@drawable/bottom_gray_border"
+    android:orientation="horizontal">
 
     <!--  ListRow Left sied Thumbnail image -->
     <LinearLayout android:id="@+id/thumbnail"
@@ -16,8 +16,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user_image"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
@@ -25,52 +25,66 @@
             android:scaleType="centerCrop"
             app:border_width="1dp"
             app:border_color="@color/colorPrimaryDark"
-            android:src="@drawable/admin" />
+            android:src="@drawable/default_photo" />
 
     </LinearLayout>
 
-    <!-- Title Of Song-->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="#040404"
-        android:text="Rihanna Love the way lie"
+        android:text="Post title here"
+        android:textColor="@color/colorTitle"
         android:typeface="sans"
-        android:textStyle="normal|bold" />
+        android:textSize="14dip"
+        android:textStyle="bold" />
 
-    <!-- Artist Name -->
     <TextView
         android:id="@+id/short_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
+        android:textSize="13dip"
         android:layout_marginTop="1dip"
+        android:layout_marginRight="25dp"
         android:layout_toRightOf="@+id/thumbnail"
-        android:textColor="#343434"
-        android:text="Just gona stand there and ..." />
+        android:textColor="@color/colorShortDesc"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a neque mi." />
 
-    <!-- Rightend Duration -->
     <TextView
-        android:id="@+id/no_of_likes"
+        android:id="@+id/no_of_days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/title"
         android:gravity="right"
-        android:text="5:45"
+        android:text="2 days ago"
         android:layout_marginRight="5dip"
-        android:textSize="10dip"
-        android:textColor="#10bcc9"
+        android:textSize="9dip"
+        android:textColor="@color/colorGray"
         android:textStyle="bold"/>
 
-    <!-- Rightend Arrow -->
-    <ImageView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/navigate_arrow"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/no_of_replies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/title"
+        android:gravity="right"
+        android:text="2 days ago"
+        android:layout_marginRight="5dip"
+        android:textSize="9dip"
+        android:textColor="@color/colorGray"
+        android:textStyle="bold" />
 
 </RelativeLayout>

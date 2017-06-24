@@ -25,7 +25,7 @@ public class PollResultActivity extends AppCompatActivity {
 
     private TextView Question;
     private RadioButton Option1,Option2,Option3;
-    private Button Submit;
+    private Button Submit, btn_cancel;
     private RadioGroup result;
     private String option1,option2,option3;
     private String resultvalue;
@@ -40,12 +40,13 @@ public class PollResultActivity extends AppCompatActivity {
         fireauth = FirebaseAuth.getInstance();
         mpolls = FirebaseDatabase.getInstance().getReference("poll");
         mpollresults= FirebaseDatabase.getInstance().getReference("pollResults");
-        Question =(TextView)findViewById(R.id.Question);
+        Question = (TextView) findViewById(R.id.tview_question);
         Option1 =(RadioButton)findViewById(R.id.radioOption1);
         Option2 =(RadioButton)findViewById(R.id.radioOption2);
         Option3 =(RadioButton)findViewById(R.id.radioOption3);
         result =(RadioGroup) findViewById(R.id.radioResult);
-        Submit =(Button)findViewById(R.id.submit);
+        Submit = (Button) findViewById(R.id.btn_submit);
+        btn_cancel = (Button) findViewById(R.id.btn_cancel);
         Bundle bundle = getIntent().getExtras();
 
         option1 = bundle.getString("Option1");

@@ -7,7 +7,6 @@
     <string-array name="Status">
         <item>Owner</item>
         <item>Tenant</item>
-
     </string-array>
 
     <!-- Sign In Form Strings -->
@@ -61,11 +60,24 @@
     <string name="title_activity_menu"></string>
 
 
-
     <string name="frag_tv_post_title">Title</string>
     <string name="frag_tv_post_title_hint">Enter post title</string>
     <string name="frag_tv_post_attachment">Attachment</string>
     <string name="frag_tv_post_attachment_hint">Attach file (Optional)</string>
     <string name="frag_tv_post_message">Message</string>
     <string name="frag_tv_post_message_hint">Your message here</string>
+
+
+    <!-- Create Post Form Strings -->
+    <string name="act_create_post_create">Create</string>
+    <string name="act_create_post_cancel">Cancel</string>
+    <string name="act_create_post_title">Post Title</string>
+    <string name="act_create_post_title_hint">Provide post title</string>
+    <string name="act_create_post_details">Post Details</string>
+    <string name="act_create_post_details_hint">Provide post description</string>
+
+    <!-- Create Post Form Strings -->
+    <string name="act_contribute_poll_act_title">Polling</string>
+    <string name="act_contribute_poll_submit">Submit</string>
+    <string name="act_contribute_poll_cancel">Cancel</string>
 </resources>
