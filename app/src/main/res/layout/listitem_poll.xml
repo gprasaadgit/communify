@@ -28,7 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:layout_margin="5dp"
-        android:textColor="@android:color/white"
+
         android:textColorHint="@android:color/white"
         tools:textSize="18sp">
     </TextView>
@@ -39,8 +39,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:layout_margin="5dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+
+
         tools:textSize="18sp">
     </TextView>
     <TextView
@@ -50,8 +50,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:layout_margin="5dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+
         tools:textSize="18sp">
     </TextView>
     <TextView
@@ -61,8 +60,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         tools:layout_margin="5dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
+
         tools:textSize="18sp">
     </TextView>
 </LinearLayout>

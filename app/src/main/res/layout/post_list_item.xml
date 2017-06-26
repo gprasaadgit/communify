@@ -25,7 +25,7 @@
             android:scaleType="centerCrop"
             app:border_width="1dp"
             app:border_color="@color/colorPrimaryDark"
-            android:src="@drawable/default_photo" />
+            android:src="@drawable/admin" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,11 +96,34 @@ public class PollsFragment extends Fragment {
                 else
                 {
                     ((TextView) v.findViewById(R.id.textView2)).setText("CLOSED");
-                }
+                      +"-"+p.getOption1().get("count"));
+                }*/
 
-                ((TextView) v.findViewById(R.id.textView3)).setText(p.getOption1().get("text").toString()+"-"+p.getOption1().get("count"));
-                ((TextView) v.findViewById(R.id.textView4)).setText(p.getOption2().get("text").toString()+"-"+p.getOption2().get("count"));
-                ((TextView) v.findViewById(R.id.textView5)).setText(p.getOption3().get("text").toString()+"-"+p.getOption3().get("count"));*/
+                ((TextView) v.findViewById(R.id.progress_title_1)).setText(p.getOption1().get("text").toString());
+
+                ((TextView) v.findViewById(R.id.progress_title_2)).setText(p.getOption2().get("text").toString());
+
+                ((TextView) v.findViewById(R.id.progress_title_3)).setText(p.getOption3().get("text").toString());
+
+                long total = (long) p.getOption1().get("count") + (long) p.getOption2().get("count") +(long) p.getOption3().get("count") ;
+                long count1 = (long) p.getOption1().get("count");
+                long count2 = (long) p.getOption2().get("count");
+                long count3 = (long) p.getOption3().get("count");
+                float pb11 =0 ,pb12 =0,pb13 = (float) 0.0;
+if(total!=0) {
+     pb11 = (int) count1 / (int) total;
+     pb12 = (int) count2 / (int) total;
+     pb13 = (int) count3 / (int) total;
+}
+
+             ProgressBar pb = (ProgressBar)v.findViewById(R.id.pb_option1);
+                pb.setProgress((int)(pb11*100));
+                ProgressBar pb1 = (ProgressBar)v.findViewById(R.id.pb_option2);
+                pb1.setProgress((int)(pb12*100));
+                ProgressBar pb2 = (ProgressBar)v.findViewById(R.id.pb_option3);
+                pb2.setProgress((int)(pb13*100));
+
+
             }
         };
         lview.setAdapter(adapter);

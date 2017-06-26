@@ -116,18 +116,7 @@
         android:progressTint="@color/colorGray1"
         android:progress="72" />
 
-    <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/title"
-        android:gravity="right"
-        android:text="Close by Aug 8"
-        android:layout_marginRight="5dip"
-        android:textSize="9dip"
-        android:textColor="@color/colorGray"
-        android:textStyle="bold"/>
+
 
     <ImageView android:layout_width="20dp"
         android:layout_height="20dp"
