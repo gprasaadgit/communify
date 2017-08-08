@@ -80,4 +80,15 @@
     <string name="act_contribute_poll_act_title">Polling</string>
     <string name="act_contribute_poll_submit">Submit</string>
     <string name="act_contribute_poll_cancel">Cancel</string>
+
+
+    <!-- Verift Phone -->
+    <string name="act_verify_phone">Verify Your Number</string>
+    <string name="act_verify_phone_description">Please enter your mobile number to recieve a verfication code.</string>
+    <string name="act_verify_continue">Continue</string>
+
+    <!-- Verift Phone -->
+    <string name="act_share_location_need">Nead Your Location</string>
+    <string name="act_share_location_description">Please give us access to your GPS Location.</string>
+    <string name="act_share_location_allow">Allow</string>
 </resources>

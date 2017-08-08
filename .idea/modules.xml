@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Apartment.iml" filepath="$PROJECT_DIR$/Apartment.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommunifyGit.iml" filepath="$PROJECT_DIR$/CommunifyGit.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/communify.iml" filepath="$PROJECT_DIR$/communify.iml" />
     </modules>
   </component>
 </project>

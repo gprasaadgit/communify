@@ -113,29 +113,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-        private boolean ValidateFormBeforeSubmit() {
-            boolean response = true;
-            iv_userName_error = (ImageView) findViewById(R.id.iv_userName_error);
-            iv_password_error = (ImageView) findViewById(R.id.iv_password_error);
-System.out.print("ee"+Email.getText().toString());
-            if (Email == null || Email.getText().toString().equals("")) {
-                iv_userName_error.setVisibility(View.VISIBLE);
-                response = false;
-            } else {
-                iv_userName_error.setVisibility(View.INVISIBLE);
-            }
-
-            if (Pwd == null || Pwd.getText().toString().equals("")) {
-                iv_password_error.setVisibility(View.VISIBLE);
-                response = false;
-            } else {
-                iv_password_error.setVisibility(View.INVISIBLE);
-            }
-
-            return response;
+    private boolean ValidateFormBeforeSubmit() {
+        boolean response = true;
+        iv_userName_error = (ImageView) findViewById(R.id.iv_userName_error);
+        iv_password_error = (ImageView) findViewById(R.id.iv_password_error);
+        System.out.print("ee" + Email.getText().toString());
+        if (Email == null || Email.getText().toString().equals("")) {
+            iv_userName_error.setVisibility(View.VISIBLE);
+            response = false;
+        } else {
+            iv_userName_error.setVisibility(View.INVISIBLE);
         }
+
+        if (Pwd == null || Pwd.getText().toString().equals("")) {
+            iv_password_error.setVisibility(View.VISIBLE);
+            response = false;
+        } else {
+            iv_password_error.setVisibility(View.INVISIBLE);
+        }
+
+        return response;
     }
+}
 
 
 
