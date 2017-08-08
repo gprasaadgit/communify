@@ -1,133 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_poll"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_up_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@drawable/bng"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.gap22.community.apartment.PollActivity">
-    <TableLayout
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/sign_up_image_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="100dp"
+        android:background="@drawable/top_common_bg"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <EditText
-            android:id = "@+id/Question"
-
-            android:hint="Enter Question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textStyle="normal|bold"/>
-    </TableRow>
-
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <EditText
-            android:id = "@+id/option1"
-
-            android:hint="Enter First Option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textStyle="normal|bold"/>
-    </TableRow>
-
-
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <EditText
-            android:id = "@+id/option2"
-
-            android:hint="Enter second option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textStyle="normal|bold"/>
-    </TableRow>
-
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <EditText
-            android:id = "@+id/option3"
-
-            android:hint="Enter third option"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textStyle="normal|bold"/>
-    </TableRow>
-
-    <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id ="@+id/create"
-            android:textColor="@android:color/black"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text ="Create"
-          />
+            android:src="@drawable/ic_hdr_polling" />
 
-    </TableRow>
-    </TableLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/sign_up_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0.58"
+        android:background="@drawable/login_transp_bg"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bottom_gray_border"
+                android:paddingBottom="15dp">
+
+                <EditText
+                    android:id="@+id/edtInput"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/act_contribute_poll_question_hint"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:maxLength="2000"
+                    android:maxLines="6" />
+
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <RadioGroup
+                    android:id="@+id/radioResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/radioOption1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Yes / No / Maybe" />
+
+                    <RadioButton
+                        android:id="@+id/radioOption2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Agree / Disagree / Nutral" />
+
+                    <RadioButton
+                        android:id="@+id/radioOption3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:checked="true"
+                        android:text="I Like / I Disalike / No Comments" />
+
+                </RadioGroup>
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_submit"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/act_contribute_poll_submit"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:text="@string/act_contribute_poll_cancel"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

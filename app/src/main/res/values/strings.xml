@@ -80,6 +80,7 @@
     <string name="act_contribute_poll_act_title">Polling</string>
     <string name="act_contribute_poll_submit">Submit</string>
     <string name="act_contribute_poll_cancel">Cancel</string>
+    <string name="act_contribute_poll_question_hint">Enter Question</string>
 
 
     <!-- Verift Phone -->

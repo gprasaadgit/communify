@@ -31,14 +31,14 @@ public class PollActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
-        Question=(EditText)findViewById(R.id.Question);
+/*        Question=(EditText)findViewById(R.id.Question);
         Option1=(EditText)findViewById(R.id.option1);
         Option2=(EditText)findViewById(R.id.option2);
-        Option3=(EditText)findViewById(R.id.option3);
-        create =(Button)findViewById(R.id.create);
-        mDatabase = FirebaseDatabase.getInstance().getReference("poll");
-        fireauth = FirebaseAuth.getInstance();
-        create.setOnClickListener(new View.OnClickListener() {
+        Option3=(EditText)findViewById(R.id.option3);*/
+        //create =(Button)findViewById(R.id.create);
+        //mDatabase = FirebaseDatabase.getInstance().getReference("poll");
+        //fireauth = FirebaseAuth.getInstance();
+        /*create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Poll p = new Poll();
@@ -63,7 +63,7 @@ p.setOption1(option);
                     createPoll(p);
                 }
             }
-        });
+        });*/
     }
 
     public boolean validate(Poll p)
