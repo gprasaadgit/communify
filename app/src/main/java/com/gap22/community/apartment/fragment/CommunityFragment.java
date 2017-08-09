@@ -53,10 +53,10 @@ public class CommunityFragment extends Fragment {
         progress = new ProgressDialog(getActivity());
         FloatingActionButton fab = (FloatingActionButton) fragCommView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
-        String storageUserId = storagePref.getPreference("userId");
+        String storageUserId = storagePref.getPreference("type");
         if (storageUserId != "") {
 
-            if (storageUserId.equals("testadmin@gmail.com"))
+            if (storageUserId.equals("admin"))
             {
                 fab.setVisibility(View.VISIBLE);
             }

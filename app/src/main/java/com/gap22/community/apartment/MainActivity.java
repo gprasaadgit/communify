@@ -19,7 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.gap22.community.apartment.R.id.et_userName;
 
@@ -30,10 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText Pwd;
     private ProgressDialog progress;
     private FirebaseAuth fireauth;
+
     private TextView newuser;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
     private DatabaseReference mDatabase;
+
     private StoragePreferences storagePref;
 
     @Override
@@ -42,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference("member");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -91,12 +98,37 @@ public class MainActivity extends AppCompatActivity {
                             progress.dismiss();
                             if (task.isSuccessful()) {
                                 storagePref.savePreference("userId", email);
-                                Intent menu = new Intent(MainActivity.this, CoreOperation.class);
+                                fireauth.getCurrentUser().getUid();
 
-                                finish();
-                                startActivity(menu);
-                                overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                return;
+                                mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+
+                                            Intent menu = new Intent(MainActivity.this, CoreOperation.class);
+                                            storagePref.savePreference("type", "member");
+                                            finish();
+                                            startActivity(menu);
+                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            Intent menu = new Intent(MainActivity.this, CoreOperation.class);
+                                            storagePref.savePreference("type", "admin");
+                                            finish();
+                                            startActivity(menu);
+                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                            return;
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+
 
 
                             } else {

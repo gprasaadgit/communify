@@ -25,7 +25,7 @@ import java.util.HashMap;
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollActivity extends AppCompatActivity {
-    private EditText Question,Option1,Option2,Option3;
+    private EditText Question;
     private Button create,cancel;
     private DatabaseReference mDatabase;
     private FirebaseAuth fireauth;

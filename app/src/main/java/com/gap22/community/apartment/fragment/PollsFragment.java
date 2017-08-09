@@ -56,10 +56,10 @@ public class PollsFragment extends Fragment {
         FloatingActionButton fab = (FloatingActionButton) fragPollView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
         progress = new ProgressDialog(getActivity());
-        String storageUserId = storagePref.getPreference("userId");
+        String storageUserId = storagePref.getPreference("type");
         if (storageUserId != "") {
 
-            if (storageUserId.equals("testadmin@gmail.com"))
+            if (storageUserId.equals("admin"))
             {
                 fab.setVisibility(View.VISIBLE);
             }

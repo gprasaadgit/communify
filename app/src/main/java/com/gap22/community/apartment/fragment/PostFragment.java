@@ -56,11 +56,12 @@ public class PostFragment extends Fragment {
 
         FloatingActionButton fab = (FloatingActionButton) fragPostView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
-        String storageUserId = storagePref.getPreference("userId");
+
         progress = new ProgressDialog(getActivity());
+        String storageUserId = storagePref.getPreference("type");
         if (storageUserId != "") {
 
-            if (storageUserId.equals("testadmin@gmail.com"))
+            if (storageUserId.equals("admin"))
             {
                fab.setVisibility(View.VISIBLE);
             }
