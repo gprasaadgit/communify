@@ -26,7 +26,7 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference mposts,mauthor;
     private FirebaseAuth fireauth;
     private EditText Title,Posts;
-    private Button create;
+    private Button create,cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,8 @@ public class PostActivity extends AppCompatActivity {
         mauthor= FirebaseDatabase.getInstance().getReference("author");
         Title = (EditText) findViewById(R.id.et_title);
         Posts = (EditText) findViewById(R.id.et_description);
-        create =(Button) findViewById(R.id.create);
+        create =(Button) findViewById(R.id.btn_submit);
+        cancel = (Button) findViewById(R.id.btn_cancel);
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,14 @@ public class PostActivity extends AppCompatActivity {
                 if(validate(p)) {
                     createPosts(p);
                 }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PostActivity.this, MainActivity.class));
+                finish();
             }
         });
 

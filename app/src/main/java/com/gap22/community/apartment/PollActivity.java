@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Database.Poll;
@@ -24,34 +26,63 @@ import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollActivity extends AppCompatActivity {
     private EditText Question,Option1,Option2,Option3;
-    private Button create;
+    private Button create,cancel;
     private DatabaseReference mDatabase;
     private FirebaseAuth fireauth;
+    private RadioGroup Options;
+    private RadioButton option1,option2,option3;
+    int selectedid = 0;
+    String text = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
-/*        Question=(EditText)findViewById(R.id.Question);
-        Option1=(EditText)findViewById(R.id.option1);
+         Options = (RadioGroup)findViewById(R.id.radioResult);
+       option1 = (RadioButton) findViewById(R.id.radioOption1);
+         option2 = (RadioButton) findViewById(R.id.radioOption2);
+       option3 = (RadioButton) findViewById(R.id.radioOption3);
+       Question=(EditText)findViewById(R.id.edtInput);
+        create =(Button)findViewById(R.id.btn_submit);
+        cancel = (Button) findViewById(R.id.btn_cancel);
+         selectedid = Options.getCheckedRadioButtonId();
+         text = "";
+
+
+        /*Option1=(EditText)findViewById(R.id.option1);
         Option2=(EditText)findViewById(R.id.option2);
         Option3=(EditText)findViewById(R.id.option3);*/
-        //create =(Button)findViewById(R.id.create);
-        //mDatabase = FirebaseDatabase.getInstance().getReference("poll");
-        //fireauth = FirebaseAuth.getInstance();
-        /*create.setOnClickListener(new View.OnClickListener() {
+        //create =(Button)findViewById(R.id.create);*/
+        mDatabase = FirebaseDatabase.getInstance().getReference("poll");
+        fireauth = FirebaseAuth.getInstance();
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Poll p = new Poll();
+
+                if(selectedid==option1.getId())
+                {
+                     text = option1.getText().toString();
+
+
+                }
+                else if(selectedid==option2.getId())
+                {
+                    text = option2.getText().toString();
+                }
+                else
+                {
+                    text = option3.getText().toString();
+                }
              //   p.setOption1(Option1.getText().toString());
 
                 HashMap option = new HashMap();
-                option.put("text",Option1.getText().toString());
+                option.put("text",text.split("/")[0]);
                 option.put("count",0);
                 HashMap option2 = new HashMap();
-                option2.put("text",Option2.getText().toString());
+                option2.put("text",text.split("/")[1]);
                 option2.put("count",0);
                 HashMap option3 = new HashMap();
-                option3.put("text",Option3.getText().toString());
+                option3.put("text",text.split("/")[2]);
                 option3.put("count",0);
 p.setOption1(option);
                 p.setOption2(option2);
@@ -63,7 +94,14 @@ p.setOption1(option);
                     createPoll(p);
                 }
             }
-        });*/
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PollActivity.this, MainActivity.class));
+                finish();
+            }
+        });
     }
 
     public boolean validate(Poll p)
@@ -74,21 +112,12 @@ p.setOption1(option);
             Toast.makeText(PollActivity.this,"Please Enter Question",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(TextUtils.isEmpty(p.getOption1().get("text").toString()))
+        if(selectedid == 0)
         {
-            Toast.makeText(PollActivity.this,"Please Enter Option1",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PollActivity.this,"Please Choose Options",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(TextUtils.isEmpty(p.getOption2().get("text").toString()))
-        {
-            Toast.makeText(PollActivity.this,"Please Enter Option2",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(TextUtils.isEmpty(p.getOption3().get("text").toString()))
-        {
-            Toast.makeText(PollActivity.this,"Please Enter Option3",Toast.LENGTH_SHORT).show();
-            return false;
-        }
+
         return true;
     }
     public void createPoll(Poll p)
