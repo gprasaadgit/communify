@@ -8,6 +8,16 @@ public class Member {
     private String email;
     private String firstname;
 
+    public String getCommunityid() {
+        return communityid;
+    }
+
+    public void setCommunityid(String communityid) {
+        this.communityid = communityid;
+    }
+
+    private String communityid;
+
     public String getFirstname() {
         return firstname;
     }

@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,7 @@ public class PollResultActivity extends AppCompatActivity {
     private DatabaseReference mpolls,mpollresults;
     private FirebaseAuth fireauth;
     int finalcount,option1count,option2count,option3count;
+    private StoragePreferences storagePref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,7 @@ public class PollResultActivity extends AppCompatActivity {
         Submit = (Button) findViewById(R.id.btn_submit);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
         Bundle bundle = getIntent().getExtras();
-
+        storagePref = StoragePreferences.getInstance(this);
         option1 = bundle.getString("Option1");
         option2 = bundle.getString("Option2");
         option3 = bundle.getString("Option3");
@@ -89,8 +91,10 @@ public class PollResultActivity extends AppCompatActivity {
                     resultvalue = "option3";
                     finalcount = 1+option3count;
                 }
-                mpollresults.child(pollId).child(fireauth.getCurrentUser().getUid()).setValue(resultvalue);
-                mpolls.child(pollId).child(resultvalue).child("count").setValue(finalcount);
+                String storageUserId = storagePref.getPreference("CommunityID");
+
+                mpollresults.child(storageUserId).child(pollId).child(fireauth.getCurrentUser().getUid()).setValue(resultvalue);
+                mpolls.child(storageUserId).child(pollId).child(resultvalue).child("count").setValue(finalcount);
                 Toast.makeText(PollResultActivity.this, "Poll Response Submitted", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PollResultActivity.this, CoreOperation.class));
                 finish();

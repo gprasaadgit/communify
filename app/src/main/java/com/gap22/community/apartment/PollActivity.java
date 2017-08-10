@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Poll;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,10 +34,13 @@ public class PollActivity extends AppCompatActivity {
     private RadioButton option1,option2,option3;
     int selectedid = 0;
     String text = "";
+    private StoragePreferences storagePref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
+        storagePref = StoragePreferences.getInstance(this);
          Options = (RadioGroup)findViewById(R.id.radioResult);
        option1 = (RadioButton) findViewById(R.id.radioOption1);
          option2 = (RadioButton) findViewById(R.id.radioOption2);
@@ -123,8 +127,8 @@ p.setOption1(option);
     public void createPoll(Poll p)
     {
         String userId = mDatabase.push().getKey();
-
-        mDatabase.child(userId).setValue(p);
+        String storageUserId = storagePref.getPreference("CommunityID");
+        mDatabase.child(storageUserId).child(userId).setValue(p);
 
 
 

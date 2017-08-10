@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Posts;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,13 +28,14 @@ public class PostActivity extends AppCompatActivity {
     private FirebaseAuth fireauth;
     private EditText Title,Posts;
     private Button create,cancel;
+    private StoragePreferences storagePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         fireauth = FirebaseAuth.getInstance();
-
+        storagePref = StoragePreferences.getInstance(this);
         mposts = FirebaseDatabase.getInstance().getReference("post");
         mauthor= FirebaseDatabase.getInstance().getReference("author");
         Title = (EditText) findViewById(R.id.et_title);
@@ -85,10 +87,10 @@ public class PostActivity extends AppCompatActivity {
     }
     public void createPosts(com.gap22.community.apartment.Database.Posts p)
     {
-
+        String storageUserId = storagePref.getPreference("CommunityID");
         String key = mposts.push().getKey();
 
-        mposts.child(key).setValue(p);
+        mposts.child(storageUserId).child(key).setValue(p);
 
 
 

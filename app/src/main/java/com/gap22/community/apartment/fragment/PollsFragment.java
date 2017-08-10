@@ -56,7 +56,8 @@ public class PollsFragment extends Fragment {
         FloatingActionButton fab = (FloatingActionButton) fragPollView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
         progress = new ProgressDialog(getActivity());
-        String storageUserId = storagePref.getPreference("type");
+       final String storageUserId = storagePref.getPreference("type");
+        String CommunityId = storagePref.getPreference("CommunityID");
         if (storageUserId != "") {
 
             if (storageUserId.equals("admin"))
@@ -78,8 +79,8 @@ public class PollsFragment extends Fragment {
 
         lview = (ListView) fragPollView.findViewById(R.id.listView2);
         fireauth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("poll");
-        mpollresults= FirebaseDatabase.getInstance().getReference("pollResults");
+        mDatabase = FirebaseDatabase.getInstance().getReference("poll").child(CommunityId);
+        mpollresults= FirebaseDatabase.getInstance().getReference("pollResults").child(CommunityId);
         progress.setMessage("Loading Data");
         progress.show();
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
@@ -130,7 +131,7 @@ if(total!=0) {
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!(fireauth.getCurrentUser().getEmail().equals("testadmin@gmail.com")))
+                if (!(storageUserId.equals("admin")))
                 { final Poll p = (Poll) adapter.getItem(position);
                     final String pollid = adapter.getRef(position).getKey();
 

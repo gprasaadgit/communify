@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Database.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                             progress.dismiss();
                             if (task.isSuccessful()) {
                                 storagePref.savePreference("userId", email);
-                                fireauth.getCurrentUser().getUid();
+
 
                                 mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
@@ -107,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
 
                                             Intent menu = new Intent(MainActivity.this, CoreOperation.class);
                                             storagePref.savePreference("type", "member");
+                                            Member m = dataSnapshot.getValue(Member.class);
+                                            storagePref.savePreference("CommunityID",m.getCommunityid());
                                             finish();
                                             startActivity(menu);
                                             overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             Intent menu = new Intent(MainActivity.this, CoreOperation.class);
                                             storagePref.savePreference("type", "admin");
+                                            storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
                                             finish();
                                             startActivity(menu);
                                             overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);

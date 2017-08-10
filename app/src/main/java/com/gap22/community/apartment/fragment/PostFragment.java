@@ -70,6 +70,7 @@ public class PostFragment extends Fragment {
                 fab.setVisibility(View.GONE);
             }
         }
+        String CommunityId = storagePref.getPreference("CommunityID");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +79,7 @@ public class PostFragment extends Fragment {
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
-        mDatabase = FirebaseDatabase.getInstance().getReference("post");
+        mDatabase = FirebaseDatabase.getInstance().getReference("post").child(CommunityId);
         fireauth = FirebaseAuth.getInstance();
         progress.setMessage("Loading Data");
         progress.show();
@@ -88,8 +89,8 @@ public class PostFragment extends Fragment {
             protected void populateView(View v, Object model, int position) {
                 progress.dismiss();
                 Posts p = (Posts) model;
-                ((TextView) v.findViewById(R.id.title)).setText(p.getTitle());
-                ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody());
+                ((TextView) v.findViewById(R.id.title)).setText(p.getTitle().trim());
+                ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody().trim());
 
                 if(p.getDate()!= 0)
                 {

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Member;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +44,7 @@ public class PostResponse extends AppCompatActivity {
     private String postQuestion;
     private Button Response;
     private int responsecount;
+    private StoragePreferences storagePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,13 @@ public class PostResponse extends AppCompatActivity {
         title.setText( bundle.getString("Title"));
         responsecount = bundle.getInt("ResponseCount");
         post.setText(postQuestion);
+        storagePref = StoragePreferences.getInstance(this);
         Response =(Button) findViewById(R.id.respond);
-        mDatabase = FirebaseDatabase.getInstance().getReference("postResponse").child(pollId);
+        final String storageUserId = storagePref.getPreference("CommunityID");
+        mDatabase = FirebaseDatabase.getInstance().getReference("postResponse").child(storageUserId).child(pollId);
         mmember = FirebaseDatabase.getInstance().getReference("member");
-        mpost = FirebaseDatabase.getInstance().getReference("post").child(pollId);
+
+        mpost = FirebaseDatabase.getInstance().getReference("post").child(storageUserId).child(pollId);
        final FirebaseListAdapter adapter = new FirebaseListAdapter(this, Object.class, android.R.layout.simple_list_item_1, mDatabase)
        {
 
@@ -135,6 +140,7 @@ Response.setOnClickListener(new View.OnClickListener() {
                                 {
                                     responsecount = responsecount +1;
                                 }
+
                                 mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(Output);
 
                                 mpost.child("responses").setValue(responsecount);

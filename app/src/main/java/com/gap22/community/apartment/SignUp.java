@@ -82,6 +82,7 @@ public class SignUp extends AppCompatActivity {
                 m.setFirstname(firstname.getText().toString());
                 m.setLastname(lastname.getText().toString());
                 m.setUnit(unit.getText().toString());
+                m.setCommunityid("4A0lC6N0XOTWdsr2DetL1NOcGax1");
 
                 m.setStatus(1);
                 if (validate(m)) {

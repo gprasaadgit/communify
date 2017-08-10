@@ -65,17 +65,17 @@ public class OptionalSignup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mDatabase.child(userid).child("residencestatus").setValue(residence.getSelectedItem().toString());
-                mDatabase.child(userid).child("occupation").setValue(occupation.getText().toString());
+                mDatabase.child("4A0lC6N0XOTWdsr2DetL1NOcGax1").child(userid).child("residencestatus").setValue(residence.getSelectedItem().toString());
+                mDatabase.child("4A0lC6N0XOTWdsr2DetL1NOcGax1").child(userid).child("occupation").setValue(occupation.getText().toString());
              if(!TextUtils.isEmpty(noofAdults.getText().toString()))
              {
-                    mDatabase.child(userid).child("numAdults").setValue(Integer.parseInt(noofAdults.getText().toString()));
+                    mDatabase.child("4A0lC6N0XOTWdsr2DetL1NOcGax1").child(userid).child("numAdults").setValue(Integer.parseInt(noofAdults.getText().toString()));
                 }
             if(!TextUtils.isEmpty(noofChild.getText().toString())) {
-                    mDatabase.child(userid).child("numChildren").setValue(Integer.parseInt(noofChild.getText().toString()));
+                    mDatabase.child("4A0lC6N0XOTWdsr2DetL1NOcGax1").child(userid).child("numChildren").setValue(Integer.parseInt(noofChild.getText().toString()));
                 }
             if(!TextUtils.isEmpty(noofInfants.getText().toString())){
-                    mDatabase.child(userid).child("numInfants").setValue(Integer.parseInt(noofInfants.getText().toString()));
+                    mDatabase.child("4A0lC6N0XOTWdsr2DetL1NOcGax1").child(userid).child("numInfants").setValue(Integer.parseInt(noofInfants.getText().toString()));
                 }
                 Intent menu = new Intent(OptionalSignup.this, MainActivity.class);
 
