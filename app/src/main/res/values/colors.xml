@@ -11,7 +11,9 @@
     <color name="colorIndigo1">#283593</color>
     <color name="colorOrange1">#ff3d00</color>
     <color name="colorGrey1">#607d8b</color>
+    <color name="colorGrey2">#f0f0f0</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGreen1">#33691e</color>
+    <color name="colorGreen2">#ddf4c2</color>
     <color name="colorBlack">#000000</color>
 </resources>

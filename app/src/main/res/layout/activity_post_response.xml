@@ -1,62 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_post_response"
+    android:id="@+id/sign_up_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    android:fillViewport="true"
+    android:orientation="vertical">
 
-
-    android:background="@drawable/bng"
-    tools:context="com.gap22.community.apartment.PostResponse">
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/sign_up_image_panel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Title"
-        android:padding="10dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        tools:layout_margin="10dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        />
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/Post"
-    android:padding="10dp"
-    android:minLines="1"
-    android:maxLines="4"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    tools:layout_margin="10dp"
-    android:textColor="@android:color/white"
-    android:textColorHint="@android:color/white"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    />
+        android:layout_height="90dp"
+        android:background="@drawable/top_common_bg"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Respond"
-        tools:layout_margin="10dp"
-        android:padding="20dp"
-        android:id="@+id/respond"
-        android:textColor="@android:color/black"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_user_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/post_standby" />
 
-    <ListView
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
-        android:divider="#FFFFFF"
-        android:dividerHeight="4px"
-        android:layout_width="match_parent">
-    </ListView>
+        <!--<ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="154dp"
+            android:layout_height="151dp"
+            app:srcCompat="@drawable/communify_sign_up_icon" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_weight="0.58"
+        android:background="@drawable/login_transp_bg"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/stanby_text"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_green"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/qmap_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Narayanan D"
+                    android:textColor="@color/colorGrey1" />
+
+                <TextView
+                    android:id="@+id/qmap_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:text="@string/stanby_text"
+                    android:textColor="@color/colorBlack" />
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/et_post_response_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/act_create_post_response_hint"
+                android:inputType="text"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="90dp"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/btn_send"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/message_send" />
+
+            <Button
+                android:id="@+id/btn_attachment"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/message_attachment" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

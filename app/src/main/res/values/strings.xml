@@ -8,6 +8,7 @@
         <item>Owner</item>
         <item>Tenant</item>
     </string-array>
+    <string name="stanby_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eros velit, pellentesque sit amet tortor at, feugiat suscipit nibh. Quisque laoreet ante sit amet ante auctor aliquam.</string>
 
     <!-- Sign In Form Strings -->
     <string name="act_signin_sign_in">Sign In</string>
@@ -75,6 +76,7 @@
     <string name="act_create_post_title_hint">Provide post title</string>
     <string name="act_create_post_details">Post Details</string>
     <string name="act_create_post_details_hint">Provide post description</string>
+    <string name="act_create_post_response_hint">Send your comments</string>
 
     <!-- Create Post Form Strings -->
     <string name="act_contribute_poll_act_title">Polling</string>
