@@ -88,9 +88,11 @@ public class PostFragment extends Fragment {
             @Override
             protected void populateView(View v, Object model, int position) {
                 progress.dismiss();
+
                 Posts p = (Posts) model;
-                ((TextView) v.findViewById(R.id.title)).setText(p.getTitle().trim());
-                ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody().trim());
+                ((TextView) v.findViewById(R.id.title)).setText(p.getTitle());
+                ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody());
+                ((TextView)v.findViewById(R.id.no_of_replies)).setText(p.getResponses()+"Replies");
 
                 if(p.getDate()!= 0)
                 {
@@ -123,6 +125,7 @@ public class PostFragment extends Fragment {
                         .into(imageView);*/
             }
         };
+
         lview.setAdapter(adapter);
 
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

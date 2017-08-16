@@ -102,10 +102,12 @@ public class CommunityFragment extends Fragment {
 // ImageView in your Activity
                 ImageView imageView = (ImageView)v.findViewById(R.id.img_user_image);
 
+
 // Load the image using Glide
                 Glide.with(getActivity() )
                         .using(new FirebaseImageLoader())
                         .load(storageRef)
+                        .error(R.drawable.admin)
                         .into(imageView);
 
             }

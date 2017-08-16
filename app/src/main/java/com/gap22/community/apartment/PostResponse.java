@@ -7,20 +7,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Database.Member;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PostResponse extends AppCompatActivity {
 
-    private TextView post,title;
+    private TextView title;
+    private EditText et_post_response_message;
     ListView lview;
 
 
@@ -36,64 +48,61 @@ public class PostResponse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_response);
-      /*  lview = (ListView) findViewById(R.id.listView2);
-        post =(TextView) findViewById(R.id.Post);
+        lview = (ListView) findViewById(R.id.list_Post_Reponse);
+        //  post =(TextView) findViewById(R.id.Post);
         title =(TextView) findViewById(R.id.tview_title);
+        et_post_response_message =(EditText) findViewById(R.id.et_post_response_message);
 
         fireauth = FirebaseAuth.getInstance();
         Bundle bundle = getIntent().getExtras();
         pollId = bundle.getString("PostId");
         postQuestion = bundle.getString("Post");
-        title.setText( bundle.getString("Title"));
+        //title.setText( bundle.getString("Title"));
         responsecount = bundle.getInt("ResponseCount");
-        post.setText(postQuestion);
+        title.setText(postQuestion);
         storagePref = StoragePreferences.getInstance(this);
-        Response =(Button) findViewById(R.id.respond);
+        Response =(Button) findViewById(R.id.btn_send);
         final String storageUserId = storagePref.getPreference("CommunityID");
         mDatabase = FirebaseDatabase.getInstance().getReference("postResponse").child(storageUserId).child(pollId);
         mmember = FirebaseDatabase.getInstance().getReference("member");
 
         mpost = FirebaseDatabase.getInstance().getReference("post").child(storageUserId).child(pollId);
-       final FirebaseListAdapter adapter = new FirebaseListAdapter(this, Object.class, android.R.layout.simple_list_item_1, mDatabase)
-       {
+        FirebaseListAdapter adapter = new FirebaseListAdapter(this, Object.class, R.layout.viewpostresponse, mDatabase)
+        {
 
-           @Override
-           protected void populateView(View v, Object model, int position) {
-           String key = this.getRef(position).getKey();
-
-               HashMap<String,String> h = (HashMap)model;
+            @Override
+            protected void populateView(View v, Object model, int position) {
 
 
 
-               final TextView t = (TextView) v.findViewById(android.R.id.text1);
-               t.setTextColor(Color.WHITE);
-
-            t.setText(((HashMap) model).get("text").toString()+"-"+((HashMap) model).get("name").toString());
+                System.out.print("testtt"+position);
 
 
+                final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
 
-           }
-       };
+                final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
+
+                response.setText(((HashMap) model).get("text").toString());
+                name.setText(((HashMap) model).get("name").toString());
+
+
+
+            }
+        };
+
         lview.setAdapter(adapter);
 
 
-Response.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(PostResponse.this);
-        alert.setTitle("Post Response"); //Set Alert dialog title here
-        alert.setMessage("Enter Your Response Here"); //Message here
+        Response.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        // Set an EditText view to get user input
-        final EditText input = new EditText(PostResponse.this);
-        alert.setView(input);
 
-        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+
                 //You will get as string input data in this variable.
                 // here we convert the input to a string and show in a toast.
                 final HashMap Output = new HashMap();
-               final String srt = input.getEditableText().toString();
+                final String srt = et_post_response_message .getText().toString();
 
                 mmember.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent( new ValueEventListener()
                 {
@@ -158,22 +167,14 @@ Response.setOnClickListener(new View.OnClickListener() {
                     }
                 });
 
-               
 
 
-            } // End of onClick(DialogInterface dialog, int whichButton)
-        }); //End of alert.setPositiveButton
-        alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-                dialog.cancel();
+
+
+
             }
-        }); //End of alert.setNegativeButton
-        AlertDialog alertDialog = alert.create();
-        alertDialog.show();
-    }
-});
-*/
+        });
+
 
     }
 
