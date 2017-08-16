@@ -1,219 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TableLayout
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:fontFamily="monospace"
 
             android:text="View Community"
+            android:textAlignment="center"
+            android:textAllCaps="true"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
+            android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="normal|bold|italic"
-            android:textAlignment="center"
-            android:textAllCaps="true" />
+            android:typeface="monospace" />
 
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
-
-
-            <TextView
-                android:id = "@+id/Name"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-
-                android:inputType="text"
-                style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:fontFamily="monospace"
-                android:typeface="monospace"
-                android:textSize="24sp"
-                android:textStyle="normal|bold" />
-        </TableRow>
-
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
-
-            <TextView
-                android:id = "@+id/builder"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="text"
-                style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:fontFamily="monospace"
-                android:typeface="monospace"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="normal|bold" />
-        </TableRow>
-
-
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
-
-
-            <TextView
-                android:id = "@+id/sec"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="text"
-                style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:fontFamily="monospace"
-                android:typeface="monospace"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="normal|bold" />
-        </TableRow>
-
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
-
-            <TextView
-                android:id = "@+id/Address1"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="text"
-                style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:fontFamily="monospace"
-                android:typeface="monospace"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="normal|bold" />
-        </TableRow>
-
-      <TableRow android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="15dp">
-
-
-
-        <TextView
-            android:id = "@+id/city"
-
-
+        <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            android:textSize="24sp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            android:textStyle="normal|bold" />
-    </TableRow>
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id = "@+id/state"
-
-
+                android:id="@+id/Name"
+                style="@android:style/Widget.DeviceDefault.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:fontFamily="monospace"
-                android:typeface="monospace"
-                android:textSize="24sp"
-                android:textStyle="normal|bold" />
-        </TableRow>
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
-
-
-            <TextView
-                android:id = "@+id/pincode"
-
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="number" style="@android:style/Widget.DeviceDefault.EditText"
+                android:inputType="text"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-                android:fontFamily="monospace"
-                android:typeface="monospace"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
         </TableRow>
 
-        <TableRow android:layout_width="match_parent"
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="15dp">
-
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id = "@+id/tax"
-
-
+                android:id="@+id/builder"
+                style="@android:style/Widget.DeviceDefault.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:inputType="text" style="@android:style/Widget.DeviceDefault.EditText"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:fontFamily="monospace"
-                android:typeface="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="24sp"
-                android:textStyle="normal|bold" />
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sec"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Address1"
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/city"
+
+
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/state"
+
+
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/pincode"
+
+
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="number"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tax"
+
+
+                style="@android:style/Widget.DeviceDefault.EditText"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
+        </TableRow>
 
 
     </TableLayout>

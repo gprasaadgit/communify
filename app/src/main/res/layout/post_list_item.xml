@@ -54,6 +54,18 @@
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a neque mi." />
 
     <TextView
+        android:id="@+id/no_of_replies"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/short_message"
+        android:textSize="9dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="5dip"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textColor="@color/colorGray"
+        android:text="20 Replies" />
+
+    <TextView
         android:id="@+id/no_of_days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,18 +85,5 @@
         android:src="@drawable/navigate_arrow"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"/>
-
-    <TextView
-        android:id="@+id/no_of_replies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/title"
-        android:gravity="right"
-        android:text="2 days ago"
-        android:layout_marginRight="5dip"
-        android:textSize="9dip"
-        android:textColor="@color/colorGray"
-        android:textStyle="bold" />
 
 </RelativeLayout>
