@@ -6,12 +6,28 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/text_User_Display_Name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Narayanan D"
-        android:textColor="@color/colorGrey1" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp">
+
+        <TextView
+            android:id="@+id/text_User_Display_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:text="Narayanan D"
+            android:textColor="@color/colorGrey1" />
+
+        <ImageView
+            android:id="@+id/img_Edit_Comment"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:src="@drawable/post_edit" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/text_User_Response"
