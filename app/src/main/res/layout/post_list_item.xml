@@ -10,9 +10,9 @@
     <LinearLayout android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dip"
         android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dip">
+        android:layout_marginRight="5dip"
+        android:padding="3dip">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_user_image"
@@ -23,9 +23,9 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="5dp"
             android:scaleType="centerCrop"
-            app:border_width="1dp"
+            android:src="@drawable/admin"
             app:border_color="@color/colorPrimaryDark"
-            android:src="@drawable/admin" />
+            app:border_width="1dp" />
 
     </LinearLayout>
 
@@ -37,33 +37,34 @@
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Post title here"
         android:textColor="@color/colorTitle"
-        android:typeface="sans"
         android:textSize="14dip"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <TextView
         android:id="@+id/short_message"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:textSize="13dip"
-        android:layout_marginTop="1dip"
         android:layout_marginRight="25dp"
+        android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a neque mi."
         android:textColor="@color/colorShortDesc"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque a neque mi." />
+        android:textSize="13dip" />
 
     <TextView
         android:id="@+id/no_of_replies"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/short_message"
-        android:textSize="9dip"
-        android:layout_marginTop="1dip"
+        android:layout_marginBottom="5dp"
         android:layout_marginRight="5dip"
+        android:layout_marginTop="1dip"
         android:layout_toRightOf="@+id/thumbnail"
+        android:text="20 Replies"
         android:textColor="@color/colorGray"
-        android:text="20 Replies" />
+        android:textSize="9dip" />
 
     <TextView
         android:id="@+id/no_of_days"
@@ -71,19 +72,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/title"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="5dip"
         android:gravity="right"
         android:text="2 days ago"
-        android:layout_marginRight="5dip"
-        android:textSize="9dip"
         android:textColor="@color/colorGray"
+        android:textSize="9dip"
         android:textStyle="bold"/>
 
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/navigate_arrow"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:src="@drawable/navigate_arrow" />
 
 </RelativeLayout>
