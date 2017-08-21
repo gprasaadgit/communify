@@ -87,11 +87,24 @@
 
     <!-- Verift Phone -->
     <string name="act_verify_phone">Verify Your Number</string>
-    <string name="act_verify_phone_description">Please enter your mobile number to recieve a verfication code.</string>
+    <string name="act_verify_phone_description">Please enter your mobile number to receive a verification code.</string>
     <string name="act_verify_continue">Continue</string>
 
     <!-- Verift Phone -->
     <string name="act_share_location_need">Nead Your Location</string>
     <string name="act_share_location_description">Please give us access to your GPS Location.</string>
     <string name="act_share_location_allow">Allow</string>
+
+    <!-- View Profile -->
+    <string name="act_view_profile_fullname">Gopalan Arun Prasad</string>
+    <string name="act_view_profile_role">Association Head</string>
+    <string name="act_view_profile_Update">Update Profile</string>
+    <string name="act_view_profile_unit">Unit</string>
+    <string name="act_view_profile_occupation">Occupation</string>
+    <string name="act_view_profile_residence">Residence</string>
+    <string name="act_view_profile_adults">Adults</string>
+    <string name="act_view_profile_child">Child</string>
+    <string name="act_view_profile_infants">Infants</string>
+    <string name="act_view_profile_phone">Phone</string>
+    <string name="act_view_profile_email">Email</string>
 </resources>
