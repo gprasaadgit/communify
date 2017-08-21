@@ -107,4 +107,9 @@
     <string name="act_view_profile_infants">Infants</string>
     <string name="act_view_profile_phone">Phone</string>
     <string name="act_view_profile_email">Email</string>
+
+    <!-- Invite users -->
+    <string name="act_view_invite_mem_title">Invite Members!</string>
+    <string name="act_view_invite_mem_btn">Invite</string>
+    <string name="act_view_invite_mem_desc">Add members to your community and get collabrated</string>
 </resources>
