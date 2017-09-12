@@ -112,4 +112,8 @@
     <string name="act_view_invite_mem_title">Invite Members!</string>
     <string name="act_view_invite_mem_btn">Invite</string>
     <string name="act_view_invite_mem_desc">Add members to your community and get collabrated</string>
+    <string name="title_activity_get_collaborated">GetCollaborated</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

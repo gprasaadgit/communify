@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
 
-                                            Intent menu = new Intent(MainActivity.this, CoreOperation.class);
+                                            Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
                                             storagePref.savePreference("type", "member");
                                             Member m = dataSnapshot.getValue(Member.class);
                                             storagePref.savePreference("CommunityID",m.getCommunityid());
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            Intent menu = new Intent(MainActivity.this, CoreOperation.class);
+                                            Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
                                             storagePref.savePreference("type", "admin");
                                             storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
                                             finish();

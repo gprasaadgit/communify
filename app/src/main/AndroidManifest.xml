@@ -3,6 +3,7 @@
     package="com.gap22.community.apartment">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <!--
 ATTENTION: This was auto-generated to add Google Play services to your project for
  App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -14,9 +15,7 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhoneVerification">
-
-        </activity>
+        <activity android:name=".PhoneVerification"></activity>
         <activity android:name=".CreateCommunityActivity" />
         <activity android:name=".PollActivity" />
         <activity android:name=".ViewCommunity" />
@@ -27,12 +26,16 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".CoreOperation" />
         <activity android:name=".SignUp" />
         <activity android:name=".OptionalSignup" />
-        <activity android:name=".MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".GetCollaborated" />
         <activity android:name=".ShareMyLocation" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

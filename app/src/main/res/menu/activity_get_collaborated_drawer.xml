@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/icl_mnu_my_profile"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/icl_mnu_gallery"
+            android:title="Community Gallery" />
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/icl_mnu_events_calendar"
+            android:title="Events Calendar" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/icl_mnu_notifications"
+            android:title="Notification" />
+        <item
+            android:id="@+id/nav_my_community"
+            android:icon="@drawable/icl_mnu_my_community"
+            android:title="My Community" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_invite_neighbours"
+                android:icon="@drawable/icl_mnu_invite_neighbours"
+                android:title="Invite Neighbours" />
+            <item
+                android:id="@+id/nav_raise_a_query"
+                android:icon="@drawable/icl_mnu_ask_question"
+                android:title="Raise A Query" />
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/icl_mnu_signout"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>
