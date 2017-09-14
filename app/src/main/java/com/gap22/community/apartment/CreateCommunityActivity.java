@@ -185,7 +185,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
 
         mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(c);
         Toast.makeText(CreateCommunityActivity.this, "Community Created", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, ViewCommunity.class));
+        startActivity(new Intent(this, GetCollaborated.class));
         finish();
     }
     public boolean onCreateOptionsMenu(Menu menu) {

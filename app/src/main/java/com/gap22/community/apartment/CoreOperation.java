@@ -52,6 +52,7 @@ public class CoreOperation extends AppCompatActivity {
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_polls, 0, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
+
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabThree.setText("  Community");
         tabThree.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_community, 0, 0, 0);
@@ -60,8 +61,9 @@ public class CoreOperation extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new PostFragment(), "Post");
+
         adapter.addFragment(new PollsFragment(), "Polls");
+        adapter.addFragment(new PostFragment(), "Post");
         adapter.addFragment(new CommunityFragment(), "Community");
         viewPager.setAdapter(adapter);
     }
