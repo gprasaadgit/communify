@@ -1,9 +1,7 @@
 package com.gap22.community.apartment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -36,6 +34,8 @@ public class GetCollaborated extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle(R.string.main_panel_title);
+        Intent menu = new Intent(GetCollaborated.this, CoreOperation.class);
+        startActivity(menu);
     }
 
     @Override

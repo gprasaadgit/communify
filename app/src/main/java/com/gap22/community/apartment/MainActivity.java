@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView newuser;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mCommunity;
 
     private StoragePreferences storagePref;
 
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
         mDatabase = FirebaseDatabase.getInstance().getReference("member");
+        mCommunity = FirebaseDatabase.getInstance().getReference("community");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -119,11 +120,44 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
                                             storagePref.savePreference("type", "admin");
-                                            storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
-                                            finish();
-                                            startActivity(menu);
-                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                            return;
+
+
+                                            mCommunity.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                                                    if (dataSnapshot.exists()) {
+
+                                                        Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
+                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
+                                                        finish();
+                                                        startActivity(menu);
+                                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                                        return;
+
+                                                    } else {
+
+                                                        Intent menu = new Intent(MainActivity.this, CreateCommunityActivity.class);
+                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
+                                                        finish();
+                                                        startActivity(menu);
+                                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                                        return;
+
+
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+
+
+
+
                                         }
                                     }
 
