@@ -1,20 +1,27 @@
 package com.gap22.community.apartment;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.fragment.ApproveInviteRequestFragment;
 
 public class GetCollaborated extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public ViewPager viewpager;
+    public NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +31,18 @@ public class GetCollaborated extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        viewpager = (ViewPager) findViewById(R.id.viewpager);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setTitle(R.string.main_panel_title);
-        Intent menu = new Intent(GetCollaborated.this, CoreOperation.class);
-        startActivity(menu);
     }
 
     @Override
@@ -77,6 +84,7 @@ public class GetCollaborated extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
+            //startActivity(new Intent(getApplicationContext(), UserSettings.class));
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
