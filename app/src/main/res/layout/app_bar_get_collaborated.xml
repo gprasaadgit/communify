@@ -19,10 +19,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <include layout="@layout/app_bar_content_main" />
 
 </android.support.design.widget.CoordinatorLayout>

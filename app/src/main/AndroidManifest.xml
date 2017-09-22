@@ -26,9 +26,8 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".CoreOperation" />
         <activity android:name=".SignUp" />
         <activity android:name=".OptionalSignup" />
-        <activity android:name=".GetCollaborated" />
         <activity android:name=".ShareMyLocation" />
-        <activity android:name=".DrawerActivity.UserSettings" />
+        <activity android:name=".GetCollaborated" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme">

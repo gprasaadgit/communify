@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="none">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icl_mnu_home"
+            android:title="Home" />
+        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/icl_mnu_my_profile"
             android:title="My Profile" />
@@ -23,6 +27,23 @@
             android:icon="@drawable/icl_mnu_my_community"
             android:title="My Community" />
     </group>
+
+    <item android:title="Manage">
+        <menu>
+            <item
+                android:id="@+id/nav_manage_invites"
+                android:icon="@drawable/icl_mnu_invite_neighbours"
+                android:title="Manage Invites" />
+            <item
+                android:id="@+id/nav_update_community_info"
+                android:icon="@drawable/icl_mnu_ask_question"
+                android:title="Update Community Info" />
+            <item
+                android:id="@+id/nav_set_rights"
+                android:icon="@drawable/icl_mnu_signout"
+                android:title="Set Rights" />
+        </menu>
+    </item>
 
     <item android:title="Communicate">
         <menu>
