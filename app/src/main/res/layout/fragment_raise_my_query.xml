@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.gap22.community.apartment.fragment.RaiseMyQuery">
+    tools:context="com.gap22.community.apartment.Fragments.RaiseMyQuery">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

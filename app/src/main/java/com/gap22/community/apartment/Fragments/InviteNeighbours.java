@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.fragment;
+package com.gap22.community.apartment.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 
 import com.gap22.community.apartment.R;
 
+public class InviteNeighbours extends Fragment {
 
-public class MyProfile extends Fragment {
     private int mIndex;
 
-    public MyProfile() {
+    public InviteNeighbours() {
         // Required empty public constructor
     }
 
@@ -26,14 +26,13 @@ public class MyProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View fragPollView = inflater.inflate(R.layout.fragment_my_profile, container, false);
-        return fragPollView;
+        return inflater.inflate(R.layout.fragment_invite_neighbours, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle("My Profile");
+        getActivity().setTitle("Invite Neighbours");
     }
 }

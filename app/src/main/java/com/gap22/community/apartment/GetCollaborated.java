@@ -1,11 +1,8 @@
 package com.gap22.community.apartment;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,15 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gap22.community.apartment.Common.FontsOverride;
-import com.gap22.community.apartment.fragment.ApproveInviteRequestFragment;
-import com.gap22.community.apartment.fragment.CollabrationPallet;
-import com.gap22.community.apartment.fragment.EventsCalendar;
-import com.gap22.community.apartment.fragment.InviteNeighbours;
-import com.gap22.community.apartment.fragment.MyCommunity;
-import com.gap22.community.apartment.fragment.MyProfile;
-import com.gap22.community.apartment.fragment.Notifications;
-import com.gap22.community.apartment.fragment.RaiseMyQuery;
-import com.twitter.sdk.android.tweetui.GalleryActivity;
+import com.gap22.community.apartment.Fragments.CollabrationPallet;
+import com.gap22.community.apartment.Fragments.EventsCalendar;
+import com.gap22.community.apartment.Fragments.InviteNeighbours;
+import com.gap22.community.apartment.Fragments.MyCommunity;
+import com.gap22.community.apartment.Fragments.MyProfile;
+import com.gap22.community.apartment.Fragments.Notifications;
+import com.gap22.community.apartment.Fragments.RaiseMyQuery;
 
 public class GetCollaborated extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

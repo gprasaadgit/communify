@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.fragment;
+package com.gap22.community.apartment.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

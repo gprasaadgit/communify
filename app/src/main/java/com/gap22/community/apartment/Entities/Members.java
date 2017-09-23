@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.entities;
+package com.gap22.community.apartment.Entities;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,22 +10,22 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Members {
 
-    public long community_id;
-    public long user_id;
-    public String user_email;
-    public Date user_registered_on;
-    public String user_activation_key;
-    public boolean user_status;
-    public String user_first_name;
-    public int user_adults;
-    public int user_children;
-    public int user_infants;
-    public String user_title;
-    public String user_unit;
-    public String user_phone;
-    public String user_twitter_url;
-    public String user_facebook_url;
-    public String user_about;
+    private long community_id;
+    private long user_id;
+    private String user_email;
+    private Date user_registered_on;
+    private String user_activation_key;
+    private boolean user_status;
+    private String user_first_name;
+    private int user_adults;
+    private int user_children;
+    private int user_infants;
+    private String user_title;
+    private String user_unit;
+    private String user_phone;
+    private String user_twitter_url;
+    private String user_facebook_url;
+    private String user_about;
 
     public Members() {
 

@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.fragment;
+package com.gap22.community.apartment.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

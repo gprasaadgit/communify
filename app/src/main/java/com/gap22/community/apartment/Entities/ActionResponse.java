@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.entities;
+package com.gap22.community.apartment.Entities;
 
 /**
  * Created by nxd7826 on 14-09-2017.

@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.entities;
+package com.gap22.community.apartment.Entities;
 
 import java.util.Date;
 import java.util.Map;
@@ -10,19 +10,19 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Post {
 
-    public long community_id;
-    public long post_id;
-    public String post_author;
-    public Date post_date;
-    public String post_content;
-    public String post_title;
-    public boolean post_status;
-    public String comment_status;
-    public String post_password;
-    public Date post_modified;
-    public String post_parent;
-    public String post_type;
-    public String post_responses;
+    private long community_id;
+    private long post_id;
+    private String post_author;
+    private Date post_date;
+    private String post_content;
+    private String post_title;
+    private boolean post_status;
+    private String comment_status;
+    private String post_password;
+    private Date post_modified;
+    private String post_parent;
+    private String post_type;
+    private String post_responses;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

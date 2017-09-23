@@ -12,9 +12,9 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gap22.community.apartment.fragment.CommunityFragment;
-import com.gap22.community.apartment.fragment.PollsFragment;
-import com.gap22.community.apartment.fragment.PostFragment;
+import com.gap22.community.apartment.Fragments.CommunityFragment;
+import com.gap22.community.apartment.Fragments.PollsFragment;
+import com.gap22.community.apartment.Fragments.PostFragment;
 
 import java.util.ArrayList;
 import java.util.List;

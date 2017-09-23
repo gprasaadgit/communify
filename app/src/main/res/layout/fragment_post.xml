@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     android:background="@color/colorWhite"
-    tools:context="com.gap22.community.apartment.fragment.PostFragment">
+    tools:context="com.gap22.community.apartment.Fragments.PostFragment">
 
     <LinearLayout
         android:id="@+id/frag_post_panel"

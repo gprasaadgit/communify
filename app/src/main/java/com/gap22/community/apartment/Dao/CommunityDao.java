@@ -1,28 +1,15 @@
 package com.gap22.community.apartment.Dao;
 
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.gap22.community.apartment.Database.Member;
-import com.google.android.gms.common.data.DataBufferObserverSet;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.gap22.community.apartment.entities.Community;
-import com.gap22.community.apartment.entities.ActionResponse;
+import com.gap22.community.apartment.Entities.Community;
+import com.gap22.community.apartment.Entities.ActionResponse;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DatabaseReference;
 import com.gap22.community.apartment.Database.KeyGenerator;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class CommunityDao {
 

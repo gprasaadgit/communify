@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.entities;
+package com.gap22.community.apartment.Entities;
 
 import java.util.Date;
 import java.util.Map;
@@ -10,16 +10,16 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class PostComments {
 
-    public long comment_Id;
-    public long comment_post_Id;
-    public String comment_author;
-    public String comment_author_IP;
-    public Date comment_date;
-    public String comment_content;
-    public boolean comment_approved;
-    public String comment_type;
-    public String comment_parent;
-    public String user_id;
+    private long comment_Id;
+    private long comment_post_Id;
+    private String comment_author;
+    private String comment_author_IP;
+    private Date comment_date;
+    private String comment_content;
+    private boolean comment_approved;
+    private String comment_type;
+    private String comment_parent;
+    private String user_id;
 
     public PostComments() {
 

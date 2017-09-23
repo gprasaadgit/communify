@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.fragment;
+package com.gap22.community.apartment.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,19 +9,24 @@ import android.view.ViewGroup;
 
 import com.gap22.community.apartment.R;
 
-public class CollabrationPallet extends Fragment {
+public class RaiseMyQuery extends Fragment {
 
+    private int mIndex;
 
-    public CollabrationPallet() {
+    public RaiseMyQuery() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View fragPollView = inflater.inflate(R.layout.fragment_collabration_pallet, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View fragPollView = inflater.inflate(R.layout.fragment_raise_my_query, container, false);
         return fragPollView;
     }
 
@@ -29,6 +34,7 @@ public class CollabrationPallet extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle(R.string.main_panel_title);
+        getActivity().setTitle("Raise My Query");
     }
+
 }
