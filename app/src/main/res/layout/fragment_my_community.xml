@@ -1,15 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sign_up_form"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="My Community"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:id="@+id/sign_up_image_panel"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/appartment_profile_pic"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="0.00">
 
-</RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sign_up_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.58"
+        android:background="@drawable/login_transp_bg"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.60">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_name"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_title_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="La Parsey Community"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_address"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_address_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="La Parsey \n82, Union Rd, \nChinna Nolambur, \nChennai, \nTamil Nadu - 600095"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_tax_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_tax_id"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_tax_id_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="TAX-C457-AHSU8766"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_builder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_builder"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_builder_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Jain Housing &amp; Cosntructions Ltd"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_invite_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_invite_code"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_invite_code_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="24581"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_owner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_owner"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_owner_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="Gopalan Arun Prasad"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_community_started_on"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/frag_view_community_info_started_on"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bottom_gray_border"
+                    android:paddingBottom="15dp">
+
+                    <TextView
+                        android:id="@+id/tview_community_started_on_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="22 March 2017"
+                        android:textColor="@color/colorGray1"
+                        android:textSize="13sp" />
+                </TableRow>
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

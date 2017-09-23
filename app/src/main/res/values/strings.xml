@@ -114,6 +114,16 @@
     <string name="act_view_invite_mem_desc">Add members to your community and get collabrated</string>
     <string name="title_activity_get_collaborated">GetCollaborated</string>
 
+    <!-- View Community Info -->
+    <string name="frag_view_community_info_name">Community Name</string>
+    <string name="frag_view_community_info_address">Address</string>
+    <string name="frag_view_community_info_builder">Builder</string>
+    <string name="frag_view_community_info_invite_code">Invite Code</string>
+    <string name="frag_view_community_info_started_on">Started On</string>
+    <string name="frag_view_community_info_owner">Owner</string>
+    <string name="frag_view_community_info_tax_id">Tax ID</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

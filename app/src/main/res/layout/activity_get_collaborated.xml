@@ -19,6 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:theme="@style/NavigationViewStyle"
         app:headerLayout="@layout/nav_header_get_collaborated"
         app:menu="@menu/activity_get_collaborated_drawer" />
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.R;
 
 public class MyCommunity extends Fragment {
@@ -19,7 +20,7 @@ public class MyCommunity extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        FontsOverride.setDefaultFont(getActivity(), "MONOSPACE", "fonts/avenirltstd-book.ttf");
     }
 
     @Override
