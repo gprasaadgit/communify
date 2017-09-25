@@ -123,6 +123,30 @@
     <string name="frag_view_community_info_owner">Owner</string>
     <string name="frag_view_community_info_tax_id">Tax ID</string>
 
+    <!-- Edit Profile -->
+    <string name="frag_edit_profile_first_name">First Name</string>
+    <string name="frag_edit_profile_last_name">Last Name</string>
+    <string name="frag_edit_profile_role">Role In Community </string>
+    <string name="frag_edit_profile_unit">Unit</string>
+    <string name="frag_edit_profile_occupation">Occupation</string>
+    <string name="frag_edit_profile_residence">Residence</string>
+    <string name="frag_edit_profile_adults">Adults</string>
+    <string name="frag_edit_profile_child">Child</string>
+    <string name="frag_edit_profile_infants">Infants</string>
+    <string name="frag_edit_profile_phone">Phone</string>
+    <string name="frag_edit_profile_email">Email</string>
+    <string name="frag_edit_profile_first_name_hint">Provide your First Name</string>
+    <string name="frag_edit_profile_last_name_hint">Provide your Last Name</string>
+    <string name="frag_edit_profile_role_hint">Provide your Role In Community </string>
+    <string name="frag_edit_profile_unit_hint">Provide your Unit</string>
+    <string name="frag_edit_profile_occupation_hint">Provide your Occupation</string>
+    <string name="frag_edit_profile_residence_hint">Provide your Residence</string>
+    <string name="frag_edit_profile_adults_hint">Provide your Adults</string>
+    <string name="frag_edit_profile_child_hint">Provide your Child</string>
+    <string name="frag_edit_profile_infants_hint">Provide your Infants</string>
+    <string name="frag_edit_profile_phone_hint">Provide your Phone</string>
+    <string name="frag_edit_profile_email_hint">Provide your Email</string>
+    <string name="frag_edit_profile_Update">Update Profile</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
