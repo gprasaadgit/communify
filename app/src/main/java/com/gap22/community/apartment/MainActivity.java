@@ -109,7 +109,11 @@ public class MainActivity extends AppCompatActivity {
 
                                             Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
                                             storagePref.savePreference("type", "member");
+
                                             Member m = dataSnapshot.getValue(Member.class);
+                                            storagePref.savePreference("name",m.getFirstname());
+                                            storagePref.savePreference("email",m.getEmail());
+                                            storagePref.savePreference("img",fireauth.getCurrentUser().getUid());
                                             storagePref.savePreference("CommunityID",m.getCommunityid());
                                             finish();
                                             startActivity(menu);
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
+
                                             storagePref.savePreference("type", "admin");
 
 

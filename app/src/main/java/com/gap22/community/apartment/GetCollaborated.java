@@ -1,9 +1,9 @@
 package com.gap22.community.apartment;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,8 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Fragments.CollabrationPallet;
 import com.gap22.community.apartment.Fragments.EventsCalendar;
 import com.gap22.community.apartment.Fragments.InviteNeighbours;
@@ -20,12 +26,19 @@ import com.gap22.community.apartment.Fragments.MyCommunity;
 import com.gap22.community.apartment.Fragments.MyProfile;
 import com.gap22.community.apartment.Fragments.Notifications;
 import com.gap22.community.apartment.Fragments.RaiseMyQuery;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class GetCollaborated extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public NavigationView navigationView;
 
+    private StoragePreferences storagePref;
+    private TextView username,useremail;
+    private ImageView userimg;
+    Menu menu ;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +56,50 @@ public class GetCollaborated extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Menu menu = navigationView.getMenu();
+        View header = navigationView.getHeaderView(0);
+
+        storagePref = StoragePreferences.getInstance(GetCollaborated.this);
+        final String storageUserId = storagePref.getPreference("type");
+        final String name = storagePref.getPreference("name");
+        final String email = storagePref.getPreference("email");
+        final String img = storagePref.getPreference("img");
+        if (storageUserId != "") {
+
+            if (storageUserId.equals("admin"))
+            {
+
+            }
+            else
+            {
+                MenuItem item = menu.findItem(R.id.nav_Manage);
+
+                item.setVisible(false);
+                System.out.print("Community :"+item.isVisible()+"item"+item.getTitle());
+
+username =(TextView)header.findViewById(R.id.tv_username);
+useremail =(TextView)header.findViewById(R.id.tv_email)    ;
+userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+img+".jpg");
+                username.setText(name);
+                useremail.setText(email);
+                Glide.with(this )
+                        .using(new FirebaseImageLoader())
+                        .load(storageRef)
+                        .error(R.drawable.admin)
+                        .into(userimg);
+
+
+            }
+
+
+        }
+
+
+
         setTitle(R.string.main_panel_title);
+
+
         displaySelectedScreen(R.id.nav_home);
     }
 
@@ -59,8 +115,10 @@ public class GetCollaborated extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.get_collaborated, menu);
-        return false;
+
+        getMenuInflater().inflate(R.menu.activity_get_collaborated_drawer, menu);
+
+       return false;
     }
 
     @Override

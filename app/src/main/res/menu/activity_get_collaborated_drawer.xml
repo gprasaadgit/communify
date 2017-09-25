@@ -28,7 +28,8 @@
             android:title="My Community" />
     </group>
 
-    <item android:title="Manage">
+    <item android:title="Manage"
+        android:id="@+id/nav_Manage">
         <menu>
             <item
                 android:id="@+id/nav_manage_invites"
