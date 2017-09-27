@@ -13,15 +13,18 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/icl_mnu_gallery"
-            android:title="Community Gallery" />
+            android:title="Community Gallery"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_events"
             android:icon="@drawable/icl_mnu_events_calendar"
-            android:title="Events Calendar" />
+            android:title="Events Calendar"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_notification"
             android:icon="@drawable/icl_mnu_notifications"
-            android:title="Notification" />
+            android:title="Notification"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_my_community"
             android:icon="@drawable/icl_mnu_my_community"
