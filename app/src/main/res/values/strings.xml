@@ -111,7 +111,7 @@
     <!-- Invite users -->
     <string name="act_view_invite_mem_title">Invite Members!</string>
     <string name="act_view_invite_mem_btn">Invite</string>
-    <string name="act_view_invite_mem_desc">Add members to your community and get collabrated</string>
+    <string name="act_view_invite_mem_desc">Add members to your community and get collaborated</string>
     <string name="title_activity_get_collaborated">GetCollaborated</string>
 
     <!-- View Community Info -->
@@ -147,6 +147,13 @@
     <string name="frag_edit_profile_phone_hint">Provide your Phone</string>
     <string name="frag_edit_profile_email_hint">Provide your Email</string>
     <string name="frag_edit_profile_Update">Update Profile</string>
+
+    <!-- Create or Join Community -->
+    <string name="frag_create_or_join_com_join">Join</string>
+    <string name="frag_create_or_join_com_create">Create</string>
+    <string name="frag_create_or_join_com_title">What are you waiting for?</string>
+    <string name="frag_create_or_join_com_message">Lets join an existing community to get collaborated or create your own community to start collaborating</string>
+    <string name="frag_create_or_join_com_enterinvite">Enter invite code to join  community</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -15,7 +15,7 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhoneVerification"></activity>
+        <activity android:name=".PhoneVerification" />
         <activity android:name=".CreateCommunityActivity" />
         <activity android:name=".PollActivity" />
         <activity android:name=".ViewCommunity" />
@@ -33,9 +33,11 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".JoinOrCreateCommunity"></activity>
     </application>
 
 </manifest>
