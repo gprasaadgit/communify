@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         progress = new ProgressDialog(this);
         fireauth = FirebaseAuth.getInstance();
 
+
+
        /* if (fireauth.getCurrentUser() != null) {
             // User is logged in
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);

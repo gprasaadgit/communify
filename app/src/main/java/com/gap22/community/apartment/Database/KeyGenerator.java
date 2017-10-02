@@ -5,12 +5,13 @@ import java.util.Date;
 
 public class KeyGenerator {
 
-    private static final String CommunityKeyPrefix = "comu-";
-    private static final String MemberKeyPrefix = "memb-";
-    private static final String PostKeyPrefix = "post";
-    private static final String PostCommentKeyPrefix = "post-comt-";
-    private static final String PollKeyPrefix = "poll-";
-    private static final String PollResponseKeyPrefix = "poll-resp-";
+    private static final String CommunityKeyPrefix = "CMTY-";
+    private static final String MemberKeyPrefix = "MEMB-";
+    private static final String PostKeyPrefix = "POST-";
+    private static final String PostCommentKeyPrefix = "POST-CMNT-";
+    private static final String PollKeyPrefix = "POLL-";
+    private static final String PollResponseKeyPrefix = "POLL-RESP-";
+    private static final String SecurityGroupKeyPrefix = "SEC-GRP-";
     SimpleDateFormat sdf;
 
     public KeyGenerator() {
@@ -39,5 +40,9 @@ public class KeyGenerator {
 
     public String GetNewPollResponseKey() {
         return PollResponseKeyPrefix + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+    }
+
+    public String GetNewSecurityGroupResponseKey(String groupName) {
+        return SecurityGroupKeyPrefix + groupName.toUpperCase() + "-" + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
     }
 }

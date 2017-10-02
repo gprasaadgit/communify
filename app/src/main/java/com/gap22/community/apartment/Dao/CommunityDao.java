@@ -1,6 +1,8 @@
 package com.gap22.community.apartment.Dao;
 
 
+import com.gap22.community.apartment.Entities.Members;
+import com.gap22.community.apartment.Entities.SecurityGroupSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.gap22.community.apartment.Entities.Community;
@@ -17,6 +19,7 @@ public class CommunityDao {
     private FirebaseAuth fbAuthentication;
     private KeyGenerator keyGen = new KeyGenerator();
 
+
     public CommunityDao() {
         dbReference = FirebaseDatabase.getInstance().getReference();
     }
@@ -28,20 +31,26 @@ public class CommunityDao {
 
     public Community GetCommunityById(String community_id) {
         Community response = new Community();
-
         return response;
     }
 
-    public ActionResponse CreateCommunity(Community community) {
+    public ActionResponse CreateCommunity(String communityId, Community community, String memberId, Members members) {
         ActionResponse response = new ActionResponse();
-        String newKey = keyGen.GetNewCommunityKey();
+        SecurityDao securityDao = new SecurityDao();
+        MembersDao membersDao = new MembersDao();
+        SecurityGroupSettings securityGroupSettings;
 
-        try {
-            dbReference.child("community").child(newKey).setValue(community);
-        } catch (Exception e) {
-            response.error_message = e.getMessage();
-            response.success = false;
-        }
+        //try {
+        dbReference.child(communityId).child("Profile").setValue(community);
+        securityGroupSettings = new SecurityGroupSettings("ADMIN", true, true, true, true, true, true, true, true,
+                true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+                true, true, true, true, true, true);
+        securityDao.CreateSecurityGroupWithRights(communityId, securityGroupSettings);
+        membersDao.CreateMembers(communityId, memberId, members);
+        //} catch (Exception e) {
+        //    response.error_message = e.getMessage();
+        //    response.success = false;
+        //}
 
         return response;
     }
@@ -50,7 +59,7 @@ public class CommunityDao {
         ActionResponse response = new ActionResponse();
 
         try {
-            dbReference.child("/community/").child(community_id).updateChildren(community.toMap());
+            dbReference.child(community_id).updateChildren(community.toMap());
         } catch (Exception e) {
             response.error_message = e.getMessage();
             response.success = false;
@@ -63,7 +72,7 @@ public class CommunityDao {
         ActionResponse response = new ActionResponse();
 
         try {
-            dbReference.child("/community/").child(community_id).removeValue();
+            dbReference.child(community_id).removeValue();
         } catch (Exception e) {
             response.error_message = e.getMessage();
             response.success = false;

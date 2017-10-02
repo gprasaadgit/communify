@@ -3,6 +3,7 @@ package com.gap22.community.apartment.Entities;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -10,34 +11,32 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Community {
 
-    private String id;
-    private String title;
-    private String address1;
-    private String address2;
-    private String address3;
-    private String city;
-    private String state;
-    private int pincode;
-    private String status;
-    private String taxid;
-    private String builder;
-    private String about;
-    private String invitecode;
-    private String owner;
-    private Date created_on;
-    private String modified_by;
-    private Date modified_on;
+    public String title;
+    public String address1;
+    public String address2;
+    public String address3;
+    public String city;
+    public String state;
+    public int pincode;
+    public String status;
+    public String taxid;
+    public String builder;
+    public String about;
+    public String invitecode;
+    public String owner;
+    public Date created_on;
+    public String modified_by;
+    public Date modified_on;
 
     public Community() {
 
     }
 
-    public Community(String id, String title, String address1, String address2,
+    public Community(String title, String address1, String address2,
                      String address3, String city, String state, int pincode,
                      Status status, String taxid, String builder, String about,
                      String invitecode, String owner, Date created_on,
                      String modified_by, Date modified_on) {
-        this.id = id;
         this.title = title;
         this.address1 = address1;
         this.address2 = address2;
@@ -59,7 +58,6 @@ public class Community {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("id", id);
         if (title != null) {
             result.put("title", title);
         }
@@ -114,7 +112,7 @@ public class Community {
 
     public enum Status {
         Active("A"), InActive("I"), Archive("X");
-        private String value;
+        public String value;
 
         Status(String value) {
             this.value = value;

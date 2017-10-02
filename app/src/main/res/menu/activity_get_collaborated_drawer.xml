@@ -46,6 +46,10 @@
                 android:id="@+id/nav_set_rights"
                 android:icon="@drawable/icl_mnu_signout"
                 android:title="Set Rights" />
+            <item
+                android:id="@+id/nav_set_answer_queries"
+                android:icon="@drawable/icl_mnu_ask_question"
+                android:title="Community Queries" />
         </menu>
     </item>
 

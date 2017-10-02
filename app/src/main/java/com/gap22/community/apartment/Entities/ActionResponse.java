@@ -8,5 +8,6 @@ public class ActionResponse {
     public String error_code;
     public String error_message;
     public String action;
+    public Object value;
     public boolean success = true;
 }

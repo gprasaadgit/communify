@@ -1,6 +1,7 @@
 package com.gap22.community.apartment.Entities;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -10,62 +11,73 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Post {
 
-    private long community_id;
-    private long post_id;
-    private String post_author;
-    private Date post_date;
-    private String post_content;
-    private String post_title;
-    private boolean post_status;
-    private String comment_status;
-    private String post_password;
-    private Date post_modified;
-    private String post_parent;
-    private String post_type;
-    private String post_responses;
+    public String author;
+    public Date created_date;
+    public String content;
+    public String title;
+    public String status;
+    public String comment_status;
+    public String password;
+    public Date modified;
+    public String parent;
+    public String type;
+    public List<PostResponse> responses;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Post(long post_id, String post_author, Date post_date, String post_content,
-                String post_title, boolean post_status, String comment_status,
-                String post_password, Date post_modified, String post_parent,
-                String post_type, String post_responses) {
-        this.post_id = post_id;
-        this.post_author = post_author;
-        this.post_date = post_date;
-        this.post_date = post_date;
-        this.post_content = post_content;
-        this.post_title = post_title;
-        this.post_status = post_status;
-        this.comment_status = comment_status;
-        this.post_password = post_password;
-        this.post_modified = post_modified;
-        this.post_modified = post_modified;
-        this.post_parent = post_parent;
-        this.post_type = post_type;
-        this.post_responses = post_responses;
+    public Post(String author, Date created_date, String content,
+                String title, Status status, CommentStatus comment_status,
+                String password, Date modified, String parent,
+                String type, List<PostResponse> responses) {
+        this.author = author;
+        this.created_date = created_date;
+        this.content = content;
+        this.title = title;
+        this.status = status.value;
+        this.comment_status = comment_status.value;
+        this.password = password;
+        this.modified = modified;
+        this.modified = modified;
+        this.parent = parent;
+        this.type = type;
+        this.responses = responses;
     }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("community_id", community_id);
-        result.put("post_id", post_id);
-        result.put("post_author", post_author);
-        result.put("post_date", post_date);
-        result.put("post_date", post_date);
-        result.put("post_content", post_content);
-        result.put("post_title", post_title);
-        result.put("post_status", post_status);
+        result.put("author", author);
+        result.put("created_date", created_date);
+        result.put("content", content);
+        result.put("title", title);
+        result.put("status", status);
         result.put("comment_status", comment_status);
-        result.put("post_password", post_password);
-        result.put("post_modified", post_modified);
-        result.put("post_modified", post_modified);
-        result.put("post_parent", post_parent);
-        result.put("post_type", post_type);
-        result.put("post_responses", post_responses);
+        result.put("password", password);
+        result.put("modified", modified);
+        result.put("modified", modified);
+        result.put("parent", parent);
+        result.put("type", type);
+        result.put("responses", responses);
         return result;
+    }
+
+    public enum Status {
+        Active("A"), InActive("I"), Archive("X");
+        public String value;
+
+        Status(String value) {
+            this.value = value;
+        }
+    }
+
+    public enum CommentStatus {
+        EveryOne("E"), OnlyAdmin("A"), NoComments("N");
+        public String value;
+
+        CommentStatus(String value) {
+            this.value = value;
+        }
     }
 }

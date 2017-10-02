@@ -3,6 +3,7 @@
     package="com.gap22.community.apartment">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!--
 ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -37,7 +38,8 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".JoinOrCreateCommunity"></activity>
+        <activity android:name=".JoinOrCreateCommunity" />
+        <activity android:name=".NewHirachiy"></activity>
     </application>
 
 </manifest>

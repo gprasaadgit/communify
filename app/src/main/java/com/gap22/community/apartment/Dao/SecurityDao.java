@@ -2,27 +2,25 @@ package com.gap22.community.apartment.Dao;
 
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.ActionResponse;
-import com.gap22.community.apartment.Entities.Post;
-import com.gap22.community.apartment.Entities.PostResponse;
 import com.gap22.community.apartment.Entities.SecurityGroupSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PostDao {
+public class SecurityDao {
 
     private DatabaseReference dbReference;
     private FirebaseAuth fbAuthentication;
     private KeyGenerator keyGen = new KeyGenerator();
 
-    public PostDao() {
+    public SecurityDao() {
         dbReference = FirebaseDatabase.getInstance().getReference();
     }
 
-    public ActionResponse CreatePost(String communityId, String postId, Post post) {
+    public ActionResponse CreateSecurityGroupWithRights(String communityId, SecurityGroupSettings securityGroupSettings) {
         ActionResponse response = new ActionResponse();
         try {
-            dbReference.child(communityId).child("Post").child(postId).setValue(post);
+            dbReference.child(communityId).child("Security").child(securityGroupSettings.name).setValue(securityGroupSettings);
         } catch (Exception e) {
             response.error_message = e.getMessage();
             response.success = false;
@@ -30,17 +28,4 @@ public class PostDao {
 
         return response;
     }
-
-    public ActionResponse CreatePostResponse(String communityId, String postId, String postResponseId, PostResponse postResponse) {
-        ActionResponse response = new ActionResponse();
-        try {
-            dbReference.child(communityId).child("Post").child(postId).child("post_responses").child(postResponseId).setValue(postResponse);
-        } catch (Exception e) {
-            response.error_message = e.getMessage();
-            response.success = false;
-        }
-
-        return response;
-    }
-
 }
