@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Dao.*;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.*;
@@ -50,7 +51,7 @@ public class NewHirachiy extends AppCompatActivity {
     public void btn_PostResponse_onClickBtn(View v) {
         PostDao postDao = new PostDao();
         Date createdDate = new Date();
-        PostResponse postResponse = new PostResponse("MEMB-20171002214959927", "192.168.1.31", createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
+        PostResponse postResponse = new PostResponse("MEMB-20171002214959927", IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
                 PostResponse.Status.Approved, "", "");
         postDao.CreatePostResponse("CMTY-20171002214959926", "POST-20171002221734216", keyGen.GetNewPostCommentKey(), postResponse);
     }
