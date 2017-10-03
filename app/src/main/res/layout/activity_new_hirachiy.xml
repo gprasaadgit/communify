@@ -84,9 +84,9 @@
         android:text="Notification" />
 
     <Button
-        android:id="@+id/btn_Gallery"
+        android:id="@+id/btn_Users"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:onClick="btn_Gallery_onClickBtn"
-        android:text="Gallery" />
+        android:onClick="btn_Users_onClickBtn"
+        android:text="Users" />
 </LinearLayout>

@@ -91,7 +91,10 @@ public class NewHirachiy extends AppCompatActivity {
 
     }
 
-    public void btn_Gallery_onClickBtn(View v) {
-
+    public void btn_Users_onClickBtn(View v) {
+        GlobalUserDao globalUserDao = new GlobalUserDao();
+        Date createdDate = new Date();
+        GlobalUser globalUser = new GlobalUser("Mr", "Narayanan", "Dayalan", "narayanan.chat@gmail.com", "gavs_123", createdDate, "");
+        globalUserDao.CreateUser(globalUser);
     }
 }
