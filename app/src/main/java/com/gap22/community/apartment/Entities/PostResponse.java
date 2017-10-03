@@ -11,7 +11,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class PostResponse {
 
     public String author;
-    public String author_IP;
+    public String author_Wlan_IP;
+    public String author_eth_IP;
     public Date date;
     public String content;
     public String status;
@@ -22,10 +23,11 @@ public class PostResponse {
 
     }
 
-    public PostResponse(String author, String author_IP, Date date, String content,
+    public PostResponse(String author, String author_Wlan_IP, String author_eth_IP, Date date, String content,
                         Status status, String type, String parent) {
         this.author = author;
-        this.author_IP = author_IP;
+        this.author_Wlan_IP = author_Wlan_IP;
+        this.author_eth_IP = author_eth_IP;
         this.date = date;
         this.content = content;
         this.type = type;
@@ -37,7 +39,8 @@ public class PostResponse {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("author", author);
-        result.put("author_IP", author_IP);
+        result.put("author_Wlan_IP", author_Wlan_IP);
+        result.put("author_Wlan_IP", author_Wlan_IP);
         result.put("date", date);
         result.put("content", content);
         result.put("type", type);
