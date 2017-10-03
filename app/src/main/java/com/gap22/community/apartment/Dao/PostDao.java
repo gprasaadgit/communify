@@ -31,6 +31,18 @@ public class PostDao {
         return response;
     }
 
+    public ActionResponse UpdatePost(String communityId, String postId, Post post) {
+        ActionResponse response = new ActionResponse();
+        try {
+            dbReference.child(communityId).child("Post").child(postId).setValue(post);
+        } catch (Exception e) {
+            response.error_message = e.getMessage();
+            response.success = false;
+        }
+
+        return response;
+    }
+
     public ActionResponse CreatePostResponse(String communityId, String postId, String postResponseId, PostResponse postResponse) {
         ActionResponse response = new ActionResponse();
         try {

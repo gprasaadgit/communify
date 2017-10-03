@@ -53,7 +53,7 @@ public class NewHirachiy extends AppCompatActivity {
         Date createdDate = new Date();
         PostResponse postResponse = new PostResponse("MEMB-20171002214959927", IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
                 PostResponse.Status.Approved, "", "");
-        postDao.CreatePostResponse("CMTY-20171002214959926", "POST-20171002221734216", keyGen.GetNewPostCommentKey(), postResponse);
+        postDao.CreatePostResponse("CMTY-20171002214959926", "POST-20171003225923348", keyGen.GetNewPostCommentKey(), postResponse);
     }
 
     public void btn_PollResponse_onClickBtn(View v) {
@@ -80,8 +80,16 @@ public class NewHirachiy extends AppCompatActivity {
         PostDao postDao = new PostDao();
         Date createdDate = new Date();
         Post post = new Post("MEMB-20171002214959927", createdDate, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis. Sed sapien justo, consectetur ut rhoncus et, interdum nec dolor. Nullam sem risus, pellentesque in neque a, venenatis tempor neque. Donec gravida lorem vel mauris consequat, vel porta dui pretium. Sed odio nulla, pretium sed iaculis in, scelerisque sit amet massa. Integer at mi eget lorem lacinia venenatis. Vivamus a dui eget lacus pellentesque porttitor. Ut maximus lacus eu eleifend suscipit. Nullam magna purus, tincidunt sed ante eget, suscipit blandit lectus. Duis posuere massa at tellus rutrum, ac varius ipsum venenatis. Donec sed euismod mi. Curabitur pharetra laoreet bibendum. Morbi lacinia sapien id odio commodo volutpat. ",
-                "A Test Post Title", Post.Status.Active, Post.CommentStatus.EveryOne, "", null, "", "", null);
+                "A Test Post Title", Post.Status.Active, Post.CommentStatus.EveryOne, "", null, "", "");
         postDao.CreatePost("CMTY-20171002214959926", keyGen.GetNewPostKey(), post);
+    }
+
+    public void btn_UpdatePost_onClickBtn(View v) {
+        PostDao postDao = new PostDao();
+        Date createdDate = new Date();
+        Post post = new Post("MEMB-20171002214959927", createdDate, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis. Sed sapien justo, consectetur ut rhoncus et, interdum nec dolor. Nullam sem risus, pellentesque in neque a, venenatis tempor neque. Donec gravida lorem vel mauris consequat, vel porta dui pretium. Sed odio nulla, pretium sed iaculis in, scelerisque sit amet massa. Integer at mi eget lorem lacinia venenatis. Vivamus a dui eget lacus pellentesque porttitor. Ut maximus lacus eu eleifend suscipit. Nullam magna purus, tincidunt sed ante eget, suscipit blandit lectus. Duis posuere massa at tellus rutrum, ac varius ipsum venenatis. Donec sed euismod mi. Curabitur pharetra laoreet bibendum. Morbi lacinia sapien id odio commodo volutpat. ",
+                "A Test Post Title", Post.Status.Active, Post.CommentStatus.EveryOne, "", null, "", "");
+        postDao.UpdatePost("CMTY-20171002214959926", "POST-20171003224413208", post);
     }
 
     public void btn_Poll_onClickBtn(View v) {

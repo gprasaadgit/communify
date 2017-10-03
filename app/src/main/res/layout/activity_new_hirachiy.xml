@@ -6,87 +6,146 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_community"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_community_onClickBtn"
-        android:text="Community" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_Invites"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Invites_onClickBtn"
-        android:text="Invites" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-    <Button
-        android:id="@+id/btn_PostResponse"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_PostResponse_onClickBtn"
-        android:text="Post Response" />
+            <TableRow android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_PollResponse"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_PollResponse_onClickBtn"
-        android:text="Poll Response" />
+                <Button
+                    android:id="@+id/btn_community"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_community_onClickBtn"
+                    android:text="Community" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/btn_Questions"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Questions_onClickBtn"
-        android:text="Questions" />
+            <TableRow android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_Rights"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Rights_onClickBtn"
-        android:text="Rights" />
+                <Button
+                    android:id="@+id/btn_Invites"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Invites_onClickBtn"
+                    android:text="Invites" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/btn_Events"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Events_onClickBtn"
-        android:text="Events" />
+            <TableRow android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_Members"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Members_onClickBtn"
-        android:text="Members" />
+                <Button
+                    android:id="@+id/btn_PostResponse"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_PostResponse_onClickBtn"
+                    android:text="Post Response" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/btn_Post"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Post_onClickBtn"
-        android:text="Post" />
+            <TableRow android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_Poll"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Poll_onClickBtn"
-        android:text="Poll" />
+                <Button
+                    android:id="@+id/btn_PollResponse"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_PollResponse_onClickBtn"
+                    android:text="Poll Response" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/btn_Notifications"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Notifications_onClickBtn"
-        android:text="Notification" />
+            <TableRow android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/btn_Users"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Users_onClickBtn"
-        android:text="Users" />
+                <Button
+                    android:id="@+id/btn_Questions"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Questions_onClickBtn"
+                    android:text="Questions" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Rights"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Rights_onClickBtn"
+                    android:text="Rights" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Events"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Events_onClickBtn"
+                    android:text="Events" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Members"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Members_onClickBtn"
+                    android:text="Members" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Post"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Post_onClickBtn"
+                    android:text="Post" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_UpdatePost"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_UpdatePost_onClickBtn"
+                    android:text="Update Post" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Poll"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Poll_onClickBtn"
+                    android:text="Poll" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Notifications"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Notifications_onClickBtn"
+                    android:text="Notification" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_Users"
+                    android:layout_width="368dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="btn_Users_onClickBtn"
+                    android:text="Users" />
+
+            </TableRow>
+        </TableLayout>
+
+    </ScrollView>
 </LinearLayout>

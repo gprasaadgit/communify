@@ -21,7 +21,6 @@ public class Post {
     public Date modified;
     public String parent;
     public String type;
-    public List<PostResponse> responses;
 
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -29,8 +28,7 @@ public class Post {
 
     public Post(String author, Date created_date, String content,
                 String title, Status status, CommentStatus comment_status,
-                String password, Date modified, String parent,
-                String type, List<PostResponse> responses) {
+                String password, Date modified, String parent, String type) {
         this.author = author;
         this.created_date = created_date;
         this.content = content;
@@ -42,7 +40,6 @@ public class Post {
         this.modified = modified;
         this.parent = parent;
         this.type = type;
-        this.responses = responses;
     }
 
     @Exclude
@@ -59,7 +56,6 @@ public class Post {
         result.put("modified", modified);
         result.put("parent", parent);
         result.put("type", type);
-        result.put("responses", responses);
         return result;
     }
 
