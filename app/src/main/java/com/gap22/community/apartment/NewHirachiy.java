@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.CommunifyCrypto;
 import com.gap22.community.apartment.Common.IPAddress;
+import com.gap22.community.apartment.Common.StaticValues;
 import com.gap22.community.apartment.Dao.*;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.*;
 import com.gap22.community.apartment.Entities.PostResponse;
+
+import javax.crypto.SecretKey;
 
 public class NewHirachiy extends AppCompatActivity {
 
@@ -36,7 +40,7 @@ public class NewHirachiy extends AppCompatActivity {
         Community community = new Community("La Parsley", "No 17, Guruswamy Main Road", "Near Nolambur Bus Stand",
                 "Nolambur", "Chennai", "Tamil Nadu", 600095, Community.Status.Active, "TXN-ID-54885NN776", "Jain Housing And Constructions Ltd",
                 "Lorum Ipsum", "54588", "OiUxTtK6rdMVnDYJpDAHXSPYpIx1", createdDate, null, null);
-        Members members = new Members("narayanan.dayalan@gmail.com", createdDate, null, Members.Status.Active, "Narayanan", "Dayalan",
+        Members members = new Members("narayanan.coc@gmail.com", createdDate, null, Members.Status.Active, "Narayanan", "Dayalan",
                 4, 1, 0, "Mr", "45", "9840399445", "", "", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis.");
         ActionResponse response = communityDao.CreateCommunity(keyGen.GetNewCommunityKey(), community, keyGen.GetNewMemberKey(), members);
         if (!response.success) {
@@ -44,8 +48,9 @@ public class NewHirachiy extends AppCompatActivity {
         }
     }
 
-    public void btn_Invites_onClickBtn(View v) {
-
+    public void btn_Invites_onClickBtn(View v) throws CommunifyCrypto.CryptoException {
+        AppConfigDao appConfigDao = new AppConfigDao();
+        appConfigDao.SetDefaultAppConfig();
     }
 
     public void btn_PostResponse_onClickBtn(View v) {
@@ -60,8 +65,16 @@ public class NewHirachiy extends AppCompatActivity {
 
     }
 
-    public void btn_Questions_onClickBtn(View v) {
+    public void btn_Questions_onClickBtn(View v) throws CommunifyCrypto.CryptoException {
+        CommunifyCrypto communifyCrypto = new CommunifyCrypto();
+        AppConfigDao appConfigDao = new AppConfigDao();
+        AppConfig appConfig;
 
+        SecretKey secretKey = communifyCrypto.getSecretKey(StaticValues.getEncriptionPass(), StaticValues.getEncriptionSalt());
+
+        appConfig = appConfigDao.GetAppConfig();
+        //Toast.makeText(this, appConfig.email_user_id, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, communifyCrypto.decrypt(secretKey, appConfig.email_user_id) , Toast.LENGTH_LONG).show();
     }
 
     public void btn_Rights_onClickBtn(View v) {
@@ -103,7 +116,10 @@ public class NewHirachiy extends AppCompatActivity {
     public void btn_Users_onClickBtn(View v) {
         GlobalUserDao globalUserDao = new GlobalUserDao();
         Date createdDate = new Date();
-        GlobalUser globalUser = new GlobalUser("Mr", "Narayanan", "Dayalan", "narayanan.chat@gmail.com", "gavs_123", createdDate, "");
-        globalUserDao.CreateUser(globalUser);
+        GlobalUser globalUser = new GlobalUser("Mr", "Narayanan", "Dayalan", "narayanan.coc@gmail.com", "gavs_123", "+919840399445", createdDate, "");
+        ActionResponse response = globalUserDao.CreateUser(globalUser);
+        if (response.success == false) {
+            Toast.makeText(this, response.error_message, Toast.LENGTH_LONG).show();
+        }
     }
 }

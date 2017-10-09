@@ -16,6 +16,7 @@ public class GlobalUser {
     public String last_name;
     public String email;
     public String password;
+    public String phone;
     public Date created_date;
     public String default_community;
 
@@ -23,13 +24,14 @@ public class GlobalUser {
 
     }
 
-    public GlobalUser(String title, String first_name, String last_name, String email, String password, Date created_date, String default_community) {
+    public GlobalUser(String title, String first_name, String last_name, String email, String password, String phone, Date created_date, String default_community) {
         this.title = title;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.created_date = created_date;
+        this.phone = phone;
         this.default_community = default_community;
     }
 
@@ -40,7 +42,7 @@ public class GlobalUser {
         result.put("first_name", first_name);
         result.put("last_name", last_name);
         result.put("email", email);
-        result.put("password", password);
+        result.put("phone", phone);
         result.put("created_date", created_date);
         result.put("default_community", default_community);
         return result;
