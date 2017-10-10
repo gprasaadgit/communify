@@ -1,14 +1,14 @@
 package com.gap22.community.apartment.Entities;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 @IgnoreExtraProperties
-public class PostResponse {
+public class PostResponses {
 
     public String author;
     public String author_Wlan_IP;
@@ -19,11 +19,11 @@ public class PostResponse {
     public String type;
     public String parent;
 
-    public PostResponse() {
+    public PostResponses() {
 
     }
 
-    public PostResponse(String author, String author_Wlan_IP, String author_eth_IP, Date date, String content,
+    public PostResponses(String author, String author_Wlan_IP, String author_eth_IP, Date date, String content,
                         Status status, String type, String parent) {
         this.author = author;
         this.author_Wlan_IP = author_Wlan_IP;

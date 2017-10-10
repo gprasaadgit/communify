@@ -3,8 +3,7 @@ package com.gap22.community.apartment.Dao;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.ActionResponse;
 import com.gap22.community.apartment.Entities.Post;
-import com.gap22.community.apartment.Entities.PostResponse;
-import com.gap22.community.apartment.Entities.SecurityGroupSettings;
+import com.gap22.community.apartment.Entities.PostResponses;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,7 +42,7 @@ public class PostDao {
         return response;
     }
 
-    public ActionResponse CreatePostResponse(String communityId, String postId, String postResponseId, PostResponse postResponse) {
+    public ActionResponse CreatePostResponse(String communityId, String postId, String postResponseId, PostResponses postResponse) {
         ActionResponse response = new ActionResponse();
         try {
             dbReference.child(communityId).child("Post").child(postId).child("post_responses").child(postResponseId).setValue(postResponse);

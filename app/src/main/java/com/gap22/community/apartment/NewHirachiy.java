@@ -1,24 +1,37 @@
 package com.gap22.community.apartment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import java.util.Date;
-
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.IPAddress;
-import com.gap22.community.apartment.Dao.*;
+import com.gap22.community.apartment.Dao.CommunityDao;
+import com.gap22.community.apartment.Dao.GlobalUserDao;
+import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
-import com.gap22.community.apartment.Entities.*;
-import com.gap22.community.apartment.Entities.PostResponse;
+import com.gap22.community.apartment.Entities.ActionResponse;
+import com.gap22.community.apartment.Entities.Community;
+import com.gap22.community.apartment.Entities.GlobalUser;
+import com.gap22.community.apartment.Entities.Members;
+import com.gap22.community.apartment.Entities.Post;
+import com.gap22.community.apartment.Entities.PostResponses;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 public class NewHirachiy extends AppCompatActivity {
 
     //private Button btn_community;
     private KeyGenerator keyGen = new KeyGenerator();
+    private DatabaseReference mDatabase;
+    private FirebaseAuth fireauth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +40,37 @@ public class NewHirachiy extends AppCompatActivity {
         //btn_community = (Button) findViewById(R.id.btn_community);
 
         setContentView(R.layout.activity_new_hirachiy);
+        mDatabase = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY");
+        ListView l =(ListView)findViewById(R.id.lis);
+        fireauth = FirebaseAuth.getInstance();
+
+
+        final FirebaseListAdapter adapter = new FirebaseListAdapter(NewHirachiy.this, GlobalUser.class, android.R.layout.simple_list_item_1, mDatabase) {
+            @Override
+            protected void populateView(View v, Object model, int position) {
+                //    progress.dismiss();
+
+
+                        GlobalUser c = (GlobalUser) model;
+                TextView txt1 = (TextView) v.findViewById(android.R.id.text1);
+                txt1.setText(c.email);
+            }
+
+        };
+
+        l.setAdapter(adapter);
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String postId= adapter.getRef(position).getKey();
+                if(postId.equals(fireauth.getCurrentUser().getUid()))
+                {
+                    Toast.makeText(NewHirachiy.this, "Match", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(NewHirachiy.this, postId, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
     }
 
     public void btn_community_onClickBtn(View v) {
@@ -37,7 +81,7 @@ public class NewHirachiy extends AppCompatActivity {
                 "Nolambur", "Chennai", "Tamil Nadu", 600095, Community.Status.Active, "TXN-ID-54885NN776", "Jain Housing And Constructions Ltd",
                 "Lorum Ipsum", "54588", "OiUxTtK6rdMVnDYJpDAHXSPYpIx1", createdDate, null, null);
         Members members = new Members("narayanan.dayalan@gmail.com", createdDate, null, Members.Status.Active, "Narayanan", "Dayalan",
-                4, 1, 0, "Mr", "45", "9840399445", "", "", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis.");
+                4, 1, 0, "Mr", "45", "9840399445", "", "", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis.","Admin");
         ActionResponse response = communityDao.CreateCommunity(keyGen.GetNewCommunityKey(), community, keyGen.GetNewMemberKey(), members);
         if (!response.success) {
             Toast.makeText(this, response.error_message, Toast.LENGTH_LONG).show();
@@ -51,8 +95,8 @@ public class NewHirachiy extends AppCompatActivity {
     public void btn_PostResponse_onClickBtn(View v) {
         PostDao postDao = new PostDao();
         Date createdDate = new Date();
-        PostResponse postResponse = new PostResponse("MEMB-20171002214959927", IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
-                PostResponse.Status.Approved, "", "");
+        PostResponses postResponse = new PostResponses("MEMB-20171002214959927", IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
+                PostResponses.Status.Approved, "", "");
         postDao.CreatePostResponse("CMTY-20171002214959926", "POST-20171003225923348", keyGen.GetNewPostCommentKey(), postResponse);
     }
 

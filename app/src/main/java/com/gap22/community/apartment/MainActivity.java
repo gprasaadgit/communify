@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Member;
+import com.gap22.community.apartment.Entities.GlobalUser;
+import com.gap22.community.apartment.Entities.Members;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView newuser;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
-    private DatabaseReference mDatabase,mCommunity;
+    private DatabaseReference mDatabase,mCommunityMember;
 
     private StoragePreferences storagePref;
 
@@ -49,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
-        mDatabase = FirebaseDatabase.getInstance().getReference("member");
-        mCommunity = FirebaseDatabase.getInstance().getReference("community");
+        mDatabase = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY");
+        //mCommunity = FirebaseDatabase.getInstance().getReference("community");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -101,42 +102,46 @@ public class MainActivity extends AppCompatActivity {
 
                             progress.dismiss();
                             if (task.isSuccessful()) {
-                                storagePref.savePreference("userId", email);
+
+                               storagePref.savePreference("userId", fireauth.getCurrentUser().getEmail());
 
 
-                                mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+                                        mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         if (dataSnapshot.exists()) {
 
                                             Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
-                                            storagePref.savePreference("type", "member");
 
-                                            Member m = dataSnapshot.getValue(Member.class);
-                                            storagePref.savePreference("name",m.getFirstname());
-                                            storagePref.savePreference("email",m.getEmail());
+
+                                            GlobalUser m = dataSnapshot.getValue(GlobalUser.class);
+                                            storagePref.savePreference("name",m.first_name);
+                                            storagePref.savePreference("email",m.email);
                                             storagePref.savePreference("img",fireauth.getCurrentUser().getUid());
-                                            storagePref.savePreference("CommunityID",m.getCommunityid());
-                                            finish();
-                                            startActivity(menu);
-                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                            return;
-                                        }
-                                        else
-                                        {
+                                            storagePref.savePreference("CommunityID",m.default_community);
 
-                                            storagePref.savePreference("type", "admin");
-
-
-                                            mCommunity.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            mCommunityMember =  FirebaseDatabase.getInstance().getReference(m.default_community).child("Members").child(fireauth.getCurrentUser().getUid());
+                                            mCommunityMember.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
 
                                                     if (dataSnapshot.exists()) {
+                                                        Members mem = dataSnapshot.getValue(Members.class);
+                                                        if(mem.security_group.equals("USER"))
+                                                        {
+                                                            storagePref.savePreference("type", "member");
+                                                        }
 
+                                                        else
+                                                        {
+                                                            storagePref.savePreference("type", "admin");
+
+                                                        }
                                                         Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
-                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
+
                                                         finish();
                                                         startActivity(menu);
                                                         overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
@@ -144,12 +149,9 @@ public class MainActivity extends AppCompatActivity {
 
                                                     } else {
 
-                                                        Intent menu = new Intent(MainActivity.this, CreateCommunityActivity.class);
-                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
-                                                        finish();
-                                                        startActivity(menu);
-                                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                                        Toast.makeText(MainActivity.this, "USER Waiting For Approval", Toast.LENGTH_SHORT).show();
                                                         return;
+
 
 
                                                     }
@@ -159,10 +161,17 @@ public class MainActivity extends AppCompatActivity {
 
                                                 }
                                             });
+                                            finish();
+                                            startActivity(menu);
+                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                            return;
+                                        }
+                                        else
+                                        {
 
 
-
-
+                                            Toast.makeText(MainActivity.this, "USER DOES NOT EXIST", Toast.LENGTH_SHORT).show();
+                                            return;
 
                                         }
                                     }

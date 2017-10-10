@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Member;
+import com.gap22.community.apartment.Entities.PostResponses;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -63,27 +64,29 @@ public class PostResponse extends AppCompatActivity {
         storagePref = StoragePreferences.getInstance(this);
         Response =(Button) findViewById(R.id.btn_send);
         final String storageUserId = storagePref.getPreference("CommunityID");
-        mDatabase = FirebaseDatabase.getInstance().getReference("postResponse").child(storageUserId).child(pollId);
+        mDatabase = FirebaseDatabase.getInstance().getReference(storageUserId).child("Post").child(pollId).child("post_responses");
+
         mmember = FirebaseDatabase.getInstance().getReference("member");
 
         mpost = FirebaseDatabase.getInstance().getReference("post").child(storageUserId).child(pollId);
-        FirebaseListAdapter adapter = new FirebaseListAdapter(this, Object.class, R.layout.viewpostresponse, mDatabase)
+        FirebaseListAdapter adapter = new FirebaseListAdapter(this, PostResponses.class, R.layout.viewpostresponse, mDatabase)
         {
 
             @Override
             protected void populateView(View v, Object model, int position) {
 
+PostResponses ob =(PostResponses) model;
 
 
-                System.out.print("testtt"+position);
 
 
                 final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
 
                 final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
+                response.setText(ob.content);
+              //  name.setText();
 
-                response.setText(((HashMap) model).get("text").toString());
-                name.setText(((HashMap) model).get("name").toString());
+
 
 
 

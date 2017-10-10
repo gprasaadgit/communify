@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Posts;
+import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.PostActivity;
 import com.gap22.community.apartment.PostResponse;
 import com.gap22.community.apartment.R;
@@ -82,7 +83,7 @@ public class PostFragment extends Fragment {
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
-        mDatabase = FirebaseDatabase.getInstance().getReference("post").child(CommunityId);
+        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId).child("/Post/");
         fireauth = FirebaseAuth.getInstance();
 
 
@@ -96,21 +97,22 @@ public class PostFragment extends Fragment {
                     progress.setMessage("Loading Data");
                     progress.show();
 
-                    final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Posts.class, R.layout.post_list_item, mDatabase) {
+                    final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Post.class, R.layout.post_list_item, mDatabase) {
                         @Override
                         protected void populateView(View v, Object model, int position) {
                         //    progress.dismiss();
 
-                            Posts p = (Posts) model;
-                            ((TextView) v.findViewById(R.id.title)).setText(p.getTitle());
-                            ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody());
-                            ((TextView)v.findViewById(R.id.no_of_replies)).setText(p.getResponses()+"Replies");
+                            Post p = (Post) model;
+                            ((TextView) v.findViewById(R.id.title)).setText(p.title);
+                            ((TextView) v.findViewById(R.id.short_message)).setText(p.content);
 
-                            if(p.getDate()!= 0)
-                            {
+                            //((TextView)v.findViewById(R.id.no_of_replies)).setText(p.getResponses()+"Replies");
 
 
-                                long diffInMillisec = System.currentTimeMillis() - p.getDate();
+                           /* {
+
+
+                                long diffInMillisec = System.currentTimeMillis() - p.created_date;
                                 long diffInSec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
                                 long seconds = diffInSec % 60;
                                 diffInSec/= 60;
@@ -120,7 +122,7 @@ public class PostFragment extends Fragment {
                                 diffInSec /= 24;
                                 long  days = diffInSec;
                                 ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
-                            }
+                            }*/
 
 
 
@@ -145,18 +147,18 @@ public class PostFragment extends Fragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             {
-                                Posts p = (Posts) adapter.getItem(position);
+                                /*Post p = (Post) adapter.getItem(position);
                                 String postId= adapter.getRef(position).getKey();
                                 Bundle bundle = new Bundle();
-                                bundle.putString("Post",p.getBody());
-                                bundle.putString("Title",p.getTitle());
+                                bundle.putString("Post",p.content);
+                                bundle.putString("Title",p.title);
                                 bundle.putString("PostId",postId );
-                                bundle.putInt("ResponseCount",p.getResponses());
+                               // bundle.putInt("ResponseCount",p.getResponses());
                                 Intent i = new Intent(getActivity(), PostResponse.class);
                                 i.putExtras(bundle);
 
 //Fire that second activity
-                                startActivity(i);
+                                startActivity(i);*/
 
                             }
 
