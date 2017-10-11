@@ -1,8 +1,7 @@
 package com.gap22.community.apartment.Dao;
 
-import com.firebase.ui.auth.ui.User;
 import com.gap22.community.apartment.Common.CommunifyCrypto;
-import com.gap22.community.apartment.Common.StaticValues;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.AppConfig;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +30,7 @@ public class AppConfigDao {
     public void SetDefaultAppConfig() throws CommunifyCrypto.CryptoException {
         communifyCrypto = new CommunifyCrypto();
 
-        secretKey = communifyCrypto.getSecretKey(StaticValues.getEncriptionPass(), StaticValues.getEncriptionSalt());
+        secretKey = communifyCrypto.getSecretKey(GlobalValues.getEncriptionPass(), GlobalValues.getEncriptionSalt());
 
         AppConfig appConfig = new AppConfig(communifyCrypto.encrypt(secretKey, "communify.alerts@gmail.com"), communifyCrypto.encrypt(secretKey, "Communify_123"));
         dbReference.child("APP-CONFIG").setValue(appConfig);
@@ -41,9 +40,9 @@ public class AppConfigDao {
         appConfig = new AppConfig();
 
         DatabaseReference ref = dbReference.child("/APP-CONFIG/");
-        secretKey = communifyCrypto.getSecretKey(StaticValues.getEncriptionPass(), StaticValues.getEncriptionSalt());
+        secretKey = communifyCrypto.getSecretKey(GlobalValues.getEncriptionPass(), GlobalValues.getEncriptionSalt());
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {

@@ -165,6 +165,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
                     android:text="@string/act_signin_sign_in"
+                    android:onClick="btn_SignIn_onClickBtn"
                     android:textColor="@android:color/white"
                     android:textSize="18sp" />
             </TableRow>
@@ -179,6 +180,7 @@
                     android:paddingBottom="15dp"
                     android:paddingTop="15dp"
                     android:text="@string/act_signin_dont_have_account"
+                    android:onClick="btn_Dont_Have_Account_onClickBtn"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
                     android:textSize="15sp" />

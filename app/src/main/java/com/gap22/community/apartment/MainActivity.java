@@ -14,8 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Member;
+import com.gap22.community.apartment.Entities.GlobalUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView newuser;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
-    private DatabaseReference mDatabase,mCommunity;
+    private DatabaseReference mDatabase, mCommunity;
 
     private StoragePreferences storagePref;
 
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
         mDatabase = FirebaseDatabase.getInstance().getReference("member");
-        mCommunity = FirebaseDatabase.getInstance().getReference("community");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -63,131 +63,74 @@ public class MainActivity extends AppCompatActivity {
         newuser = (TextView) findViewById(R.id.tview_dont_have_account);
         progress = new ProgressDialog(this);
         fireauth = FirebaseAuth.getInstance();
-
-
-
-       /* if (fireauth.getCurrentUser() != null) {
-            // User is logged in
-            Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
-            startActivity(intent_coreOper);
-            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-        }*/
-
-        newuser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent menu = new Intent(MainActivity.this, SignUp.class);
-
-                finish();
-                startActivity(menu);
-
-                return;
-
-            }
-        });
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final String email = Email.getText().toString().trim();
-                String password = Pwd.getText().toString().trim();
-                if (ValidateFormBeforeSubmit() == true) {
-
-                    progress.setMessage("Loggin in Please Wait");
-                    progress.show();
-                    fireauth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            progress.dismiss();
-                            if (task.isSuccessful()) {
-                                storagePref.savePreference("userId", email);
-
-
-                                mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-
-                                            Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
-                                            storagePref.savePreference("type", "member");
-
-                                            Member m = dataSnapshot.getValue(Member.class);
-                                            storagePref.savePreference("name",m.getFirstname());
-                                            storagePref.savePreference("email",m.getEmail());
-                                            storagePref.savePreference("img",fireauth.getCurrentUser().getUid());
-                                            storagePref.savePreference("CommunityID",m.getCommunityid());
-                                            finish();
-                                            startActivity(menu);
-                                            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                            return;
-                                        }
-                                        else
-                                        {
-
-                                            storagePref.savePreference("type", "admin");
-
-
-                                            mCommunity.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                                                    if (dataSnapshot.exists()) {
-
-                                                        Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
-                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
-                                                        finish();
-                                                        startActivity(menu);
-                                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                                        return;
-
-                                                    } else {
-
-                                                        Intent menu = new Intent(MainActivity.this, CreateCommunityActivity.class);
-                                                        storagePref.savePreference("CommunityID",fireauth.getCurrentUser().getUid() );
-                                                        finish();
-                                                        startActivity(menu);
-                                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                                        return;
-
-
-                                                    }
-                                                }
-                                                @Override
-                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                }
-                                            });
-
-
-
-
-
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-
-
-
-                            } else {
-
-                                Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    });
-
-                }
-            }
-        });
     }
 
+    public void btn_Dont_Have_Account_onClickBtn(View v) {
+        Intent menu = new Intent(MainActivity.this, SignUp.class);
+        finish();
+        startActivity(menu);
+        return;
+    }
+
+    public void btn_SignIn_onClickBtn(View v) {
+        final String email = Email.getText().toString().trim();
+        String password = Pwd.getText().toString().trim();
+        if (ValidateFormBeforeSubmit() == true) {
+
+            progress.setMessage("Loggin in Please Wait");
+            progress.show();
+
+            fireauth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    progress.dismiss();
+                    if (task.isSuccessful()) {
+                        storagePref.savePreference("userId", email);
+
+                        mCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
+                        mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
+
+                                    if (globalUser.default_community != "") {
+                                        storagePref.savePreference("name", globalUser.first_name);
+                                        storagePref.savePreference("email", globalUser.email);
+                                        storagePref.savePreference("img", fireauth.getCurrentUser().getUid());
+                                        storagePref.savePreference("CommunityID", globalUser.default_community);
+                                        GlobalValues.setCommunityId(globalUser.default_community);
+                                        Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
+                                        finish();
+                                        startActivity(getCollaborated);
+                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                        return;
+                                    } else {
+                                        Intent joinOrCreateCommunity = new Intent(MainActivity.this, JoinOrCreateCommunity.class);
+                                        finish();
+                                        startActivity(joinOrCreateCommunity);
+                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                        return;
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+
+                        });
+                    } else {
+                        Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+            });
+        }
+    }
 
     private boolean ValidateFormBeforeSubmit() {
         boolean response = true;
