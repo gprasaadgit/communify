@@ -228,7 +228,7 @@ public class SignUp extends AppCompatActivity {
 
     public boolean validate(Member m) {
         if (TextUtils.isEmpty(m.getEmail())) {
-            Toast.makeText(SignUp.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(SignUp.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (TextUtils.isEmpty(pwd.getText().toString())) {

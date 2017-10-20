@@ -17,6 +17,7 @@ import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.GlobalUser;
+import com.gap22.community.apartment.Entities.Members;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
-        mDatabase = FirebaseDatabase.getInstance().getReference("member");
+       // mDatabase = FirebaseDatabase.getInstance().getReference("member");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -102,6 +103,47 @@ public class MainActivity extends AppCompatActivity {
                                         storagePref.savePreference("img", fireauth.getCurrentUser().getUid());
                                         storagePref.savePreference("CommunityID", globalUser.default_community);
                                         GlobalValues.setCommunityId(globalUser.default_community);
+
+                                        mDatabase =  FirebaseDatabase.getInstance().getReference(globalUser.default_community).child("Members").child(fireauth.getCurrentUser().getUid());
+                                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+                                                if (dataSnapshot.exists()) {
+                                                    Members mem = dataSnapshot.getValue(Members.class);
+                                                    if(mem.security_group.equals("USER"))
+                                                    {
+                                                        storagePref.savePreference("type", "member");
+                                                    }
+
+                                                    else
+                                                    {
+                                                        storagePref.savePreference("type", "admin");
+
+                                                    }
+                                                    Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
+
+                                                    finish();
+                                                    startActivity(menu);
+                                                    overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                                    return;
+
+                                                } else {
+
+                                                    Toast.makeText(MainActivity.this, "USER Waiting For Approval", Toast.LENGTH_SHORT).show();
+                                                    return;
+
+
+
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+
+                                            }
+                                        });
+
                                         Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
                                         finish();
                                         startActivity(getCollaborated);

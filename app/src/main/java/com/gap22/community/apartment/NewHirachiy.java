@@ -1,20 +1,24 @@
 package com.gap22.community.apartment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import java.util.Date;
-
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.CommunifyCrypto;
-import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.GlobalValues;
-import com.gap22.community.apartment.Dao.*;
+import com.gap22.community.apartment.Dao.AppConfigDao;
+import com.gap22.community.apartment.Dao.CommunityDao;
+import com.gap22.community.apartment.Dao.GlobalUserDao;
+import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
-import com.gap22.community.apartment.Entities.*;
-import com.gap22.community.apartment.Entities.PostResponse;
+import com.gap22.community.apartment.Entities.ActionResponse;
+import com.gap22.community.apartment.Entities.AppConfig;
+import com.gap22.community.apartment.Entities.Community;
+import com.gap22.community.apartment.Entities.GlobalUser;
+import com.gap22.community.apartment.Entities.Post;
+
+import java.util.Date;
 
 import javax.crypto.SecretKey;
 
@@ -39,12 +43,13 @@ public class NewHirachiy extends AppCompatActivity {
         Community community = new Community("La Parsley", "No 17, Guruswamy Main Road", "Near Nolambur Bus Stand",
                 "Nolambur", "Chennai", "Tamil Nadu", 600095, Community.Status.Active, "TXN-ID-54885NN776", "Jain Housing And Constructions Ltd",
                 "Lorum Ipsum", "54588", "OiUxTtK6rdMVnDYJpDAHXSPYpIx1", createdDate, null, null);
-        Members members = new Members("narayanan.coc@gmail.com", createdDate, null, Members.Status.Active, "Narayanan", "Dayalan",
+      /*  Members members = new Members("narayanan.coc@gmail.com", createdDate, null, Members.Status.Active, "Narayanan", "Dayalan",
                 4, 1, 0, "Mr", "45", "9840399445", "", "", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique varius risus eget gravida. Duis ac eros quis sapien accumsan iaculis.");
         ActionResponse response = communityDao.CreateCommunity(keyGen.GetNewCommunityKey(), community, keyGen.GetNewMemberKey(), members);
         if (!response.success) {
             Toast.makeText(this, response.error_message, Toast.LENGTH_LONG).show();
-        }
+        }*/
+
     }
 
     public void btn_Invites_onClickBtn(View v) throws CommunifyCrypto.CryptoException {
@@ -52,13 +57,13 @@ public class NewHirachiy extends AppCompatActivity {
         appConfigDao.SetDefaultAppConfig();
     }
 
-    public void btn_PostResponse_onClickBtn(View v) {
+   /* public void btn_PostResponse_onClickBtn(View v) {
         PostDao postDao = new PostDao();
         Date createdDate = new Date();
         PostResponse postResponse = new PostResponse("KgpySaT5EuZjvmuK1aO1KrEYHj52", IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, "Nam gravida scelerisque risus. Cras in quam vitae leo cursus ornare. Nullam nec diam eros. Phasellus sed justo nisl. Praesent pharetra massa vel mauris efficitur malesuada.",
                 PostResponse.Status.Approved, "", "");
         postDao.CreatePostResponse("CMTY20171011210657333", "POST20171011211110040", keyGen.GetNewPostCommentKey(), postResponse);
-    }
+    }*/
 
     public void btn_PollResponse_onClickBtn(View v) {
 

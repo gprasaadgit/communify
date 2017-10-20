@@ -13,12 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Posts;
+import com.gap22.community.apartment.Dao.PostDao;
+import com.gap22.community.apartment.Database.KeyGenerator;
+import com.gap22.community.apartment.Entities.Post;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
@@ -45,18 +50,22 @@ public class PostActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                com.gap22.community.apartment.Database.Posts p = new Posts();
 
-                p.setAuthor(fireauth.getCurrentUser().getUid());
-                p.setBody(Posts.getText().toString());
-                p.setTitle(Title.getText().toString());
-                p.setType("Announcement");
-                p.setDate(System.currentTimeMillis());
-                p.setResponses(0);
 
-                if(validate(p)) {
-                    createPosts(p);
-                }
+
+                PostDao postDao = new PostDao();
+                Date createdDate = new Date();
+                KeyGenerator keyGen = new KeyGenerator();
+                final String CommunityId = GlobalValues.getCommunityId();
+                Post post = new Post(fireauth.getCurrentUser().getUid(), createdDate, Posts.getText().toString(),
+                        Title.getText().toString(), Post.Status.Active, Post.CommentStatus.EveryOne, "", null, "", "");
+                validate(post);
+                postDao.CreatePost(CommunityId, keyGen.GetNewPostKey(), post);
+
+
+                Toast.makeText(PostActivity.this, "Post Created", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PostActivity.this, GetCollaborated.class));
+                finish();
             }
         });
 
@@ -69,15 +78,15 @@ public class PostActivity extends AppCompatActivity {
         });
 
     }
-    public boolean validate(com.gap22.community.apartment.Database.Posts p)
+    public boolean validate(Post p)
     {
 
-        if(TextUtils.isEmpty(p.getTitle()))
+        if(TextUtils.isEmpty(p.title))
         {
             Toast.makeText(PostActivity.this,"Please Enter Title",Toast.LENGTH_SHORT).show();
             return false;
         }
-        if(TextUtils.isEmpty(p.getBody()))
+        if(TextUtils.isEmpty(p.content))
         {
             Toast.makeText(PostActivity.this,"Please Enter Content",Toast.LENGTH_SHORT).show();
             return false;
@@ -85,21 +94,7 @@ public class PostActivity extends AppCompatActivity {
 
         return true;
     }
-    public void createPosts(com.gap22.community.apartment.Database.Posts p)
-    {
-        String storageUserId = storagePref.getPreference("CommunityID");
-        String key = mposts.push().getKey();
 
-        mposts.child(storageUserId).child(key).setValue(p);
-
-
-
-        mauthor.child(fireauth.getCurrentUser().getUid()).child("posts").child(key).setValue("true");
-        Toast.makeText(PostActivity.this, "Post Created", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, CoreOperation.class));
-        finish();
-
-    }
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();

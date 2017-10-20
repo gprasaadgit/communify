@@ -2,6 +2,7 @@ package com.gap22.community.apartment.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Posts;
 import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.PostActivity;
 import com.gap22.community.apartment.PostResponse;
@@ -26,8 +30,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
 
 
 public class PostFragment extends Fragment {
@@ -36,7 +41,7 @@ public class PostFragment extends Fragment {
     ListView lview;
 
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, mpostresponse;
     private FirebaseAuth fireauth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private StoragePreferences storagePref;
@@ -65,16 +70,13 @@ public class PostFragment extends Fragment {
         String storageUserId = storagePref.getPreference("type");
         if (storageUserId != "") {
 
-            if (storageUserId.equals("admin"))
-            {
-               fab.setVisibility(View.VISIBLE);
-            }
-            else
-            {
+            if (storageUserId.equals("admin")) {
+                fab.setVisibility(View.VISIBLE);
+            } else {
                 fab.setVisibility(View.GONE);
             }
         }
-        String CommunityId = storagePref.getPreference("CommunityID");
+        String CommunityId = GlobalValues.getCommunityId();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,71 +85,87 @@ public class PostFragment extends Fragment {
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
-        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId).child("/Post/");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
+        mpostresponse = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
+
         fireauth = FirebaseAuth.getInstance();
 
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
-                {
-                     ProgressDialog progress;
-                    progress = new ProgressDialog(getActivity());
-                    progress.setMessage("Loading Data");
-                    progress.show();
-
-                    final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Post.class, R.layout.post_list_item, mDatabase) {
-                        @Override
-                        protected void populateView(View v, Object model, int position) {
-                        //    progress.dismiss();
-
-                            Post p = (Post) model;
-                            ((TextView) v.findViewById(R.id.title)).setText(p.title);
-                            ((TextView) v.findViewById(R.id.short_message)).setText(p.content);
-
-                            //((TextView)v.findViewById(R.id.no_of_replies)).setText(p.getResponses()+"Replies");
 
 
-                           /* {
 
 
-                                long diffInMillisec = System.currentTimeMillis() - p.created_date;
-                                long diffInSec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
-                                long seconds = diffInSec % 60;
-                                diffInSec/= 60;
-                                long minutes =diffInSec % 60;
-                                diffInSec /= 60;
-                                long  hours = diffInSec % 24;
-                                diffInSec /= 24;
-                                long  days = diffInSec;
-                                ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
+                            /*long postCount = dataSnapshot.getChildrenCount();
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Posts post = postSnapshot.getValue(Posts.class);
+                                Toast.makeText(getActivity(), post.getTitle(), Toast.LENGTH_SHORT).show();
                             }*/
 
 
+        ProgressDialog progress;
+        progress = new ProgressDialog(getActivity());
+        progress.setMessage("Loading Data");
+        progress.show();
 
-               /* if(p.)
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+p.getAuthor()+".jpg");
+        final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Post.class, R.layout.post_list_item, mDatabase) {
+            @Override
+            protected void populateView(View v, Object model, int position) {
+                //    progress.dismiss();
+                String postId = getRef(position).getKey();
+                Post p = (Post) model;
+
+                ((TextView) v.findViewById(R.id.title)).setText(p.title);
+                ((TextView) v.findViewById(R.id.short_message)).setText(p.content);
+                final TextView responsecount = ((TextView) v.findViewById(R.id.no_of_replies));
+
+                mpostresponse.child(postId).child("post_responses").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            responsecount.setText(dataSnapshot.getChildrenCount() + " - Replies");
+                            responsecount.setTextColor(Color.YELLOW);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                Date today = new Date();
+                long diff = today.getTime() - p.created_date.getTime();
+                int days = (int) (diff / (1000 * 60 * 60 * 24));
+                int hours = (int) (diff / (1000 * 60 * 60));
+                int minutes = (int) (diff / (1000 * 60));
+                int seconds = (int) (diff / (1000));
+                ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
+
+
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/" + p.author + ".jpg");
 
 // ImageView in your Activity
-                ImageView imageView = (ImageView)v.findViewById(R.id.img);
+                ImageView imageView = (ImageView) v.findViewById(R.id.img_user_image);
 
 // Load the image using Glide
-                Glide.with(getActivity() )
+                Glide.with(getActivity())
                         .using(new FirebaseImageLoader())
                         .load(storageRef)
-                        .into(imageView);*/
-                        }
-                    };
+                        .into(imageView);
+            }
+        };
+
+
+
 
                     lview.setAdapter(adapter);
 
                     lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             {
-                                /*Post p = (Post) adapter.getItem(position);
+                                Post p = (Post) adapter.getItem(position);
                                 String postId= adapter.getRef(position).getKey();
                                 Bundle bundle = new Bundle();
                                 bundle.putString("Post",p.content);
@@ -158,7 +176,7 @@ public class PostFragment extends Fragment {
                                 i.putExtras(bundle);
 
 //Fire that second activity
-                                startActivity(i);*/
+                                startActivity(i);
 
                             }
 
@@ -166,86 +184,10 @@ public class PostFragment extends Fragment {
                     });
 
 
-                }
-                else
-                {
-                    //progress.dismiss();
 
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
-        final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Posts.class, R.layout.post_list_item, mDatabase) {
-            @Override
-            protected void populateView(View v, Object model, int position) {
-               // progress.dismiss();
 
-                Posts p = (Posts) model;
-                ((TextView) v.findViewById(R.id.title)).setText(p.getTitle());
-                ((TextView) v.findViewById(R.id.short_message)).setText(p.getBody());
-                ((TextView)v.findViewById(R.id.no_of_replies)).setText(p.getResponses()+"Replies");
-
-                if(p.getDate()!= 0)
-                {
-
-
-                    long diffInMillisec = System.currentTimeMillis() - p.getDate();
-                    long diffInSec = TimeUnit.MILLISECONDS.toSeconds(diffInMillisec);
-                    long seconds = diffInSec % 60;
-                    diffInSec/= 60;
-                    long minutes =diffInSec % 60;
-                    diffInSec /= 60;
-                    long  hours = diffInSec % 24;
-                    diffInSec /= 24;
-                    long  days = diffInSec;
-                    ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
-                }
-
-
-
-               /* if(p.)
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+p.getAuthor()+".jpg");
-
-// ImageView in your Activity
-                ImageView imageView = (ImageView)v.findViewById(R.id.img);
-
-// Load the image using Glide
-                Glide.with(getActivity() )
-                        .using(new FirebaseImageLoader())
-                        .load(storageRef)
-                        .into(imageView);*/
-            }
-        };
-
-        lview.setAdapter(adapter);
-
-        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                {
-                    Posts p = (Posts) adapter.getItem(position);
-                    String postId= adapter.getRef(position).getKey();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Post",p.getBody());
-                    bundle.putString("Title",p.getTitle());
-                    bundle.putString("PostId",postId );
-                    bundle.putInt("ResponseCount",p.getResponses());
-                    Intent i = new Intent(getActivity(), PostResponse.class);
-                    i.putExtras(bundle);
-
-//Fire that second activity
-                    startActivity(i);
-
-                }
-
-            }
-        });
         return fragPostView;
 
     }

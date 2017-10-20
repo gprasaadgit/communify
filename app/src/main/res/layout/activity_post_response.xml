@@ -50,7 +50,7 @@
             android:layout_gravity="top"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/stanby_text"
+
             android:textColor="@color/colorBlack"
             android:textSize="15sp" />
 

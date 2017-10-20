@@ -15,18 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.gap22.community.apartment.Common.GlobalValues;
+import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Member;
+import com.gap22.community.apartment.Dao.PostDao;
+import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.PostResponses;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
+import java.util.Date;
 
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
@@ -63,12 +63,12 @@ public class PostResponse extends AppCompatActivity {
         title.setText(postQuestion);
         storagePref = StoragePreferences.getInstance(this);
         Response =(Button) findViewById(R.id.btn_send);
-        final String storageUserId = storagePref.getPreference("CommunityID");
-        mDatabase = FirebaseDatabase.getInstance().getReference(storageUserId).child("Post").child(pollId).child("post_responses");
+        final String CommunityId = GlobalValues.getCommunityId();
+        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId).child("Post").child(pollId).child("post_responses");
 
         mmember = FirebaseDatabase.getInstance().getReference("member");
 
-        mpost = FirebaseDatabase.getInstance().getReference("post").child(storageUserId).child(pollId);
+
         FirebaseListAdapter adapter = new FirebaseListAdapter(this, PostResponses.class, R.layout.viewpostresponse, mDatabase)
         {
 
@@ -80,7 +80,7 @@ PostResponses ob =(PostResponses) model;
 
 
 
-                final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
+                //final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
 
                 final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
                 response.setText(ob.content);
@@ -104,71 +104,17 @@ PostResponses ob =(PostResponses) model;
 
                 //You will get as string input data in this variable.
                 // here we convert the input to a string and show in a toast.
-                final HashMap Output = new HashMap();
+
                 final String srt = et_post_response_message .getText().toString();
+                PostDao postDao = new PostDao();
+                Date createdDate = new Date();
+                 KeyGenerator keyGen = new KeyGenerator();
+                PostResponses postResponse = new PostResponses(fireauth.getCurrentUser().getUid(), IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, srt ,PostResponses.Status.Approved, "", "");
+                postDao.CreatePostResponse(CommunityId, pollId, keyGen.GetNewPostCommentKey(), postResponse);
 
-                mmember.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent( new ValueEventListener()
-                {
-
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        if (dataSnapshot.exists()) {
-                            Member m = dataSnapshot.getValue(Member.class);
-
-                            Output.put("text",srt);
-                            Output.put("name",m.getFirstname());
-                        }
-
-                        else
-                        {
-                            Output.put("text",srt);
-                            Output.put("name","Admin");
-                        }
-
-                        mDatabase.child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists())
-                                {
-
-                                }
-                                else
-                                {
-                                    responsecount = responsecount +1;
-                                }
-
-                                mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(Output);
-
-                                mpost.child("responses").setValue(responsecount);
-                                Toast.makeText(PostResponse.this,"Response Submitted Succesfully",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(PostResponse.this, CoreOperation.class));
-                                finish();
-
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-
-
-
-
-
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                Toast.makeText(PostResponse.this, "Response Submitted", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PostResponse.this, GetCollaborated.class));
+                finish();
 
 
 

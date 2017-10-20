@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PostDao {
+public class   PostDao {
 
     private DatabaseReference dbReference;
     private FirebaseAuth fbAuthentication;
