@@ -30,7 +30,7 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".ShareMyLocation" />
         <activity android:name=".GetCollaborated" />
         <activity
-            android:name=".MainActivity"
+            android:name=".NewHirachiy"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
             </intent-filter>
         </activity>
         <activity android:name=".JoinOrCreateCommunity" />
-        <activity android:name=".NewHirachiy"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

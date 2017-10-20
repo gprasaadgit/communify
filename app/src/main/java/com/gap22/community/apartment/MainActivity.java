@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
 
-                                    if (globalUser.default_community != "") {
+                                    if (!globalUser.default_community.equals("")) {
                                         storagePref.savePreference("name", globalUser.first_name);
                                         storagePref.savePreference("email", globalUser.email);
                                         storagePref.savePreference("img", fireauth.getCurrentUser().getUid());

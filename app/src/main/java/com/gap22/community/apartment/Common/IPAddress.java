@@ -16,12 +16,6 @@ public class IPAddress {
         return sbuf.toString();
     }
 
-    /**
-     * Get utf8 byte array.
-     *
-     * @param str
-     * @return array of NULL if error was found
-     */
     public static byte[] getUTF8Bytes(String str) {
         try {
             return str.getBytes("UTF-8");
@@ -30,13 +24,6 @@ public class IPAddress {
         }
     }
 
-    /**
-     * Load UTF8withBOM or any ansi text file.
-     *
-     * @param filename
-     * @return
-     * @throws java.io.IOException
-     */
     public static String loadFileAsString(String filename) throws java.io.IOException {
         final int BUFLEN = 1024;
         BufferedInputStream is = new BufferedInputStream(new FileInputStream(filename), BUFLEN);
@@ -63,12 +50,6 @@ public class IPAddress {
         }
     }
 
-    /**
-     * Returns MAC address of the given interface name.
-     *
-     * @param interfaceName eth0, wlan0 or NULL=use first interface
-     * @return mac address or empty string
-     */
     public static String getMACAddress(String interfaceName) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -95,12 +76,6 @@ public class IPAddress {
         }*/
     }
 
-    /**
-     * Get IP address from first non-localhost interface
-     *
-     * @param ipv4 true=return ipv4, false=return ipv6
-     * @return address or empty string
-     */
     public static String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());

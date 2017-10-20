@@ -71,6 +71,19 @@
             android:inputType="number"
             android:textAlignment="center" />
 
+        <TextView
+            android:id="@+id/tview_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/frag_create_or_join_com_enterinvite"
+            android:textAlignment="center"
+            android:visibility="invisible"
+            android:textColor="@color/colorOrange1"
+            android:textSize="13sp" />
+
 
     </LinearLayout>
 
@@ -92,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="@string/frag_create_or_join_com_join"
+                android:onClick="btn_Join_onClickBtn"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
