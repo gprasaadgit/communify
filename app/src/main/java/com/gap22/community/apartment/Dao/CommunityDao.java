@@ -42,10 +42,10 @@ public class CommunityDao {
 
         //try {
         dbReference.child(communityId).child("Profile").setValue(community);
-        securityGroupSettings = new SecurityGroupSettings("ADMIN", true, true, true, true, true, true, true, true,
-                true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+        securityGroupSettings = new SecurityGroupSettings(true, true, true, true, true, true, true, true,
+                true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
                 true, true, true, true, true, true);
-        securityDao.CreateSecurityGroupWithRights(communityId, securityGroupSettings);
+        securityDao.CreateSecurityGroupWithRights(communityId, "ADMIN", securityGroupSettings);
         membersDao.CreateMembers(communityId, memberId, members);
         //} catch (Exception e) {
         //    response.error_message = e.getMessage();

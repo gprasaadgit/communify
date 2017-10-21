@@ -21,6 +21,7 @@ import com.gap22.community.apartment.Dao.GlobalUserDao;
 import com.gap22.community.apartment.Dao.MembersDao;
 import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Dao.PostDao;
+import com.gap22.community.apartment.Dao.SecurityDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.ActionResponse;
 import com.gap22.community.apartment.Entities.AppConfig;
@@ -150,7 +151,12 @@ public class NewHirachiy extends AppCompatActivity {
     }
 
     public void btn_Notifications_onClickBtn(View v) {
+        SecurityGroupSettings securityGroupSettingsAdmin = new SecurityGroupSettings(false, false, false, false, false, false, false, true, true, false, false, false, false, true, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false);
+        SecurityGroupSettings securityGroupSettingsNormalUser = new SecurityGroupSettings(false, false, false, false, false, false, false, true, true, false, false, false, false, true, false, false, false, false, false, false, true, false, false, false, false, true, false, false, false, false, true, false);
+        SecurityDao securityDao = new SecurityDao();
 
+        securityDao.CreateSecurityGroupWithRights("CMTY-20171002214959926", "ADMIN", securityGroupSettingsAdmin);
+        securityDao.CreateSecurityGroupWithRights("CMTY-20171002214959926", "NORMAL-USER", securityGroupSettingsNormalUser);
     }
 
     public void btn_Users_onClickBtn(View v) {

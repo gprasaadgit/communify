@@ -11,7 +11,6 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class SecurityGroupSettings {
 
-    public String name;
     public boolean CanEditCommunity;
     public boolean CanArchiveCommunity;
     public boolean CanAcceptInvites;
@@ -25,6 +24,7 @@ public class SecurityGroupSettings {
     public boolean CanEditPoll;
     public boolean CanCreatePoll;
     public boolean CanDeletePoll;
+    public boolean CanContributePoll;
     public boolean CanAbusePoll;
     public boolean CanViewPollDashboard;
     public boolean IsPollAdmin;
@@ -48,20 +48,15 @@ public class SecurityGroupSettings {
 
     }
 
-    public SecurityGroupSettings(String id, String name) {
-        this.name = name;
-    }
-
-    public SecurityGroupSettings(String name, boolean CanEditCommunity, boolean CanArchiveCommunity,
+    public SecurityGroupSettings(boolean CanEditCommunity, boolean CanArchiveCommunity,
                                  boolean CanAcceptInvites, boolean IsCommunityAdmin, boolean CanEditPost, boolean CanCreatePost,
                                  boolean CanDeletePost, boolean CanAbusePost, boolean CanReplyPost, boolean IsPostAdmin,
-                                 boolean CanEditPoll, boolean CanCreatePoll, boolean CanDeletePoll, boolean CanAbusePoll,
+                                 boolean CanEditPoll, boolean CanCreatePoll, boolean CanDeletePoll, boolean CanContributePoll, boolean CanAbusePoll,
                                  boolean CanViewPollDashboard, boolean IsPollAdmin, boolean CanEditEvents, boolean CanCreateEvents,
                                  boolean CanDeleteEvents, boolean CanAbuseEvents, boolean IsEventsAdmin, boolean CanEditNotification,
                                  boolean CanCreateNotification, boolean CanDeleteNotification, boolean CanAbuseNotification,
                                  boolean IsNotificationAdmin, boolean CanEditQuestions, boolean CanCreateQuestions,
                                  boolean CanDeleteQuestions, boolean CanAbuseQuestions, boolean IsQuestionsAdmin) {
-        this.name = name;
         this.CanEditCommunity = CanEditCommunity;
         this.CanArchiveCommunity = CanArchiveCommunity;
         this.CanAcceptInvites = CanAcceptInvites;
@@ -75,6 +70,7 @@ public class SecurityGroupSettings {
         this.CanEditPoll = CanEditPoll;
         this.CanCreatePoll = CanCreatePoll;
         this.CanDeletePoll = CanDeletePoll;
+        this.CanContributePoll = CanContributePoll;
         this.CanAbusePoll = CanAbusePoll;
         this.CanViewPollDashboard = CanViewPollDashboard;
         this.IsPollAdmin = IsPollAdmin;
@@ -111,6 +107,7 @@ public class SecurityGroupSettings {
         result.put("CanEditPoll", CanEditPoll);
         result.put("CanCreatePoll", CanCreatePoll);
         result.put("CanDeletePoll", CanDeletePoll);
+        result.put("CanContributePoll", CanContributePoll);
         result.put("CanAbusePoll", CanAbusePoll);
         result.put("CanViewPollDashboard", CanViewPollDashboard);
         result.put("IsPollAdmin", IsPollAdmin);
