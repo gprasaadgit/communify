@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import android.view.View;
 import android.widget.Toast;
+
 import com.gap22.community.apartment.Common.CommunifyCrypto;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.IPAddress;
@@ -16,6 +18,7 @@ import com.gap22.community.apartment.Dao.CommunityDao;
 import com.gap22.community.apartment.Dao.CommunityInviteCodeDao;
 import com.gap22.community.apartment.Dao.EventsDao;
 import com.gap22.community.apartment.Dao.GlobalUserDao;
+import com.gap22.community.apartment.Dao.MembersDao;
 import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
@@ -26,6 +29,7 @@ import com.gap22.community.apartment.Entities.GlobalUser;
 import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.Entities.*;
 import com.gap22.community.apartment.Entities.PostResponses;
+
 import javax.crypto.SecretKey;
 
 public class NewHirachiy extends AppCompatActivity {
@@ -113,7 +117,10 @@ public class NewHirachiy extends AppCompatActivity {
     }
 
     public void btn_Members_onClickBtn(View v) {
-
+        MembersDao membersDao = new MembersDao();
+        Date createdDate = new Date();
+        Members members = new Members("narayanan.vsn@gmail.com", createdDate, createdDate, Members.Status.Active, "Narayanan", "Dayalan", 0, 0, 0, "Mr", "", "9840399445", null, null, "This is all what i have", "ADMIN");
+        membersDao.CreateMembers("CMTY-20171002214959926", "6wR7YC72wecEhqKsiggCtrAgylj2", members);
     }
 
     public void btn_Post_onClickBtn(View v) {

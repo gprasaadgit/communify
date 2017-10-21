@@ -18,6 +18,7 @@ import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.GlobalUser;
 import com.gap22.community.apartment.Entities.Members;
+import com.gap22.community.apartment.Entities.SecurityGroupSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView newuser;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
-    private DatabaseReference mDatabase, mCommunity;
+    private DatabaseReference dRefMembers, dRefCommunity, dRefSecutityRights;
 
     private StoragePreferences storagePref;
 
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
-       // mDatabase = FirebaseDatabase.getInstance().getReference("member");
         String storageUserId = storagePref.getPreference("userId");
       /*  if (storageUserId != "") {
             Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
@@ -85,75 +85,72 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    progress.dismiss();
+
                     if (task.isSuccessful()) {
                         storagePref.savePreference("userId", email);
 
-                        mCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
-                        mCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+                        dRefCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
+                        dRefCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
 
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
                                     GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
+                                    overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
 
                                     if (!globalUser.default_community.equals("")) {
-                                        storagePref.savePreference("name", globalUser.first_name);
-                                        storagePref.savePreference("email", globalUser.email);
-                                        storagePref.savePreference("img", fireauth.getCurrentUser().getUid());
-                                        storagePref.savePreference("CommunityID", globalUser.default_community);
+                                        GlobalValues.setCurrentUserEmail(globalUser.email);
+                                        storagePref.savePreference("EmailId", globalUser.email);
+                                        GlobalValues.setCurrentUserName(globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
+                                        storagePref.savePreference("FullName", globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
+                                        GlobalValues.setCurrentUserUuid(fireauth.getCurrentUser().getUid());
+                                        storagePref.savePreference("Image", fireauth.getCurrentUser().getUid());
                                         GlobalValues.setCommunityId(globalUser.default_community);
+                                        storagePref.savePreference("CommunityID", globalUser.default_community);
 
-                                        mDatabase =  FirebaseDatabase.getInstance().getReference(globalUser.default_community).child("Members").child(fireauth.getCurrentUser().getUid());
-                                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members").child(fireauth.getCurrentUser().getUid());
+                                        dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                                                 if (dataSnapshot.exists()) {
-                                                    Members mem = dataSnapshot.getValue(Members.class);
-                                                    if(mem.security_group.equals("USER"))
-                                                    {
-                                                        storagePref.savePreference("type", "member");
-                                                    }
+                                                    Members members = dataSnapshot.getValue(Members.class);
 
-                                                    else
-                                                    {
-                                                        storagePref.savePreference("type", "admin");
+                                                    dRefSecutityRights = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Security").child(members.security_group);
+                                                    dRefSecutityRights.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                    }
-                                                    Intent menu = new Intent(MainActivity.this, GetCollaborated.class);
+                                                            if (dataSnapshot.exists()) {
+                                                                SecurityGroupSettings securityGroupSettings = dataSnapshot.getValue(SecurityGroupSettings.class);
+                                                                GlobalValues.setSecurityGroupSettings(securityGroupSettings);
+                                                                Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
+                                                                startActivity(getCollaborated);
+                                                                progress.dismiss();
+                                                                finish();
+                                                                return;
+                                                            }
+                                                        }
 
-                                                    finish();
-                                                    startActivity(menu);
-                                                    overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                                    return;
+                                                        @Override
+                                                        public void onCancelled(DatabaseError databaseError) {
 
+                                                        }
+                                                    });
                                                 } else {
-
-                                                    Toast.makeText(MainActivity.this, "USER Waiting For Approval", Toast.LENGTH_SHORT).show();
                                                     return;
-
-
-
                                                 }
                                             }
+
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
 
                                             }
                                         });
-
-                                        Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
-                                        finish();
-                                        startActivity(getCollaborated);
-                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                        return;
                                     } else {
                                         Intent joinOrCreateCommunity = new Intent(MainActivity.this, JoinOrCreateCommunity.class);
-                                        finish();
                                         startActivity(joinOrCreateCommunity);
-                                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                        progress.dismiss();
+                                        finish();
                                         return;
                                     }
                                 }
@@ -165,13 +162,16 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         });
-                    } else {
+                    } else
+
+                    {
                         Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
             });
         }
+
     }
 
     private boolean ValidateFormBeforeSubmit() {

@@ -10,8 +10,8 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Members {
     public String email;
-    //public Date registered_on;
-   // public Date activated_on;
+    public Date registered_on;
+    public Date activated_on;
     public String status;
     public String first_name;
     public String last_name;
@@ -36,8 +36,8 @@ public class Members {
                    String unit, String phone, String twitter_url, String facebook_url,
                    String about,String security_group) {
         this.email = email;
-        //this.registered_on = registered_on;
-        //this.activated_on = activated_on;
+        this.registered_on = registered_on;
+        this.activated_on = activated_on;
         this.status = status.value;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -57,8 +57,8 @@ public class Members {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("email", email);
-        //result.put("registered_on", registered_on);
-        //result.put("activated_on", activated_on);
+        result.put("registered_on", registered_on);
+        result.put("activated_on", activated_on);
         result.put("status", status);
         result.put("first_name", first_name);
         result.put("last_name", last_name);
