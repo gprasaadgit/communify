@@ -2,9 +2,6 @@ package com.gap22.community.apartment.Entities;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
-
-import org.joda.time.DateTime;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
