@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Fragments.CollabrationPallet;
 import com.gap22.community.apartment.Fragments.EventsCalendar;
@@ -59,19 +60,19 @@ public class GetCollaborated extends AppCompatActivity
         Menu menu = navigationView.getMenu();
         View header = navigationView.getHeaderView(0);
 
-        storagePref = StoragePreferences.getInstance(GetCollaborated.this);
+       /* storagePref = StoragePreferences.getInstance(GetCollaborated.this);
         final String storageUserId = storagePref.getPreference("type");
         final String name = storagePref.getPreference("name");
         final String email = storagePref.getPreference("email");
-        final String img = storagePref.getPreference("img");
-        if (storageUserId != "") {
+        final String img = storagePref.getPreference("img");*/
+        {
 
-            if (storageUserId.equals("admin"))
+           /* if (storageUserId.equals("admin"))
             {
 
             }
             else
-            {
+            {*/
                 MenuItem item = menu.findItem(R.id.nav_Manage);
 
                 item.setVisible(false);
@@ -80,9 +81,9 @@ public class GetCollaborated extends AppCompatActivity
 username =(TextView)header.findViewById(R.id.tv_username);
 useremail =(TextView)header.findViewById(R.id.tv_email)    ;
 userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+img+".jpg");
-                username.setText(name);
-                useremail.setText(email);
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+GlobalValues.getCurrentUserUuid()+".jpg");
+                username.setText(GlobalValues.getCurrentUserName());
+                useremail.setText(GlobalValues.getCurrentUserEmail());
                 Glide.with(this )
                         .using(new FirebaseImageLoader())
                         .load(storageRef)
@@ -90,7 +91,7 @@ userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
                         .into(userimg);
 
 
-            }
+           // }
 
 
         }

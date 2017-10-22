@@ -14,11 +14,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.GlobalValues;
+import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Dao.PollsDao;
+import com.gap22.community.apartment.Entities.PollResponse;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
@@ -40,8 +45,8 @@ public class PollResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll_result);
         fireauth = FirebaseAuth.getInstance();
-        mpolls = FirebaseDatabase.getInstance().getReference("poll");
-        mpollresults= FirebaseDatabase.getInstance().getReference("pollResults");
+
+        //mpollresults= FirebaseDatabase.getInstance().getReference("pollResults");
         Question = (TextView) findViewById(R.id.tview_question);
         Option1 =(RadioButton)findViewById(R.id.radioOption1);
         Option2 =(RadioButton)findViewById(R.id.radioOption2);
@@ -54,9 +59,7 @@ public class PollResultActivity extends AppCompatActivity {
         option1 = bundle.getString("Option1");
         option2 = bundle.getString("Option2");
         option3 = bundle.getString("Option3");
-        option1count = bundle.getInt("Count1");
-        option2count = bundle.getInt("Count2");
-        option3count = bundle.getInt("Count3");
+
 
         pollId = bundle.getString("PollId");
         Question.setText(bundle.getString("Question"));
@@ -77,24 +80,27 @@ public class PollResultActivity extends AppCompatActivity {
                 // find the radiobutton by returned id
                if(Option1== (RadioButton) findViewById(selectedId))
                {
-                   resultvalue = "option1";
+                   resultvalue =Option1.getText().toString();
                    finalcount = 1+option1count;
                }
 
                else if(Option2== (RadioButton) findViewById(selectedId))
                 {
-                    resultvalue = "option2";
-                    finalcount = 1+option2count;
+                    resultvalue =Option2.getText().toString();
                 }
                 else
                 {
-                    resultvalue = "option3";
-                    finalcount = 1+option3count;
+                    resultvalue =Option3.getText().toString();
                 }
-                String storageUserId = storagePref.getPreference("CommunityID");
+                String storageUserId = GlobalValues.getCommunityId();
 
-                mpollresults.child(storageUserId).child(pollId).child(fireauth.getCurrentUser().getUid()).setValue(resultvalue);
-                mpolls.child(storageUserId).child(pollId).child(resultvalue).child("count").setValue(finalcount);
+               // mpollresults.child(storageUserId).child(pollId).child(fireauth.getCurrentUser().getUid()).setValue(resultvalue);
+                //mpolls.child(storageUserId).child(pollId).child(resultvalue).child("count").setValue(finalcount);
+                PollsDao pollsDao = new PollsDao();
+                Date createdDate = new Date();
+                PollResponse pollResponse = new PollResponse(IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), resultvalue, createdDate, null,null);
+
+                pollsDao.CreatePollResponse(storageUserId,pollId,GlobalValues.getCurrentUserUuid(), pollResponse);
                 Toast.makeText(PollResultActivity.this, "Poll Response Submitted", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PollResultActivity.this, CoreOperation.class));
                 finish();

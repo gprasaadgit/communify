@@ -15,8 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Poll;
+import com.gap22.community.apartment.Entities.Poll;
 import com.gap22.community.apartment.PollActivity;
 import com.gap22.community.apartment.PollResultActivity;
 import com.gap22.community.apartment.R;
@@ -57,10 +58,10 @@ public class PollsFragment extends Fragment {
         storagePref = StoragePreferences.getInstance(getActivity());
         progress = new ProgressDialog(getActivity());
        final String storageUserId = storagePref.getPreference("type");
-        String CommunityId = storagePref.getPreference("CommunityID");
-        if (storageUserId != "") {
+        String CommunityId = GlobalValues.getCommunityId();
+       {
 
-            if (storageUserId.equals("admin"))
+            if (GlobalValues.getSecurityGroupSettings().CanCreatePoll==true)
             {
                 fab.setVisibility(View.VISIBLE);
             }
@@ -79,8 +80,10 @@ public class PollsFragment extends Fragment {
 
         lview = (ListView) fragPollView.findViewById(R.id.listView2);
         fireauth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference("poll").child(CommunityId);
-        mpollresults= FirebaseDatabase.getInstance().getReference("pollResults").child(CommunityId);
+        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId).child("Poll");
+        mpollresults= FirebaseDatabase.getInstance().getReference(CommunityId).child("Poll");
+
+
         progress.setMessage("Loading Data");
         progress.show();
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
@@ -90,7 +93,7 @@ public class PollsFragment extends Fragment {
                 progress.dismiss();
                 Poll p = (Poll) model;
 
-                ((TextView) v.findViewById(R.id.title)).setText(p.getQuestion());
+                ((TextView) v.findViewById(R.id.title)).setText(p.question);
               /*  if (p.getStatus().equalsIgnoreCase("Active")) {
                     ((TextView) v.findViewById(R.id.textView2)).setText("OPEN");
                 }
@@ -100,13 +103,13 @@ public class PollsFragment extends Fragment {
                       +"-"+p.getOption1().get("count"));
                 }*/
 
-                ((TextView) v.findViewById(R.id.progress_title_1)).setText(p.getOption1().get("text").toString());
+                ((TextView) v.findViewById(R.id.progress_title_1)).setText(p.option1);
 
-                ((TextView) v.findViewById(R.id.progress_title_2)).setText(p.getOption2().get("text").toString());
+                ((TextView) v.findViewById(R.id.progress_title_2)).setText(p.option2);
 
-                ((TextView) v.findViewById(R.id.progress_title_3)).setText(p.getOption3().get("text").toString());
+                ((TextView) v.findViewById(R.id.progress_title_3)).setText(p.option3);
 
-                long total = (long) p.getOption1().get("count") + (long) p.getOption2().get("count") +(long) p.getOption3().get("count") ;
+               /* long total = (long) p.getOption1().get("count") + (long) p.getOption2().get("count") +(long) p.getOption3().get("count") ;
                 long count1 = (long) p.getOption1().get("count");
                 long count2 = (long) p.getOption2().get("count");
                 long count3 = (long) p.getOption3().get("count");
@@ -115,14 +118,14 @@ if(total!=0) {
      pb11 = (int) count1 / (int) total;
      pb12 = (int) count2 / (int) total;
      pb13 = (int) count3 / (int) total;
-}
+}*/
 
              ProgressBar pb = (ProgressBar)v.findViewById(R.id.pb_option1);
-                pb.setProgress((int)(pb11*100));
+                pb.setProgress((int)(0*100));
                 ProgressBar pb1 = (ProgressBar)v.findViewById(R.id.pb_option2);
-                pb1.setProgress((int)(pb12*100));
+                pb1.setProgress((int)(0*100));
                 ProgressBar pb2 = (ProgressBar)v.findViewById(R.id.pb_option3);
-                pb2.setProgress((int)(pb13*100));
+                pb2.setProgress((int)(0*100));
 
 
             }
@@ -131,11 +134,11 @@ if(total!=0) {
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!(storageUserId.equals("admin")))
+                if (!(GlobalValues.getSecurityGroupSettings().CanCreatePoll==true))
                 { final Poll p = (Poll) adapter.getItem(position);
                     final String pollid = adapter.getRef(position).getKey();
 
-                    mpollresults.child(adapter.getRef(position).getKey()).child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    mpollresults.child(adapter.getRef(position).getKey()).child("poll_responses").child(fireauth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -149,13 +152,13 @@ if(total!=0) {
                             else {
 
                                 Bundle bundle = new Bundle();
-                                bundle.putString("Question", p.getQuestion());
-                                bundle.putString("Option1", p.getOption1().get("text").toString());
-                                bundle.putInt("Count1", Integer.parseInt(p.getOption1().get("count").toString()));
-                                bundle.putString("Option2", p.getOption2().get("text").toString());
-                                bundle.putInt("Count2", Integer.parseInt(p.getOption2().get("count").toString()));
-                                bundle.putString("Option3", p.getOption3().get("text").toString());
-                                bundle.putInt("Count3", Integer.parseInt(p.getOption3().get("count").toString()));
+                                bundle.putString("Question", p.question);
+                                bundle.putString("Option1", p.option1);
+                               // bundle.putInt("Count1", Integer.parseInt(p.getOption1().get("count").toString()));
+                                bundle.putString("Option2", p.option2);
+                                //bundle.putInt("Count2", Integer.parseInt(p.getOption2().get("count").toString()));
+                                bundle.putString("Option3", p.option3);
+                                //bundle.putInt("Count3", Integer.parseInt(p.getOption3().get("count").toString()));
                                 bundle.putString("PollId",pollid );
                                 Intent i = new Intent(getActivity(), PollResultActivity.class);
                                 i.putExtras(bundle);

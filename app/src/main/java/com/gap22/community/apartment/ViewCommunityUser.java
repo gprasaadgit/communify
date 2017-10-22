@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.gap22.community.apartment.Database.Community;
+import com.gap22.community.apartment.Entities.Community;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -41,15 +41,15 @@ public class ViewCommunityUser extends AppCompatActivity {
             protected void populateView(View v, Object model, int position) {
                 Community c =(Community) model;
 
-                ((TextView) v.findViewById(R.id.Name)).setText("Name : "+c.getName());
-                ((TextView) v. findViewById(R.id.builder)).setText("Builder : "+c.getBuilder() );
-                ((TextView) v. findViewById(R.id.sec)).setText("Seceratary : "+c.getSeceretary() );
-                ((TextView) v. findViewById(R.id.city)).setText("City : "+c.getCity() );
-                ((TextView) v. findViewById(R.id.state)).setText("State : "+c.getState() );
-                ((TextView) v. findViewById(R.id.Address1)).setText("Address : "+c.getAddress1() );
+                ((TextView) v.findViewById(R.id.Name)).setText("Name : "+c.title);
+                ((TextView) v. findViewById(R.id.builder)).setText("Builder : "+c.builder );
+                ((TextView) v. findViewById(R.id.sec)).setText("Seceratary : "+c.owner);
+                ((TextView) v. findViewById(R.id.city)).setText("City : "+c.city);
+                ((TextView) v. findViewById(R.id.state)).setText("State : "+c.state);
+                ((TextView) v. findViewById(R.id.Address1)).setText("Address : "+c.address1 );
 
-                ((TextView) v.findViewById(pincode)).setText("Pincode :"+c.getPinCode());
-                ((TextView) v.findViewById(R.id.tax)).setText("TaxId :"+c.getTaxID());
+                ((TextView) v.findViewById(pincode)).setText("Pincode :"+c.pincode);
+                ((TextView) v.findViewById(R.id.tax)).setText("TaxId :"+c.taxid);
             }
         };
         lview.setAdapter(adapter);

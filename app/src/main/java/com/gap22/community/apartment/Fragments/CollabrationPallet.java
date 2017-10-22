@@ -53,6 +53,10 @@ public class CollabrationPallet extends Fragment {
         tabOne.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_post, 0, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
+        TextView tabTwo = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+        tabTwo.setText("  Polls ");
+        tabTwo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_polls, 0, 0, 0);
+        tabLayout.getTabAt(1).setCustomView(tabTwo);
 
 
         TextView tabThree = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
@@ -60,10 +64,6 @@ public class CollabrationPallet extends Fragment {
         tabThree.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_community, 0, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
 
-        TextView tabTwo = (TextView) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
-        tabTwo.setText("  Polls ");
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_polls, 0, 0, 0);
-        tabLayout.getTabAt(1).setCustomView(tabTwo);
 
 
 

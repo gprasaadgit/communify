@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sign_in_form"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -44,7 +43,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="5dp"
-            android:text="@string/act_view_profile_role"
+
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="14sp" />
@@ -272,37 +271,7 @@
                         android:textSize="15sp" />
                 </TableRow>
 
-                <TableRow android:layout_marginTop="15dp">
 
-                    <TextView
-                        android:id="@+id/tview_residence"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/frag_edit_profile_residence"
-                        android:textColor="@android:color/black"
-                        android:textSize="13sp" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/bottom_gray_border">
-
-                    <EditText
-                        android:id="@+id/tview_residence_value"
-                        android:layout_width="match_parent"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/frag_edit_profile_residence_hint"
-                        android:inputType="text"
-                        android:textSize="15sp" />
-                </TableRow>
 
                 <TableRow android:layout_marginTop="15dp">
 

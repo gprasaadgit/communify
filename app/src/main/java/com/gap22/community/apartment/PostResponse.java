@@ -20,11 +20,15 @@ import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
+import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.Entities.PostResponses;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
@@ -66,7 +70,7 @@ public class PostResponse extends AppCompatActivity {
         final String CommunityId = GlobalValues.getCommunityId();
         mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId).child("Post").child(pollId).child("post_responses");
 
-        mmember = FirebaseDatabase.getInstance().getReference("member");
+        mmember = FirebaseDatabase.getInstance().getReference(CommunityId).child("Members");
 
 
         FirebaseListAdapter adapter = new FirebaseListAdapter(this, PostResponses.class, R.layout.viewpostresponse, mDatabase)
@@ -80,10 +84,29 @@ PostResponses ob =(PostResponses) model;
 
 
 
-                //final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
+                final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
 
                 final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
                 response.setText(ob.content);
+
+                mmember.child(ob.author).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists())
+                        {
+                            Members mem = dataSnapshot.getValue(Members.class);
+                            name.setText(mem.first_name);
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
               //  name.setText();
 
 

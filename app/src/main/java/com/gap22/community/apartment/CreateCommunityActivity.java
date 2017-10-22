@@ -6,25 +6,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.gap22.community.apartment.Database.Community;
-import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.gap22.community.apartment.Entities.Community;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 
 public class CreateCommunityActivity extends AppCompatActivity {
@@ -98,7 +93,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
                         Create.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Community c = new Community();
+                              /*  Community c = new Community();
                                 c.setAddress1(address.getText().toString());
                                 c.setAddress2(address2.getText().toString());
                                 c.setBuilder(buildername.getText().toString());
@@ -113,7 +108,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
                                 c.setTaxID(taxid.getText().toString());
                                 if (validate(c)) {
                                     create(c);
-                                }
+                                }*/
                             }
                         });
 
@@ -136,7 +131,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
     public boolean validate(Community c)
     {
 
-        if(TextUtils.isEmpty(c.getName()))
+      /*  if(TextUtils.isEmpty(c.getName()))
         {
             Toast.makeText(CreateCommunityActivity.this,"Please Enter Name",Toast.LENGTH_SHORT).show();
             return false;
@@ -176,7 +171,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
         {
             Toast.makeText(CreateCommunityActivity.this,"Please Enter TaxId",Toast.LENGTH_SHORT).show();
             return false;
-        }
+        }*/
         return true;
     }
     public void create(Community c)
@@ -196,66 +191,10 @@ public class CreateCommunityActivity extends AppCompatActivity {
 
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        //respond to menu item selection
-
-        switch (item.getItemId()) {
-            case R.id.Polls:
-                startActivity(new Intent(this, CoreOperation.class));
-                finish();
-                return true;
-            case R.id.Community:
-                startActivity(new Intent(this, ViewCommunityUser.class));
-                finish();
-                return true;
-            case R.id.Posts:
-                startActivity(new Intent(this, CoreOperation.class));
-                finish();
-                return true;
-            case R.id.CreateCommunity:
-                startActivity(new Intent(this, CreateCommunityActivity.class));
-                finish();
-                return true;
-            case R.id.ViewCommunity:
-                startActivity(new Intent(this, ViewCommunity.class));
-                finish();
-                return true;
-            case R.id.CreatePosts:
-                startActivity(new Intent(this, PostActivity.class));
-                finish();
-                return true;
-            case R.id.CreatePolls:
-                startActivity(new Intent(this, PollActivity.class));
-                finish();
-                return true;
-            case ViewResidents:
-                startActivity(new Intent(this, CoreOperation.class));
-                finish();
-                return true;
-            case R.id.Signout:
-                fireauth.signOut();
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
-                return true;
-            case R.id.Residents:
-                Intent intent = new AppInviteInvitation.IntentBuilder("Communify App")
-                        .setMessage("please install the app")
-                       // .setDeepLink(Uri.parse("https://play.google.com/store/apps/details?id=com.vazhagavalamudhan.vethathiri&hl=en"))
-                        //.setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
-
-                        .setEmailSubject("App Invite")
-                        .setEmailHtmlContent("<html><body>https://play.google.com/store/apps/details?id=com.vazhagavalamudhan.vethathiri&hl=en<br>Install</body></html>")
-                        .build();
-                startActivityForResult(intent, 59);
 
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
 
 
-    }
 
     @Override
     protected void onDestroy() {

@@ -10,8 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Community;
+import com.gap22.community.apartment.Entities.Community;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +57,7 @@ public class MyCommunity extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("community");
         storagePref = StoragePreferences.getInstance(getActivity());
-        String cid = storagePref.getPreference("CommunityID");
+        String cid = GlobalValues.getCommunityId();
         fireauth = FirebaseAuth.getInstance();
 
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
@@ -66,11 +67,11 @@ public class MyCommunity extends Fragment {
                 if (dataSnapshot.exists()) {
 
                     Community c = dataSnapshot.getValue(Community.class);
-                    Title.setText(c.getName());
-                    Address.setText(c.getAddress1());
-                    TaxId.setText(c.getTaxID());
-                    Builder.setText(c.getBuilder());
-                    Owner.setText(c.getSeceretary());
+                    Title.setText(c.title);
+                    Address.setText(c.address1);
+                    TaxId.setText(c.taxid);
+                    Builder.setText(c.builder);
+                    Owner.setText(c.owner);
 
 
 

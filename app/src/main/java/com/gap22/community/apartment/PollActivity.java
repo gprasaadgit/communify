@@ -14,14 +14,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Poll;
+import com.gap22.community.apartment.Dao.PollsDao;
+import com.gap22.community.apartment.Database.KeyGenerator;
+import com.gap22.community.apartment.Entities.Poll;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
+import java.util.Date;
 
 import static com.gap22.community.apartment.R.id.ViewResidents;
 
@@ -35,6 +37,7 @@ public class PollActivity extends AppCompatActivity {
     int selectedid = 0;
     String text = "";
     private StoragePreferences storagePref;
+    KeyGenerator keyGen = new KeyGenerator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +55,18 @@ public class PollActivity extends AppCompatActivity {
          text = "";
 
 
+
+
         /*Option1=(EditText)findViewById(R.id.option1);
         Option2=(EditText)findViewById(R.id.option2);
         Option3=(EditText)findViewById(R.id.option3);*/
         //create =(Button)findViewById(R.id.create);*/
-        mDatabase = FirebaseDatabase.getInstance().getReference("poll");
+
         fireauth = FirebaseAuth.getInstance();
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Poll p = new Poll();
+               /* Poll p = new Poll();
 
                 if(selectedid==option1.getId())
                 {
@@ -79,15 +84,7 @@ public class PollActivity extends AppCompatActivity {
                 }
              //   p.setOption1(Option1.getText().toString());
 
-                HashMap option = new HashMap();
-                option.put("text",text.split("/")[0]);
-                option.put("count",0);
-                HashMap option2 = new HashMap();
-                option2.put("text",text.split("/")[1]);
-                option2.put("count",0);
-                HashMap option3 = new HashMap();
-                option3.put("text",text.split("/")[2]);
-                option3.put("count",0);
+
 p.setOption1(option);
                 p.setOption2(option2);
                 p.setOption3(option3);
@@ -97,6 +94,20 @@ p.setOption1(option);
                 if(validate(p)) {
                     createPoll(p);
                 }
+*/
+                String communityid = GlobalValues.getCommunityId();
+
+
+                PollsDao pollsDao = new PollsDao();
+                Date createdDate = new Date();
+                Poll poll = new Poll(Question.getText().toString(), Poll.Status.Active
+                        , option1.getText().toString(), option2.getText().toString(), option3.getText().toString(), "YNC", fireauth.getCurrentUser().getUid(), createdDate, null, null);
+validate(poll);
+                pollsDao.CreatePoll(communityid, keyGen.GetNewPollKey(), poll);
+                Toast.makeText(PollActivity.this, "Poll Created", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(PollActivity.this, GetCollaborated.class));
+                finish();
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +122,7 @@ p.setOption1(option);
     public boolean validate(Poll p)
     {
 
-        if(TextUtils.isEmpty(p.getQuestion()))
+        if(TextUtils.isEmpty(p.question))
         {
             Toast.makeText(PollActivity.this,"Please Enter Question",Toast.LENGTH_SHORT).show();
             return false;
@@ -124,19 +135,7 @@ p.setOption1(option);
 
         return true;
     }
-    public void createPoll(Poll p)
-    {
-        String userId = mDatabase.push().getKey();
-        String storageUserId = storagePref.getPreference("CommunityID");
-        mDatabase.child(storageUserId).child(userId).setValue(p);
 
-
-
-        Toast.makeText(PollActivity.this, "Poll Created", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, CoreOperation.class));
-        finish();
-
-    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.gap22.community.apartment.Database.Community;
+import com.gap22.community.apartment.Entities.Community;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -68,15 +67,15 @@ click();
                     {
                     Community cmt = dataSnapshot.getValue(Community.class);
 
-                        name.setText(cmt.getName());
-                        buildername.setText(cmt.getBuilder());
-                        seceretary.setText(cmt.getSeceretary());
-                        city.setText(cmt.getCity());
-                        state.setText(cmt.getState());
-                        address.setText(cmt.getAddress1());
-                        address2.setText(cmt.getAddress2());
-                        pincode.setText(""+cmt.getPinCode());
-                        taxid.setText(cmt.getTaxID());
+                        name.setText(cmt.title);
+                        buildername.setText(cmt.builder);
+                        seceretary.setText(cmt.owner);
+                        city.setText(cmt.city);
+                        state.setText(cmt.state);
+                        address.setText(cmt.address1);
+                        address2.setText(cmt.address2);
+                        pincode.setText(""+cmt.pincode);
+                        taxid.setText(cmt.taxid);
 
                     }
                 }
@@ -126,7 +125,7 @@ click();
     }
 public void click()
 {
-    Community c = new Community();
+    /*Community c = new Community();
     c.setAddress1(address.getText().toString());
     c.setAddress2(address2.getText().toString());
     c.setBuilder(buildername.getText().toString());
@@ -141,13 +140,13 @@ public void click()
     c.setTaxID(taxid.getText().toString());
     if(validate(c)) {
         Update(c);
-    }
+    }*/
 
 }
     public boolean validate(Community c)
     {
 
-        if(TextUtils.isEmpty(c.getName()))
+       /* if(TextUtils.isEmpty(c.getName()))
         {
             Toast.makeText(ViewCommunity.this,"Please Enter Name",Toast.LENGTH_SHORT).show();
             return false;
@@ -187,7 +186,7 @@ public void click()
         {
             Toast.makeText(ViewCommunity.this,"Please Enter TaxId",Toast.LENGTH_SHORT).show();
             return false;
-        }
+        }*/
         return true;
     }
     public void Update(Community c)
