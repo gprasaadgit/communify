@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Database.Member;
 import com.gap22.community.apartment.R;
@@ -53,18 +54,27 @@ public class CommunityFragment extends Fragment {
         progress = new ProgressDialog(getActivity());
         FloatingActionButton fab = (FloatingActionButton) fragCommView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
-        String storageUserId = storagePref.getPreference("type");
+        if ( GlobalValues.getSecurityGroupSettings().CanAcceptInvites)
+        {
+            fab.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+           fab.setVisibility(View.GONE);
+        }
+       /* String storageUserId = storagePref.getPreference("type");
         if (storageUserId != "") {
 
             if (storageUserId.equals("admin"))
             {
-                fab.setVisibility(View.VISIBLE);
+
             }
             else
             {
-                fab.setVisibility(View.GONE);
+                f
             }
-        }
+        }*/
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

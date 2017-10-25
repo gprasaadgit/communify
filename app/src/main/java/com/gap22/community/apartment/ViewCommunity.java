@@ -3,27 +3,22 @@ package com.gap22.community.apartment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Entities.Community;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class ViewCommunity extends AppCompatActivity {
     EditText name,buildername,seceretary,city,state,address,address2,pincode,taxid;
@@ -195,11 +190,11 @@ public void click()
 
         mDatabase.child(fireauth.getCurrentUser().getUid()).setValue(c);
         Toast.makeText(ViewCommunity.this,"Community Details Updated",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, CoreOperation.class));
+        startActivity(new Intent(this, GetCollaborated.class));
         finish();
 
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
+    /*public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
@@ -257,7 +252,7 @@ public void click()
         }
 
 
-    }
+    }*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

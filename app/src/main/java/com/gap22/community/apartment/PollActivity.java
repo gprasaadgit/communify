@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,13 +18,10 @@ import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.Poll;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Date;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollActivity extends AppCompatActivity {
     private EditText Question;
@@ -66,6 +62,21 @@ public class PollActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(selectedid==option1.getId())
+                {
+                    text = option1.getText().toString();
+
+
+                }
+                else if(selectedid==option2.getId())
+                {
+                    text = option2.getText().toString();
+                }
+                else
+                {
+                    text = option3.getText().toString();
+                }
                /* Poll p = new Poll();
 
                 if(selectedid==option1.getId())
@@ -101,7 +112,7 @@ p.setOption1(option);
                 PollsDao pollsDao = new PollsDao();
                 Date createdDate = new Date();
                 Poll poll = new Poll(Question.getText().toString(), Poll.Status.Active
-                        , option1.getText().toString(), option2.getText().toString(), option3.getText().toString(), "YNC", fireauth.getCurrentUser().getUid(), createdDate, null, null);
+                        , text.split("/")[0], text.split("/")[1], text.split("/")[2], "YNC", fireauth.getCurrentUser().getUid(), createdDate, null, null);
 validate(poll);
                 pollsDao.CreatePoll(communityid, keyGen.GetNewPollKey(), poll);
                 Toast.makeText(PollActivity.this, "Poll Created", Toast.LENGTH_SHORT).show();
@@ -145,11 +156,11 @@ validate(poll);
 
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
-        switch (item.getItemId()) {
+       /* switch (item.getItemId()) {
             case R.id.Polls:
                 startActivity(new Intent(this, CoreOperation.class));
                 finish();
@@ -202,10 +213,11 @@ validate(poll);
 
             default:
                 return super.onOptionsItemSelected(item);
+
         }
 
 
-    }
+    }*/
     @Override
     protected void onDestroy() {
         super.onDestroy();

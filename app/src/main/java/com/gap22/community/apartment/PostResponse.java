@@ -1,12 +1,10 @@
 package com.gap22.community.apartment;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +20,6 @@ import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.Entities.PostResponses;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,8 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PostResponse extends AppCompatActivity {
 
@@ -162,7 +157,7 @@ PostResponses ob =(PostResponses) model;
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+    /*public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
@@ -218,5 +213,5 @@ PostResponses ob =(PostResponses) model;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 }

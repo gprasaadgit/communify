@@ -60,19 +60,10 @@ public class GetCollaborated extends AppCompatActivity
         Menu menu = navigationView.getMenu();
         View header = navigationView.getHeaderView(0);
 
-       /* storagePref = StoragePreferences.getInstance(GetCollaborated.this);
-        final String storageUserId = storagePref.getPreference("type");
-        final String name = storagePref.getPreference("name");
-        final String email = storagePref.getPreference("email");
-        final String img = storagePref.getPreference("img");*/
+
         {
 
-           /* if (storageUserId.equals("admin"))
-            {
 
-            }
-            else
-            {*/
                 MenuItem item = menu.findItem(R.id.nav_Manage);
 
                 item.setVisible(false);

@@ -11,10 +11,8 @@ import android.widget.TextView;
 
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
-import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.Community;
 import com.gap22.community.apartment.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +27,9 @@ import static com.gap22.community.apartment.R.id.tview_title_value;
 
 
 public class MyCommunity extends Fragment {
-    private int mIndex;
+
     private DatabaseReference mDatabase;
-    private FirebaseAuth fireauth;
-    private StoragePreferences storagePref;
+
     private TextView Title,Address,TaxId,Builder,Owner;
 
     public MyCommunity() {
@@ -55,13 +52,10 @@ public class MyCommunity extends Fragment {
         Builder = (TextView) fragPollView.findViewById(tview_builder_value);
         Owner = (TextView) fragPollView.findViewById(tview_owner_value);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("community");
-        storagePref = StoragePreferences.getInstance(getActivity());
-        String cid = GlobalValues.getCommunityId();
-        fireauth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId());
 
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
-        mDatabase.child(cid).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("Profile").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

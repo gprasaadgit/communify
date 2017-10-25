@@ -27,8 +27,11 @@ import static com.gap22.community.apartment.R.id.img_user_image;
 
 
 public class MyProfile extends Fragment {
-    private int mIndex;
+
     private DatabaseReference myprofile;
+    private EditText tview_adults_value,tview_child_value,tview_infants_value,CommunityName,tview_unit_value,et_first_name_value,et_last_name_value,tview_phone_value,tview_email_value;
+    private TextView fullname;
+    private ImageView userimg;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     public MyProfile() {
@@ -44,7 +47,20 @@ public class MyProfile extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View fragPollView = inflater.inflate(R.layout.fragment_my_profile, container, false);
+         View fragPollView = inflater.inflate(R.layout.fragment_my_profile, container, false);
+         fullname = (TextView)fragPollView.findViewById(R.id.textView1);
+         tview_adults_value = (EditText) fragPollView.findViewById(R.id.tview_adults_value);
+         tview_child_value = (EditText) fragPollView.findViewById(R.id.tview_child_value);
+         tview_infants_value =(EditText) fragPollView.findViewById(R.id.tview_infants_value);
+         CommunityName =(EditText) fragPollView.findViewById(R.id.tview_occupation_value);
+         tview_unit_value =(EditText) fragPollView.findViewById(R.id.tview_unit_value);
+         tview_email_value =(EditText) fragPollView.findViewById(R.id.tview_email_value);
+         tview_phone_value =(EditText) fragPollView.findViewById(R.id.tview_phone_value);
+         et_last_name_value =(EditText) fragPollView.findViewById(R.id.et_last_name_value);
+         et_first_name_value =(EditText) fragPollView.findViewById(R.id.et_first_name_value);
+         userimg = (ImageView) fragPollView.findViewById(img_user_image);
+
+
         String CommunityId = GlobalValues.getCommunityId();
         myprofile = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Members").child(GlobalValues.getCurrentUserUuid());
         myprofile.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -53,48 +69,23 @@ public class MyProfile extends Fragment {
                 if(dataSnapshot.exists())
                 {
                     Members mem = dataSnapshot.getValue(Members.class);
-                    ImageView userimg = (ImageView) fragPollView.findViewById(img_user_image);
+
                     StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+GlobalValues.getCurrentUserUuid()+".jpg");
                     Glide.with(MyProfile.this )
                             .using(new FirebaseImageLoader())
                             .load(storageRef)
                             .error(R.drawable.admin)
                             .into(userimg);
-
-                    TextView fullname = (TextView)fragPollView.findViewById(R.id.textView1);
                     fullname.setText(GlobalValues.getCurrentUserName());
-
-                    EditText   tview_adults_value = (EditText) fragPollView.findViewById(R.id.tview_adults_value);
-                    tview_adults_value.setText(mem.adults);
-                    EditText tview_child_value = (EditText) fragPollView.findViewById(R.id.tview_child_value);
-                    tview_child_value.setText(mem.children);
-                    EditText tview_infants_value =(EditText) fragPollView.findViewById(R.id.tview_infants_value);
-                    tview_infants_value.setText(mem.infants);
-                    EditText CommunityName =(EditText) fragPollView.findViewById(R.id.tview_occupation_value);
+                    tview_adults_value.setText(mem.adults+"");
+                    tview_child_value.setText(mem.children+"");
+                    tview_infants_value.setText(mem.infants+"");
                     CommunityName.setText(GlobalValues.getCommunityId());
-
-                    EditText tview_unit_value =(EditText) fragPollView.findViewById(R.id.tview_unit_value);
                     tview_unit_value.setText(mem.unit);
-                    EditText tview_email_value =(EditText) fragPollView.findViewById(R.id.tview_email_value);
                     tview_email_value.setText(mem.email);
-                    EditText tview_phone_value =(EditText) fragPollView.findViewById(R.id.tview_phone_value);
                     tview_phone_value.setText(mem.phone);
-                    EditText et_last_name_value =(EditText) fragPollView.findViewById(R.id.et_last_name_value);
                     et_last_name_value.setText(mem.last_name);
-                    EditText et_first_name_value =(EditText) fragPollView.findViewById(R.id.et_first_name_value);
                     et_first_name_value.setText(mem.first_name);
-
-
-
-
-
-
-
-
-
-
-
-
                 }
             }
 

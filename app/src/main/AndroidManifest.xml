@@ -24,7 +24,7 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".ViewCommunityUser" />
         <activity android:name=".PollResultActivity" />
         <activity android:name=".PostResponse" />
-        <activity android:name=".CoreOperation" />
+
         <activity android:name=".SignUp" />
         <activity android:name=".OptionalSignup" />
         <activity android:name=".ShareMyLocation" />

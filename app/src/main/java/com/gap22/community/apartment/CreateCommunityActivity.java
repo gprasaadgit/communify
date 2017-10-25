@@ -60,7 +60,7 @@ public class CreateCommunityActivity extends AppCompatActivity {
                                         // if this button is clicked, close
                                         // current activity
 
-                                        startActivity(new Intent(CreateCommunityActivity.this, CoreOperation.class));
+                                        startActivity(new Intent(CreateCommunityActivity.this, GetCollaborated.class));
                                         finish();
 
                                     }

@@ -57,7 +57,7 @@ public class PollsFragment extends Fragment {
         FloatingActionButton fab = (FloatingActionButton) fragPollView.findViewById(R.id.fab_);
         storagePref = StoragePreferences.getInstance(getActivity());
         progress = new ProgressDialog(getActivity());
-       final String storageUserId = storagePref.getPreference("type");
+
         String CommunityId = GlobalValues.getCommunityId();
        {
 

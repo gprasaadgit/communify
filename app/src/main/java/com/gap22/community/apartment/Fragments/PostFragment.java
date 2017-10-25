@@ -2,7 +2,6 @@ package com.gap22.community.apartment.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -91,11 +90,7 @@ String CommunityId = GlobalValues.getCommunityId();
 
 
 
-                            /*long postCount = dataSnapshot.getChildrenCount();
-                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                Posts post = postSnapshot.getValue(Posts.class);
-                                Toast.makeText(getActivity(), post.getTitle(), Toast.LENGTH_SHORT).show();
-                            }*/
+
 
 
 
@@ -119,7 +114,7 @@ String CommunityId = GlobalValues.getCommunityId();
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             responsecount.setText(dataSnapshot.getChildrenCount() + " - Replies");
-                            responsecount.setTextColor(Color.YELLOW);
+                           // responsecount.setTextColor(Color.YELLOW);
                         }
                     }
 

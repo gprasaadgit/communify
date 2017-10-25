@@ -1,12 +1,9 @@
 package com.gap22.community.apartment;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -14,12 +11,10 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Entities.Community;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import static com.gap22.community.apartment.R.id.ViewResidents;
 import static com.gap22.community.apartment.R.id.pincode;
 
 public class ViewCommunityUser extends AppCompatActivity {
@@ -62,7 +57,7 @@ public class ViewCommunityUser extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
@@ -119,7 +114,7 @@ public class ViewCommunityUser extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
     @Override
     protected void onDestroy() {
         super.onDestroy();

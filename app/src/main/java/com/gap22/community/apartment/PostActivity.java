@@ -1,13 +1,11 @@
 package com.gap22.community.apartment;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,14 +16,11 @@ import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.Post;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -104,7 +99,7 @@ public class PostActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
@@ -164,7 +159,7 @@ fireauth.signOut();
         }
 
 
-    }
+    }*/
 
     @Override
     protected void onDestroy() {

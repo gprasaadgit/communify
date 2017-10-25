@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -19,13 +18,10 @@ import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Entities.PollResponse;
-import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Date;
-
-import static com.gap22.community.apartment.R.id.ViewResidents;
 
 public class PollResultActivity extends AppCompatActivity {
 
@@ -102,7 +98,7 @@ public class PollResultActivity extends AppCompatActivity {
 
                 pollsDao.CreatePollResponse(storageUserId,pollId,GlobalValues.getCurrentUserUuid(), pollResponse);
                 Toast.makeText(PollResultActivity.this, "Poll Response Submitted", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(PollResultActivity.this, CoreOperation.class));
+                startActivity(new Intent(PollResultActivity.this, GetCollaborated.class));
                 finish();
 
             }
@@ -122,7 +118,7 @@ public class PollResultActivity extends AppCompatActivity {
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
 
@@ -178,5 +174,5 @@ public class PollResultActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 }

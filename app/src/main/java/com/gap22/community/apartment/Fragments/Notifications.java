@@ -11,7 +11,6 @@ import com.gap22.community.apartment.R;
 
 
 public class Notifications extends Fragment {
-    private int mIndex;
 
     public Notifications() {
         // Required empty public constructor

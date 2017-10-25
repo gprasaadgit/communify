@@ -52,12 +52,7 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
-        String storageUserId = storagePref.getPreference("userId");
-      /*  if (storageUserId != "") {
-            Intent intent_coreOper = new Intent(getApplicationContext(), CoreOperation.class);
-            startActivity(intent_coreOper);
-            overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-        }*/
+
         Login = (Button) findViewById(R.id.btn_sign_in);
         Email = (EditText) findViewById(et_userName);
         Pwd = (EditText) findViewById(R.id.et_password);
