@@ -1,6 +1,5 @@
 package com.gap22.community.apartment;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gap22.community.apartment.Common.CommonFunctions;
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                                                             if (dataSnapshot.exists()) {
                                                                 SecurityGroupSettings securityGroupSettings = dataSnapshot.getValue(SecurityGroupSettings.class);
                                                                 GlobalValues.setSecurityGroupSettings(securityGroupSettings);
+                                                                CommonFunctions.SaveObjectToSharedPreference(MainActivity.this, "securityGroupSettings", "secGroup", securityGroupSettings);
                                                                 Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
                                                                 startActivity(getCollaborated);
                                                                 progress.dismiss();
