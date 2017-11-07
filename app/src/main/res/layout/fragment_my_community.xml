@@ -196,7 +196,7 @@
                 </TableRow>
 
                 <TableRow android:layout_marginTop="15dp"
-                    android:visibility="invisible">
+                   >
 
                     <TextView
                         android:id="@+id/tview_invite_code"
@@ -214,7 +214,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/bottom_gray_border"
                     android:paddingBottom="15dp"
-                    android:visibility="invisible">
+                   >
 
                     <TextView
                         android:id="@+id/tview_invite_code_value"
@@ -228,7 +228,7 @@
                         android:textSize="13sp" />
                 </TableRow>
                 <TableRow android:layout_marginTop="15dp"
-                    android:visibility="invisible">
+                  >
 
                     <TextView
                         android:id="@+id/tview_community_started_on"
@@ -246,7 +246,7 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/bottom_gray_border"
                     android:paddingBottom="15dp"
-                    android:visibility="invisible">
+                    >
 
                     <TextView
                         android:id="@+id/tview_community_started_on_value"

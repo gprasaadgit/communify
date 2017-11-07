@@ -1,10 +1,10 @@
 package com.gap22.community.apartment.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +19,6 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.Post;
-import com.gap22.community.apartment.PostActivity;
-import com.gap22.community.apartment.PostResponse;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -74,8 +72,15 @@ public class PostFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PostActivity.class));
-                getActivity().finish();
+                Fragment CreatePost = new CreatePost();
+
+
+                               /* Intent i = new Intent(getActivity(), PollResultActivity.class);
+                                i.putExtras(bundle);*/
+
+                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, CreatePost);
+                ft.commit();
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
@@ -162,11 +167,15 @@ String CommunityId = GlobalValues.getCommunityId();
                     bundle.putString("Title",p.title);
                     bundle.putString("PostId",postId );
                     // bundle.putInt("ResponseCount",p.getResponses());
-                    Intent i = new Intent(getActivity(), PostResponse.class);
-                    i.putExtras(bundle);
+                    Fragment PostResponse = new PostResponses();
 
-//Fire that second activity
-                    startActivity(i);
+                    PostResponse.setArguments(bundle);
+                               /* Intent i = new Intent(getActivity(), PollResultActivity.class);
+                                i.putExtras(bundle);*/
+
+                    FragmentTransaction ft =getFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_frame, PostResponse);
+                    ft.commit();
 
                 }
 

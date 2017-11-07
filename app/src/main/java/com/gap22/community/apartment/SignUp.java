@@ -7,9 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,18 +17,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.FontsOverride;
-import com.gap22.community.apartment.Database.Member;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.gap22.community.apartment.Entities.Members;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
@@ -61,7 +53,7 @@ public class SignUp extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("member");
         setContentView(R.layout.activity_sign_up);
         addListenerOnButton();
-        populateTitles();
+      populateTitles();
 
     }
 
@@ -76,7 +68,8 @@ public class SignUp extends AppCompatActivity {
                 firstname = (EditText) findViewById(R.id.et_firstname);
                 lastname = (EditText) findViewById(R.id.et_lastname);
                 unit = (EditText) findViewById(R.id.et_unit);
-                final Member m = new Member();
+               /* final Members m = new Members(email.getText().toString(),,,);
+
                 m.setEmail(email.getText().toString());
                 m.setTitle(title.getSelectedItem().toString());
                 m.setFirstname(firstname.getText().toString());
@@ -84,13 +77,13 @@ public class SignUp extends AppCompatActivity {
                 m.setUnit(unit.getText().toString());
                 m.setCommunityid("4A0lC6N0XOTWdsr2DetL1NOcGax1");
 
-                m.setStatus(1);
-                if (validate(m)) {
+                m.setStatus(1);*/
+                if (false) {
                     progress.setMessage("Creating User  Please Wait");
                     progress.show();
 
                     String password = pwd.getText().toString().trim();
-                    fireauth.createUserWithEmailAndPassword(m.getEmail().trim(), password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+                 /*   fireauth.createUserWithEmailAndPassword(m.getEmail().trim(), password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -145,7 +138,7 @@ public class SignUp extends AppCompatActivity {
                                 return;
                             }
                         }
-                    });
+                    });*/
                 }
 
             }
@@ -226,8 +219,8 @@ public class SignUp extends AppCompatActivity {
         return path;
     }
 
-    public boolean validate(Member m) {
-        if (TextUtils.isEmpty(m.getEmail())) {
+    public boolean validate(Members m) {
+      /*  if (TextUtils.isEmpty(m.getEmail())) {
          //   Toast.makeText(SignUp.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -256,7 +249,7 @@ public class SignUp extends AppCompatActivity {
         {
             Toast.makeText(SignUp.this, "Please Upload File", Toast.LENGTH_SHORT).show();
             return false;
-        }
+        }*/
 
         return true;
     }

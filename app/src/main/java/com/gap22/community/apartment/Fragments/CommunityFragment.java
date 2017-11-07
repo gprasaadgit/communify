@@ -18,7 +18,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Database.Member;
+import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.R;
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,20 +90,20 @@ public class CommunityFragment extends Fragment {
             }
         });
         lview = (ListView) fragCommView.findViewById(R.id.listView2);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference("member");
+        String CommunityId = GlobalValues.getCommunityId();
+        mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Members");
         fireauth = FirebaseAuth.getInstance();
 
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");
         progress.setMessage("Loading Data");
         progress.show();
-        adapter = new FirebaseListAdapter(getActivity(), Member.class, R.layout.community_list_item, mDatabase) {
+        adapter = new FirebaseListAdapter(getActivity(), Members.class, R.layout.community_list_item, mDatabase) {
             @Override
             protected void populateView(View v, Object model, int position) {
                 progress.dismiss();
-                Member m = (Member) model;
+                Members m = (Members) model;
                 //((TextView) v.findViewById(R.id.unit)).setText(m.getUnit());
-                ((TextView) v.findViewById(R.id.title)).setText(m.getFirstname());
+                ((TextView) v.findViewById(R.id.title)).setText(m.first_name);
                 ((TextView) v.findViewById(R.id.role)).setText("Active");
                 String obj = this.getRef(position).getKey();
 

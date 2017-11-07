@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import static com.gap22.community.apartment.R.id.tview_address_value;
 import static com.gap22.community.apartment.R.id.tview_builder_value;
+import static com.gap22.community.apartment.R.id.tview_community_started_on_value;
+import static com.gap22.community.apartment.R.id.tview_invite_code_value;
 import static com.gap22.community.apartment.R.id.tview_owner_value;
 import static com.gap22.community.apartment.R.id.tview_tax_id_value;
 import static com.gap22.community.apartment.R.id.tview_title_value;
@@ -30,7 +32,7 @@ public class MyCommunity extends Fragment {
 
     private DatabaseReference mDatabase;
 
-    private TextView Title,Address,TaxId,Builder,Owner;
+    private TextView Title,Address,TaxId,Builder,Owner,InviteCode,StartedOn;
 
     public MyCommunity() {
         // Required empty public constructor
@@ -45,12 +47,14 @@ public class MyCommunity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View fragPollView = inflater.inflate(R.layout.fragment_my_community, container, false);
-        Title = (TextView) fragPollView.findViewById(tview_title_value);
-        Address = (TextView) fragPollView.findViewById(tview_address_value);
-        TaxId = (TextView) fragPollView.findViewById(tview_tax_id_value);
-        Builder = (TextView) fragPollView.findViewById(tview_builder_value);
-        Owner = (TextView) fragPollView.findViewById(tview_owner_value);
+        View fragCommunityView = inflater.inflate(R.layout.fragment_my_community, container, false);
+        Title = (TextView) fragCommunityView.findViewById(tview_title_value);
+        Address = (TextView) fragCommunityView.findViewById(tview_address_value);
+        TaxId = (TextView) fragCommunityView.findViewById(tview_tax_id_value);
+        Builder = (TextView) fragCommunityView.findViewById(tview_builder_value);
+        Owner = (TextView) fragCommunityView.findViewById(tview_owner_value);
+        InviteCode =(TextView) fragCommunityView.findViewById(tview_invite_code_value);
+        StartedOn = (TextView) fragCommunityView.findViewById(tview_community_started_on_value);
 
         mDatabase = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId());
 
@@ -66,6 +70,8 @@ public class MyCommunity extends Fragment {
                     TaxId.setText(c.taxid);
                     Builder.setText(c.builder);
                     Owner.setText(c.owner);
+                    InviteCode.setText(c.invitecode);
+                    StartedOn.setText(""+c.created_on);
 
 
 
@@ -77,7 +83,7 @@ public class MyCommunity extends Fragment {
             }
         });
 
-        return fragPollView;
+        return fragCommunityView;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.gap22.community.apartment.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +18,6 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.Poll;
-import com.gap22.community.apartment.PollActivity;
-import com.gap22.community.apartment.PollResultActivity;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -73,8 +71,13 @@ public class PollsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PollActivity.class));
-                getActivity().finish();
+                Fragment CreatePoll= new CreatePoll();
+
+
+                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, CreatePoll);
+                ft.commit();
+
             }
         });
 
@@ -134,7 +137,8 @@ if(total!=0) {
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (!(GlobalValues.getSecurityGroupSettings().CanCreatePoll==true))
+                //if (!(GlobalValues.getSecurityGroupSettings().CanCreatePoll==true))
+                if(true)
                 { final Poll p = (Poll) adapter.getItem(position);
                     final String pollid = adapter.getRef(position).getKey();
 
@@ -160,11 +164,19 @@ if(total!=0) {
                                 bundle.putString("Option3", p.option3);
                                 //bundle.putInt("Count3", Integer.parseInt(p.getOption3().get("count").toString()));
                                 bundle.putString("PollId",pollid );
-                                Intent i = new Intent(getActivity(), PollResultActivity.class);
-                                i.putExtras(bundle);
+
+                                Fragment PollsResponse = new PollResponse();
+
+                                PollsResponse.setArguments(bundle);
+                               /* Intent i = new Intent(getActivity(), PollResultActivity.class);
+                                i.putExtras(bundle);*/
+
+                                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                                ft.replace(R.id.content_frame, PollsResponse);
+                                ft.commit();
 
 //Fire that second activity
-                                startActivity(i);
+                                //startActivity(i);
                             }
 
                         }
