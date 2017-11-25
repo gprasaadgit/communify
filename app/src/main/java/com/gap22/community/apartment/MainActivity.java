@@ -29,17 +29,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.gap22.community.apartment.R.id.et_userName;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button Login;
-    private EditText Email;
-    private EditText Pwd;
-    private ProgressDialog progress;
+    private EditText et_userName;
+    private EditText et_password;
+    private ProgressDialog progressModal;
     private FirebaseAuth fireauth;
 
-    private TextView newuser;
+    private TextView tview_dont_have_account;
     private ImageView iv_password_error;
     private ImageView iv_userName_error;
     private DatabaseReference dRefMembers, dRefCommunity, dRefSecutityRights;
@@ -52,13 +53,52 @@ public class MainActivity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_main);
         storagePref = StoragePreferences.getInstance(this);
-
-        Login = (Button) findViewById(R.id.btn_sign_in);
-        Email = (EditText) findViewById(et_userName);
-        Pwd = (EditText) findViewById(R.id.et_password);
-        newuser = (TextView) findViewById(R.id.tview_dont_have_account);
-        progress = new ProgressDialog(this);
+        progressModal = new ProgressDialog(this);
+        progressModal.setMessage("Loggin in Please Wait");
         fireauth = FirebaseAuth.getInstance();
+
+        et_userName = (EditText) findViewById(R.id.et_userName);
+        et_password = (EditText) findViewById(R.id.et_password);
+        tview_dont_have_account = (TextView) findViewById(R.id.tview_dont_have_account);
+
+        String storageUserId = storagePref.getPreference("UserId");
+        if (storageUserId != "") {
+            LoadWithStoredPreference();
+        }
+    }
+
+    public void LoadWithStoredPreference() {
+        progressModal.show();
+        GetGlobalValues();
+        fireauth.signInWithEmailAndPassword(GlobalValues.getCurrentUserEmail(), GlobalValues.getCurrentUserPassword()).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members");
+                    dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            List<Members> membersesCol = new ArrayList<Members>();
+                            if (dataSnapshot.exists()) {
+                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                    Members members = postSnapshot.getValue(Members.class);
+                                    membersesCol.add(members);
+                                }
+                                Intent getCollaborated = new Intent(getApplicationContext(), GetCollaborated.class);
+                                startActivity(getCollaborated);
+                                overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                                finish();
+                                progressModal.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public void btn_Dont_Have_Account_onClickBtn(View v) {
@@ -68,21 +108,27 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
-    public void btn_SignIn_onClickBtn(View v) {
-        final String email = Email.getText().toString().trim();
-        String password = Pwd.getText().toString().trim();
-        if (ValidateFormBeforeSubmit() == true) {
+    public void GetGlobalValues() {
+        GlobalValues.setCurrentUserEmail(storagePref.getPreference("EmailId"));
+        GlobalValues.setCurrentUserPassword(storagePref.getPreference("SafePassword"));
+        GlobalValues.setCurrentUserName(storagePref.getPreference("FullName"));
+        GlobalValues.setCurrentUserUuid(fireauth.getCurrentUser().getUid());
+        GlobalValues.setCommunityId(storagePref.getPreference("CommunityID"));
+        GlobalValues.setSecurityGroupSettings(CommonFunctions.GetSavedObjectFromPreference(MainActivity.this, "securityGroupSettings", "secGroup", SecurityGroupSettings.class));
+    }
 
-            progress.setMessage("Loggin in Please Wait");
-            progress.show();
+    public void btn_SignIn_onClickBtn(View v) {
+        final String email = et_userName.getText().toString().trim();
+        final String password = et_password.getText().toString().trim();
+
+        if (ValidateFormBeforeSubmit() == true) {
+            progressModal.show();
 
             fireauth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
-
                     if (task.isSuccessful()) {
-                        storagePref.savePreference("userId", email);
+                        storagePref.savePreference("UserId", email);
 
                         dRefCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
                         dRefCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -96,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                                     if (!globalUser.default_community.equals("")) {
                                         GlobalValues.setCurrentUserEmail(globalUser.email);
                                         storagePref.savePreference("EmailId", globalUser.email);
+                                        storagePref.savePreference("SafePassword", password);
                                         GlobalValues.setCurrentUserName(globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
                                         storagePref.savePreference("FullName", globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
                                         GlobalValues.setCurrentUserUuid(fireauth.getCurrentUser().getUid());
@@ -121,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                                                                 CommonFunctions.SaveObjectToSharedPreference(MainActivity.this, "securityGroupSettings", "secGroup", securityGroupSettings);
                                                                 Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
                                                                 startActivity(getCollaborated);
-                                                                progress.dismiss();
+                                                                progressModal.dismiss();
                                                                 finish();
                                                                 return;
                                                             }
@@ -145,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                                     } else {
                                         Intent joinOrCreateCommunity = new Intent(MainActivity.this, JoinOrCreateCommunity.class);
                                         startActivity(joinOrCreateCommunity);
-                                        progress.dismiss();
+                                        progressModal.dismiss();
                                         finish();
                                         return;
                                     }
@@ -174,15 +221,14 @@ public class MainActivity extends AppCompatActivity {
         boolean response = true;
         iv_userName_error = (ImageView) findViewById(R.id.iv_userName_error);
         iv_password_error = (ImageView) findViewById(R.id.iv_password_error);
-        System.out.print("ee" + Email.getText().toString());
-        if (Email == null || Email.getText().toString().equals("")) {
+        if (et_userName == null || et_userName.getText().toString().equals("")) {
             iv_userName_error.setVisibility(View.VISIBLE);
             response = false;
         } else {
             iv_userName_error.setVisibility(View.INVISIBLE);
         }
 
-        if (Pwd == null || Pwd.getText().toString().equals("")) {
+        if (et_password == null || et_password.getText().toString().equals("")) {
             iv_password_error.setVisibility(View.VISIBLE);
             response = false;
         } else {

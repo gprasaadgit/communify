@@ -63,17 +63,10 @@ public class CollabrationPallet extends Fragment {
         tabThree.setText("  Community");
         tabThree.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tab_icon_community, 0, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
-
-
-
-
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         CollabrationPallet.ViewPagerAdapter adapter = new CollabrationPallet.ViewPagerAdapter(getFragmentManager());
-
-
         adapter.addFragment(new PostFragment(), "Post");
         adapter.addFragment(new PollsFragment(), "Polls");
         adapter.addFragment(new CommunityFragment(), "Community");

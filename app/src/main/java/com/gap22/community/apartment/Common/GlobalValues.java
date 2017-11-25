@@ -1,6 +1,7 @@
 package com.gap22.community.apartment.Common;
 
 import com.gap22.community.apartment.Entities.SecurityGroupSettings;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +14,17 @@ public class GlobalValues {
     private static String CurrentUserName = "";
     private static String CurrentUserEmail = "";
     private static String CurrentUserUuid = "";
+    private static String CurrentUserPassword = "";
     private static SecurityGroupSettings SecurityGroupSettings;
+    private static FirebaseAuth authentication;
+
+    private static void setFirebaseAuthentication(FirebaseAuth auth) {
+        authentication = auth;
+    }
+
+    private static FirebaseAuth getFirebaseAuthentication() {
+        return authentication;
+    }
 
     public static String getEncriptionPass() {
         return EncriptionPass;
@@ -29,6 +40,14 @@ public class GlobalValues {
 
     public static String getCommunityId() {
         return CommunityId;
+    }
+
+    public static void setCurrentUserPassword(String password) {
+        CurrentUserPassword = password;
+    }
+
+    public static String getCurrentUserPassword() {
+        return CurrentUserPassword;
     }
 
     public static void setCurrentUserName(String currentUserName) {

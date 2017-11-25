@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.PostDao;
-import com.gap22.community.apartment.Database.KeyGenerator;
+import com.gap22.community.apartment.Dao.KeyGenerator;
 import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;

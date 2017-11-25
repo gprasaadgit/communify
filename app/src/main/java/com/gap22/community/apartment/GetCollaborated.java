@@ -1,5 +1,6 @@
 package com.gap22.community.apartment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -36,10 +37,11 @@ public class GetCollaborated extends AppCompatActivity
     public NavigationView navigationView;
 
     private StoragePreferences storagePref;
-    private TextView username,useremail;
+    private TextView username, useremail;
     private ImageView userimg;
-    Menu menu ;
+    Menu menu;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class GetCollaborated extends AppCompatActivity
         setContentView(R.layout.activity_get_collaborated);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        storagePref = StoragePreferences.getInstance(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,39 +62,26 @@ public class GetCollaborated extends AppCompatActivity
 
         Menu menu = navigationView.getMenu();
         View header = navigationView.getHeaderView(0);
-
-
         {
+            MenuItem item = menu.findItem(R.id.nav_Manage);
 
+            item.setVisible(false);
+            System.out.print("Community :" + item.isVisible() + "item" + item.getTitle());
 
-                MenuItem item = menu.findItem(R.id.nav_Manage);
-
-                item.setVisible(false);
-                System.out.print("Community :"+item.isVisible()+"item"+item.getTitle());
-
-username =(TextView)header.findViewById(R.id.tv_username);
-useremail =(TextView)header.findViewById(R.id.tv_email)    ;
-userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+GlobalValues.getCurrentUserUuid()+".jpg");
-                username.setText(GlobalValues.getCurrentUserName());
-                useremail.setText(GlobalValues.getCurrentUserEmail());
-                Glide.with(this )
-                        .using(new FirebaseImageLoader())
-                        .load(storageRef)
-                        .error(R.drawable.admin)
-                        .into(userimg);
-
-
-           // }
-
-
+            username = (TextView) header.findViewById(R.id.tv_username);
+            useremail = (TextView) header.findViewById(R.id.tv_email);
+            userimg = (ImageView) header.findViewById(R.id.img_user_image);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/" + GlobalValues.getCurrentUserUuid() + ".jpg");
+            username.setText(GlobalValues.getCurrentUserName());
+            useremail.setText(GlobalValues.getCurrentUserEmail());
+            Glide.with(this)
+                    .using(new FirebaseImageLoader())
+                    .load(storageRef)
+                    .error(R.drawable.admin)
+                    .into(userimg);
         }
 
-
-
         setTitle(R.string.main_panel_title);
-
-
         displaySelectedScreen(R.id.nav_home);
     }
 
@@ -107,10 +97,8 @@ userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.activity_get_collaborated_drawer, menu);
-
-       return false;
+        return false;
     }
 
     @Override
@@ -157,7 +145,11 @@ userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
                 fragment = new RaiseMyQuery();
                 break;
             case R.id.nav_signout:
-                //fragment = new Menu3();
+                Intent signUpActivity = new Intent(getApplicationContext(), MainActivity.class);
+                SignOutProcess();
+                startActivity(signUpActivity);
+                overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                finish();
                 break;
         }
 
@@ -170,5 +162,14 @@ userimg =(ImageView)  header.findViewById(R.id.img_user_image)  ;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void SignOutProcess() {
+        storagePref.deletePreference("EmailId");
+        storagePref.deletePreference("SafePassword");
+        storagePref.deletePreference("FullName");
+        storagePref.deletePreference("CommunityID");
+        storagePref.deletePreference("Image");
+        storagePref.deletePreference("UserId");
     }
 }

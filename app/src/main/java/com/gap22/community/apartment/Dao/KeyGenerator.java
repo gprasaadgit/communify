@@ -1,4 +1,4 @@
-package com.gap22.community.apartment.Database;
+package com.gap22.community.apartment.Dao;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

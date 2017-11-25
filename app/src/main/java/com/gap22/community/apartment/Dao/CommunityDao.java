@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.gap22.community.apartment.Entities.Community;
 import com.gap22.community.apartment.Entities.ActionResponse;
 import com.google.firebase.database.FirebaseDatabase;
-import com.gap22.community.apartment.Database.KeyGenerator;
 
 import java.util.List;
 import java.util.ArrayList;

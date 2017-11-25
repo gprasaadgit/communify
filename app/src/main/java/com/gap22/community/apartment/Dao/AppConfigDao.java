@@ -2,7 +2,6 @@ package com.gap22.community.apartment.Dao;
 
 import com.gap22.community.apartment.Common.CommunifyCrypto;
 import com.gap22.community.apartment.Common.GlobalValues;
-import com.gap22.community.apartment.Database.KeyGenerator;
 import com.gap22.community.apartment.Entities.AppConfig;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

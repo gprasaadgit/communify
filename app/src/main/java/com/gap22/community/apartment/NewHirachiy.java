@@ -3,7 +3,6 @@ package com.gap22.community.apartment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,14 +21,13 @@ import com.gap22.community.apartment.Dao.MembersDao;
 import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Dao.SecurityDao;
-import com.gap22.community.apartment.Database.KeyGenerator;
+import com.gap22.community.apartment.Dao.KeyGenerator;
 import com.gap22.community.apartment.Entities.ActionResponse;
 import com.gap22.community.apartment.Entities.AppConfig;
 import com.gap22.community.apartment.Entities.Community;
 import com.gap22.community.apartment.Entities.GlobalUser;
 import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.Entities.*;
-import com.gap22.community.apartment.Entities.PostResponses;
 
 import javax.crypto.SecretKey;
 
