@@ -78,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
                     dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            List<Members> membersesCol = new ArrayList<Members>();
                             if (dataSnapshot.exists()) {
                                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                     Members members = postSnapshot.getValue(Members.class);
-                                    membersesCol.add(members);
+                                    members.id = postSnapshot.getKey();
+                                    GlobalValues.addCommunityMembers(members);
                                 }
                                 Intent getCollaborated = new Intent(getApplicationContext(), GetCollaborated.class);
                                 startActivity(getCollaborated);

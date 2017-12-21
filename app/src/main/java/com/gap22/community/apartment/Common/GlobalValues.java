@@ -1,10 +1,14 @@
 package com.gap22.community.apartment.Common;
 
+import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.Entities.SecurityGroupSettings;
+import com.github.underscore.Predicate;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.github.underscore.$;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GlobalValues {
     private static String EncriptionPass = "C0MmUn!F$";
@@ -17,6 +21,7 @@ public class GlobalValues {
     private static String CurrentUserPassword = "";
     private static SecurityGroupSettings SecurityGroupSettings;
     private static FirebaseAuth authentication;
+    private static List<Members> communityMembers = new ArrayList<Members>();
 
     private static void setFirebaseAuthentication(FirebaseAuth auth) {
         authentication = auth;
@@ -94,4 +99,16 @@ public class GlobalValues {
     public static SecurityGroupSettings StoreUserRights() {
         return SecurityGroupSettings;
     }
+
+    public static void addCommunityMembers(Members members) {
+        communityMembers.add(members);
+    }
+
+    public static List<Members> getCommunityMembers(Members members) {
+        return communityMembers;
+    }
+
+    /*public static Members getMemberInfoByEmailId(String memberId) {
+        return $.find(communityMembers, new Predicate<Members>() { public Members Find(Members item) { return item.id == memberId; } }).get();
+    }*/
 }

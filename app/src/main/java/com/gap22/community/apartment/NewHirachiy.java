@@ -161,7 +161,7 @@ public class NewHirachiy extends AppCompatActivity {
         GlobalUserDao globalUserDao = new GlobalUserDao();
         Date createdDate = new Date();
         GlobalUser globalUser = new GlobalUser("Mr", "Narayanan", "Dayalan", "narayanan.vsn@gmail.com", "gavs123", "+919840399445", "N", "5487541", "N", "4A0lC6N0XOTWdsr2", createdDate, "CMTY-20171002214959926");
-        ActionResponse response = globalUserDao.CreateUser(globalUser);
+        ActionResponse response = globalUserDao.CreateUser(globalUser, "sdsadsa");
         if (response.success == false) {
             Toast.makeText(this, response.error_message, Toast.LENGTH_LONG).show();
         }

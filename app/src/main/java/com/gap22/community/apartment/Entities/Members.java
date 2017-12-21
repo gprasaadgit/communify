@@ -9,6 +9,7 @@ import java.util.Map;
 
 @IgnoreExtraProperties
 public class Members {
+    public String id;
     public String email;
     public Date registered_on;
     public Date activated_on;

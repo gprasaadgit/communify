@@ -60,6 +60,7 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
                                     GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
                                     CommunityInvitesDao communityInvitesDao = new CommunityInvitesDao();
                                     communityInvitesDao.CreateCommunityInvites(communityId, fireauth.getCurrentUser().getUid(), globalUser);
+                                    tview_error_message.setText("Your invite is under security checks. Once the community administrator accepts, you will be getting notification.");
                                 }
                             }
 
@@ -74,14 +75,12 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
                     tview_error_message.setText("Invalid Invite Code!");
                     tview_error_message.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
         });
     }
 }

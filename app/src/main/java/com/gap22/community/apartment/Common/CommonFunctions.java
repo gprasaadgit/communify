@@ -3,10 +3,15 @@ package com.gap22.community.apartment.Common;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.gap22.community.apartment.Entities.SecurityGroupSettings;
 import com.google.gson.Gson;
 
+import java.security.SecureRandom;
+
 public class CommonFunctions {
+
+    static String characterNnumbers = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static String otpNumbers = "0123456789";
+    static SecureRandom rnd = new SecureRandom();
 
     private static Gson gson = new Gson();
 
@@ -26,5 +31,19 @@ public class CommonFunctions {
             return gson.fromJson(sharedPreferences.getString(preferenceKey, ""), classType);
         }
         return null;
+    }
+
+    public static String GenerateRandomString(int len) {
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(characterNnumbers.charAt(rnd.nextInt(characterNnumbers.length())));
+        return sb.toString();
+    }
+
+    public static String GenerateOTPNumber(int len) {
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(otpNumbers.charAt(rnd.nextInt(otpNumbers.length())));
+        return sb.toString();
     }
 }

@@ -24,20 +24,12 @@ public class GlobalUserDao {
         fbAuthentication = FirebaseAuth.getInstance();
     }
 
-    public ActionResponse CreateUser(GlobalUser globalUser) {
+    public ActionResponse CreateUser(GlobalUser globalUser, String userId) {
         ActionResponse response = new ActionResponse();
         tempGlobalUser = globalUser;
 
         try {
-            fbAuthentication.createUserWithEmailAndPassword(globalUser.email.trim(), "password").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        userId = task.getResult().getUser().getUid();
-                        dbReference.child("USER-DIRECTORY").child(userId).setValue(tempGlobalUser);
-                    }
-                }
-            });
+            dbReference.child("USER-DIRECTORY").child(userId).setValue(tempGlobalUser);
             response.success = true;
             response.value = userId;
         } catch (Exception e) {

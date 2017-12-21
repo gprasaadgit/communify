@@ -45,9 +45,9 @@
     <string name="act_firstlogset_proceed">Proceed</string>
     <string name="act_firstlogset_occupation">Occupation</string>
     <string name="act_firstlogset_occupation_hint">Enter occupation</string>
-    <string name="act_firstlogset_unit">Unit</string>
+    <string name="act_firstlogset_phone">Phone</string>
     <string name="act_firstlogset_residence">ResidenceStatus</string>
-    <string name="act_firstlogset_unit_unit">Enter unit</string>
+    <string name="act_firstlogset_phone_hint">Enter Phone</string>
     <string name="act_firstlogset_adults">No Of Adults</string>
     <string name="act_firstlogset_adults_hint">Enter No Of Adults</string>
     <string name="act_firstlogset_child">No Of Child</string>

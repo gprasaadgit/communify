@@ -7,4 +7,11 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
+    <ListView
+        android:layout_height="wrap_content"
+        android:id="@+id/lvInvites"
+        android:divider="#FFFFFF"
+        android:dividerHeight="4px"
+        android:layout_width="match_parent"></ListView>
+
 </LinearLayout>

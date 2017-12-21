@@ -23,13 +23,8 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             android:scaleType="centerCrop"
+            android:onClick="img_user_image_onClickBtn"
             android:src="@drawable/plus_circle_outline" />
-
-        <!--<ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="154dp"
-            android:layout_height="151dp"
-            app:srcCompat="@drawable/communify_sign_up_icon" />-->
 
     </LinearLayout>
 
@@ -108,6 +103,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_firstname_hint"
                         android:inputType="text"
+                        android:text="Narayanan"
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -138,6 +134,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_lastname_hint"
                         android:inputType="text"
+                        android:text="COC"
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -168,6 +165,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_email_id_hint"
                         android:inputType="textEmailAddress"
+                        android:text="narayanan.coc@gmail.com"
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -198,24 +196,25 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_password_hint"
                         android:inputType="textPassword"
+                        android:text="Neptune1982"
                         android:textSize="15sp" />
                 </TableRow>
 
                 <TableRow android:layout_marginTop="15dp">
                     <TextView
-                        android:id="@+id/tview_unit"
+                        android:id="@+id/tview_phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="left"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
-                        android:text="@string/act_firstlogset_unit"
+                        android:text="@string/act_firstlogset_phone"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="15sp" />
                 </TableRow>
                 <TableRow android:background="@drawable/bottom_gray_border">
                     <EditText
-                        android:id="@+id/et_unit"
+                        android:id="@+id/et_phone"
                         android:layout_width="match_parent"
                         android:layout_marginBottom="15dp"
                         android:layout_marginLeft="15dp"
@@ -223,8 +222,9 @@
                         android:layout_marginTop="3dp"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:hint="@string/act_firstlogset_unit_unit"
-                        android:inputType="number"
+                        android:hint="@string/act_firstlogset_phone_hint"
+                        android:inputType="phone"
+                        android:text="+919840399445"
                         android:textSize="15sp" />
                 </TableRow>
             </TableLayout>
@@ -251,6 +251,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="@string/act_signup_sign_up"
+                android:onClick="btn_sign_up_onClickBtn"
                 android:textColor="@android:color/white" />
         </LinearLayout>
 
