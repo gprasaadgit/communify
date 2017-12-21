@@ -21,6 +21,8 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Fragments.AcceptInvite;
+import com.gap22.community.apartment.Fragments.ApproveInviteRequestFragment;
 import com.gap22.community.apartment.Fragments.CollabrationPallet;
 import com.gap22.community.apartment.Fragments.EventsCalendar;
 import com.gap22.community.apartment.Fragments.InviteNeighbours;
@@ -65,8 +67,8 @@ public class GetCollaborated extends AppCompatActivity
         {
             MenuItem item = menu.findItem(R.id.nav_Manage);
 
-            item.setVisible(false);
-            System.out.print("Community :" + item.isVisible() + "item" + item.getTitle());
+            //item.setVisible(false);
+            //System.out.print("Community :" + item.isVisible() + "item" + item.getTitle());
 
             username = (TextView) header.findViewById(R.id.tv_username);
             useremail = (TextView) header.findViewById(R.id.tv_email);
@@ -143,6 +145,15 @@ public class GetCollaborated extends AppCompatActivity
                 break;
             case R.id.nav_raise_a_query:
                 fragment = new RaiseMyQuery();
+                break;
+            case R.id.nav_manage_invites:
+                fragment = new AcceptInvite();
+                break;
+            case R.id.nav_update_community_info:
+                break;
+            case R.id.nav_set_rights:
+                break;
+            case R.id.nav_set_answer_queries:
                 break;
             case R.id.nav_signout:
                 Intent signUpActivity = new Intent(getApplicationContext(), MainActivity.class);

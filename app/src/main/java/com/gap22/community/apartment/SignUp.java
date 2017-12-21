@@ -92,7 +92,7 @@ public class SignUp extends AppCompatActivity {
 
         if (ValidateForm() == true) {
 
-            fireauth.createUserWithEmailAndPassword(et_emailid.getText().toString(), et_password.getText().toString()).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
+            fireauth.createUserWithEmailAndPassword(emailid, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progress.dismiss();
@@ -101,7 +101,7 @@ public class SignUp extends AppCompatActivity {
                         String userId = task.getResult().getUser().getUid();
                         globalUserDao.CreateUser(globalUser, userId);
 
-                        /*if (uri != null) {
+                        if (uri != null) {
                             String filename = userId + ".jpg";
                             StorageReference childRef = storageRef.child(filename);
                             //uploading the image
@@ -122,9 +122,9 @@ public class SignUp extends AppCompatActivity {
                         } else {
                             Toast.makeText(SignUp.this, "Select an image", Toast.LENGTH_SHORT).show();
                             return;
-                        }*/
+                        }
 
-                        Intent menu = new Intent(SignUp.this, OptionalSignup.class);
+                        Intent menu = new Intent(SignUp.this, MainActivity.class);
                         startActivity(menu);
                         finish();
                         overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
@@ -189,7 +189,7 @@ public class SignUp extends AppCompatActivity {
     }*/
 
     public boolean ValidateForm() {
-        /*if (TextUtils.isEmpty(et_emailid.getText())) {
+        if (TextUtils.isEmpty(et_emailid.getText())) {
             Toast.makeText(SignUp.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -197,24 +197,20 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(SignUp.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(et_password.getText().toString())) {
-            Toast.makeText(SignUp.this, "Please Enter Title", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (TextUtils.isEmpty(m.getFirstname())) {
-            Toast.makeText(SignUp.this, "Please Enter FirstName", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(et_phone.getText().toString())) {
+            Toast.makeText(SignUp.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (TextUtils.isEmpty(m.getLastname())) {
+        if (TextUtils.isEmpty(et_lastname.getText().toString())) {
             Toast.makeText(SignUp.this, "Please Enter LastName", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(m.getUnit())) {
-            Toast.makeText(SignUp.this, "Please Enter Unit", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(et_firstname.getText().toString())) {
+            Toast.makeText(SignUp.this, "Please Enter FirstName", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (uri == null) {
+        /*if (uri == null) {
             Toast.makeText(SignUp.this, "Please Upload File", Toast.LENGTH_SHORT).show();
             return false;
         }*/

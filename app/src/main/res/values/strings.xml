@@ -31,6 +31,7 @@
     <string name="act_signup_lastname_hint">Provide your last name</string>
     <string name="act_signup_title">Title</string>
     <string name="act_signup_title_hint">Select title</string>
+    <string name="act_signup_phone">Phone</string>
     <string name="act_signup_sign_up">Sign Up</string>
     <string name="act_signup_cancel">Cancel</string>
     <string-array name="act_signup_title_collection">

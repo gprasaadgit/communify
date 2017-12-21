@@ -7,135 +7,161 @@
     android:padding="8dp">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/linear_layout_border"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="8dp">
 
-        <TableLayout
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tview_firstname"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.40"
+                android:text="@string/act_signup_firstname"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tview_firstname_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tview_lastname"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.40"
+                android:text="@string/act_signup_lastname"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tview_lastname_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tview_emailid"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.40"
+                android:text="@string/act_signup_email_id"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tview_emailid_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tview_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.40"
+                android:text="@string/act_signup_phone"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tview_phone_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="1">
+            android:gravity="right"
+            android:orientation="horizontal">
 
-            <TableRow android:layout_marginTop="15dp">
+            <Button
+                android:id="@+id/btn_accept_invite"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_green_rounded"
+                android:text="Accept"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/tview_firstname"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/act_signup_firstname"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow>
-
-                <EditText
-                    android:id="@+id/et_firstname"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/act_signup_firstname_hint"
-                    android:inputType="text"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/tview_lastname"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/act_signup_lastname"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow>
-
-                <EditText
-                    android:id="@+id/et_lastname"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/act_signup_lastname_hint"
-                    android:inputType="text"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/tview_emailid"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/act_signup_email_id"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow>
-
-                <EditText
-                    android:id="@+id/et_emailid"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/act_signup_email_id_hint"
-                    android:inputType="textEmailAddress"
-                    android:textSize="15sp" />
-            </TableRow>
-
-            <TableRow>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/button_green_rounded"
-                        android:text="Accept"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp" />
-
-                    <Button
-                        android:layout_width="80dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/button_red_rounded"
-                        android:text="Reject"
-                        android:textColor="#FFFFFF"
-                        android:textSize="13sp" />
-                </LinearLayout>
-            </TableRow>
-        </TableLayout>
-
+            <Button
+                android:id="@+id/btn_reject_invite"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:background="@drawable/button_red_rounded"
+                android:text="Reject"
+                android:textColor="#FFFFFF"
+                android:onClick="btn_reject_invite_Click"
+                android:textSize="13sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
