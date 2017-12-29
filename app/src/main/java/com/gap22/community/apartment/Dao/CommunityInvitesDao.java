@@ -36,6 +36,7 @@ public class CommunityInvitesDao {
                 0, 0, 0, globalUser.title, "", globalUser.phone, "", "", "", "NORMAL-USER");
 
         membersDao.CreateMembers(communityId, userUid, members);
+        dbReference.child("USER-DIRECTORY").child(userUid).child("default_community").setValue(communityId);
         dbReference.child(communityId).child("Invites").child(userUid).setValue(null);
         return response;
     }

@@ -128,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        storagePref.savePreference("UserId", email);
-
                         dRefCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
                         dRefCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -140,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                                     overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
 
                                     if (!globalUser.default_community.equals("")) {
+                                        storagePref.savePreference("UserId", email);
                                         GlobalValues.setCurrentUserEmail(globalUser.email);
                                         storagePref.savePreference("EmailId", globalUser.email);
                                         storagePref.savePreference("SafePassword", password);

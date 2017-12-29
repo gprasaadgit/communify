@@ -103,7 +103,7 @@ public class CommunityFragment extends Fragment {
                 progress.dismiss();
                 Members m = (Members) model;
                 //((TextView) v.findViewById(R.id.unit)).setText(m.getUnit());
-                ((TextView) v.findViewById(R.id.title)).setText(m.first_name);
+                ((TextView) v.findViewById(R.id.title)).setText(m.title + "." + m.first_name + " " + m.last_name);
                 ((TextView) v.findViewById(R.id.role)).setText("Active");
                 String obj = this.getRef(position).getKey();
 

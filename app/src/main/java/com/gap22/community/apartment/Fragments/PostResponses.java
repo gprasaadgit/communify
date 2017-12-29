@@ -99,7 +99,7 @@ public class PostResponses extends Fragment {
                         if(dataSnapshot.exists())
                         {
                             Members mem = dataSnapshot.getValue(Members.class);
-                            name.setText(mem.first_name);
+                            name.setText(mem.first_name + " " + mem.last_name);
 
                         }
 

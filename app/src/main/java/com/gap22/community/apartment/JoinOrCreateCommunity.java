@@ -61,6 +61,7 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
                                     CommunityInvitesDao communityInvitesDao = new CommunityInvitesDao();
                                     communityInvitesDao.CreateCommunityInvites(communityId, fireauth.getCurrentUser().getUid(), globalUser);
                                     tview_error_message.setText("Your invite is under security checks. Once the community administrator accepts, you will be getting notification.");
+                                    tview_error_message.setVisibility(View.VISIBLE);
                                 }
                             }
 
