@@ -103,7 +103,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_firstname_hint"
                         android:inputType="text"
-                        android:text="Narayanan"
+                        android:text=""
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -134,7 +134,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_lastname_hint"
                         android:inputType="text"
-                        android:text="COC"
+                        android:text=""
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -165,7 +165,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_email_id_hint"
                         android:inputType="textEmailAddress"
-                        android:text="narayanan.coc@gmail.com"
+                        android:text=""
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -196,7 +196,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_signup_password_hint"
                         android:inputType="textPassword"
-                        android:text="Neptune1982"
+                        android:text=""
                         android:textSize="15sp" />
                 </TableRow>
 
@@ -224,7 +224,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/act_firstlogset_phone_hint"
                         android:inputType="phone"
-                        android:text="+919840399445"
+                        android:text="+91"
                         android:textSize="15sp" />
                 </TableRow>
             </TableLayout>
