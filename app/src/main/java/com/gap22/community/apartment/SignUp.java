@@ -2,7 +2,6 @@ package com.gap22.community.apartment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ import com.gap22.community.apartment.Common.CommonFunctions;
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Dao.GlobalUserDao;
 import com.gap22.community.apartment.Entities.GlobalUser;
-import com.gap22.community.apartment.Entities.Members;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -119,13 +116,14 @@ public class SignUp extends AppCompatActivity {
                                     return;
                                 }
                             });
-                        } else {
+                        } /*else {
                             Toast.makeText(SignUp.this, "Select an image", Toast.LENGTH_SHORT).show();
                             return;
-                        }
+                        }*/
 
                         Intent menu = new Intent(SignUp.this, MainActivity.class);
                         startActivity(menu);
+                        Toast.makeText(SignUp.this, "User Created Succesfully", Toast.LENGTH_SHORT).show();
                         finish();
                         overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
                         return;
@@ -189,6 +187,20 @@ public class SignUp extends AppCompatActivity {
     }*/
 
     public boolean ValidateForm() {
+        if (uri == null) {
+            Toast.makeText(SignUp.this, "Please Upload File", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(et_firstname.getText().toString())) {
+            Toast.makeText(SignUp.this, "Please Enter FirstName", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(et_lastname.getText().toString())) {
+            Toast.makeText(SignUp.this, "Please Enter LastName", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+
         if (TextUtils.isEmpty(et_emailid.getText())) {
             Toast.makeText(SignUp.this, "Please Enter Email", Toast.LENGTH_SHORT).show();
             return false;
@@ -197,23 +209,13 @@ public class SignUp extends AppCompatActivity {
             Toast.makeText(SignUp.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(et_phone.getText().toString())) {
+        if (et_phone.getText().toString().length()<=3) {
             Toast.makeText(SignUp.this, "Please Enter Phone", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (TextUtils.isEmpty(et_lastname.getText().toString())) {
-            Toast.makeText(SignUp.this, "Please Enter LastName", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (TextUtils.isEmpty(et_firstname.getText().toString())) {
-            Toast.makeText(SignUp.this, "Please Enter FirstName", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        /*if (uri == null) {
-            Toast.makeText(SignUp.this, "Please Upload File", Toast.LENGTH_SHORT).show();
-            return false;
-        }*/
+
+
 
         return true;
     }
