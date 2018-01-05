@@ -137,7 +137,7 @@ String CommunityId = GlobalValues.getCommunityId();
                 ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
 
 
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/" + p.author + ".jpg");
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+p.author +".jpg");
 
 // ImageView in your Activity
                 ImageView imageView = (ImageView) v.findViewById(R.id.img_user_image);
