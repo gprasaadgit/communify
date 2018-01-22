@@ -80,6 +80,7 @@ public class PostFragment extends Fragment {
 
                 FragmentTransaction ft =getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, CreatePost);
+                ft.addToBackStack(null);
                 ft.commit();
             }
         });
@@ -175,6 +176,7 @@ String CommunityId = GlobalValues.getCommunityId();
 
                     FragmentTransaction ft =getFragmentManager().beginTransaction();
                     ft.replace(R.id.content_frame, PostResponse);
+                    ft.addToBackStack(null);
                     ft.commit();
 
                 }

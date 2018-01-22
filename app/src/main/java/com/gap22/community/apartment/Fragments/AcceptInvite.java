@@ -1,16 +1,11 @@
 package com.gap22.community.apartment.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,16 +13,11 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Dao.CommunityInvitesDao;
-import com.gap22.community.apartment.Entities.CommunityInviteCode;
-import com.gap22.community.apartment.Entities.Members;
+import com.gap22.community.apartment.Entities.GlobalUser;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.gap22.community.apartment.Entities.GlobalUser;
 
 public class AcceptInvite extends Fragment {
 
@@ -100,4 +90,7 @@ public class AcceptInvite extends Fragment {
 
         lvInvites.setAdapter(flAdapter);
     }
+
+
+
 }

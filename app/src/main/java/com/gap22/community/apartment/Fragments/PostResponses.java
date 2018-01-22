@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +17,8 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.IPAddress;
 import com.gap22.community.apartment.Common.StoragePreferences;
-import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Dao.KeyGenerator;
+import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -91,6 +92,13 @@ public class PostResponses extends Fragment {
                 final TextView name = (TextView) v.findViewById(R.id.text_User_Display_Name);
 
                 final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
+                final  ImageView edit =(ImageView) v.findViewById(R.id.img_Edit_Comment);
+                edit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        
+                    }
+                });
                 response.setText(ob.content);
 
                 mmember.child(ob.author).addListenerForSingleValueEvent(new ValueEventListener() {

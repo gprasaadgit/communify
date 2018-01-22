@@ -22,7 +22,6 @@ import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Fragments.AcceptInvite;
-import com.gap22.community.apartment.Fragments.ApproveInviteRequestFragment;
 import com.gap22.community.apartment.Fragments.CollabrationPallet;
 import com.gap22.community.apartment.Fragments.EventsCalendar;
 import com.gap22.community.apartment.Fragments.InviteNeighbours;
@@ -87,15 +86,7 @@ public class GetCollaborated extends AppCompatActivity
         displaySelectedScreen(R.id.nav_home);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,6 +110,15 @@ public class GetCollaborated extends AppCompatActivity
         return true;
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
     private void displaySelectedScreen(int itemId) {
         Fragment fragment = null;
 
@@ -168,6 +168,7 @@ public class GetCollaborated extends AppCompatActivity
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
+
             ft.commit();
         }
 
