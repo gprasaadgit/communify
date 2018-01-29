@@ -1,11 +1,15 @@
 package com.gap22.community.apartment.Common;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.gap22.community.apartment.R;
 import com.google.gson.Gson;
 
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CommonFunctions {
 
@@ -45,5 +49,25 @@ public class CommonFunctions {
         for (int i = 0; i < len; i++)
             sb.append(otpNumbers.charAt(rnd.nextInt(otpNumbers.length())));
         return sb.toString();
+    }
+
+    public static String GetDaysByWords(long inputDate) {
+        SimpleDateFormat format = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy");
+        Date today = new Date();
+        String returnDayVal = "Today";
+        long diff = 0;
+        try {
+            Date dateObj = format.parse(format.format(inputDate));
+            diff = (today.getTime() - dateObj.getTime()) / (86400000);
+        } catch (Exception e) {
+        }
+
+        if (diff == 1) {
+            returnDayVal = "Yesterday";
+        } else if (diff > 1) {
+            returnDayVal = String.valueOf(diff) + " " + "Days Ago";
+        }
+
+        return returnDayVal;
     }
 }

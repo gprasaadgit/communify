@@ -119,7 +119,7 @@ public class NewHirachiy extends AppCompatActivity {
         MembersDao membersDao = new MembersDao();
         Date createdDate = new Date();
         Members members = new Members("narayanan.vsn@gmail.com", createdDate, createdDate, Members.Status.Active, "Narayanan", "Dayalan", 0, 0, 0, "Mr", "", "9840399445", null, null, "This is all what i have", "ADMIN");
-        membersDao.CreateMembers("CMTY-20171002214959926", "6wR7YC72wecEhqKsiggCtrAgylj2", members);
+        membersDao.CreateMembers("CMTY-20171002214959926", "919840399445", members);
     }
 
     public void btn_Post_onClickBtn(View v) {

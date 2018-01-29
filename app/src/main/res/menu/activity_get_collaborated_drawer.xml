@@ -18,8 +18,7 @@
         <item
             android:id="@+id/nav_events"
             android:icon="@drawable/icl_mnu_events_calendar"
-            android:title="Events Calendar"
-            android:visible="false"/>
+            android:title="Events Calendar" />
         <item
             android:id="@+id/nav_notification"
             android:icon="@drawable/icl_mnu_notifications"

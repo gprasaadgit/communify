@@ -2,6 +2,7 @@ package com.gap22.community.apartment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.CommonFunctions;
+import com.gap22.community.apartment.Common.DeviceInfo;
 import com.gap22.community.apartment.Common.FontsOverride;
 import com.gap22.community.apartment.Common.GlobalValues;
+import com.gap22.community.apartment.Common.SmsIO;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.GlobalUser;
 import com.gap22.community.apartment.Entities.Members;
@@ -35,14 +38,12 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText et_userName;
-    private EditText et_password;
+    private EditText et_phoneNumber;
     private ProgressDialog progressModal;
     private FirebaseAuth fireauth;
 
     private TextView tview_dont_have_account;
-    private ImageView iv_password_error;
-    private ImageView iv_userName_error;
+    private ImageView iv_phoneNumber_error;
     private DatabaseReference dRefMembers, dRefCommunity, dRefSecutityRights;
 
     private StoragePreferences storagePref;
@@ -57,46 +58,48 @@ public class MainActivity extends AppCompatActivity {
         progressModal.setMessage("Loggin in Please Wait");
         fireauth = FirebaseAuth.getInstance();
 
-        et_userName = (EditText) findViewById(R.id.et_userName);
-        et_password = (EditText) findViewById(R.id.et_password);
+        et_phoneNumber = (EditText) findViewById(R.id.et_phoneNumber);
         tview_dont_have_account = (TextView) findViewById(R.id.tview_dont_have_account);
+        iv_phoneNumber_error = (ImageView) findViewById(R.id.iv_phoneNumber_error);
 
+        //SmsIO.SendSMS("", "");
         String storageUserId = storagePref.getPreference("UserId");
         if (storageUserId != "") {
+            et_phoneNumber.setText(DeviceInfo.GetPhoneNumber(this, this));
             LoadWithStoredPreference();
+        } else {
+            if (!DeviceInfo.CheckPermission(GlobalValues.WantPermission, this)) {
+                DeviceInfo.RequestPermission(GlobalValues.WantPermission, this);
+            } else {
+                et_phoneNumber.setText(DeviceInfo.GetPhoneNumber(this, this));
+            }
         }
     }
 
     public void LoadWithStoredPreference() {
         progressModal.show();
         GetGlobalValues();
-        fireauth.signInWithEmailAndPassword(GlobalValues.getCurrentUserEmail(), GlobalValues.getCurrentUserPassword()).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+        dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members");
+        dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members");
-                    dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                    Members members = postSnapshot.getValue(Members.class);
-                                    members.id = postSnapshot.getKey();
-                                    GlobalValues.addCommunityMembers(members);
-                                }
-                                Intent getCollaborated = new Intent(getApplicationContext(), GetCollaborated.class);
-                                startActivity(getCollaborated);
-                                overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
-                                finish();
-                                progressModal.dismiss();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        Members members = postSnapshot.getValue(Members.class);
+                        members.id = postSnapshot.getKey();
+                        GlobalValues.addCommunityMembers(members);
+                    }
+                    Intent getCollaborated = new Intent(getApplicationContext(), GetCollaborated.class);
+                    startActivity(getCollaborated);
+                    overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                    finish();
+                    progressModal.dismiss();
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressModal.dismiss();
             }
         });
     }
@@ -112,73 +115,58 @@ public class MainActivity extends AppCompatActivity {
         GlobalValues.setCurrentUserEmail(storagePref.getPreference("EmailId"));
         GlobalValues.setCurrentUserPassword(storagePref.getPreference("SafePassword"));
         GlobalValues.setCurrentUserName(storagePref.getPreference("FullName"));
-        GlobalValues.setCurrentUserUuid(fireauth.getCurrentUser().getUid());
+        GlobalValues.setCurrentUserUuid(et_phoneNumber.getText().toString().trim());
         GlobalValues.setCommunityId(storagePref.getPreference("CommunityID"));
         GlobalValues.setSecurityGroupSettings(CommonFunctions.GetSavedObjectFromPreference(MainActivity.this, "securityGroupSettings", "secGroup", SecurityGroupSettings.class));
     }
 
     public void btn_SignIn_onClickBtn(View v) {
-        final String email = et_userName.getText().toString().trim();
-        final String password = et_password.getText().toString().trim();
+        final String phoneNumber = et_phoneNumber.getText().toString().trim();
 
         if (ValidateFormBeforeSubmit() == true) {
             progressModal.show();
 
-            fireauth.signInWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+            dRefCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(phoneNumber);
+            dRefCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        dRefCommunity = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
-                        dRefCommunity.addListenerForSingleValueEvent(new ValueEventListener() {
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
+                        overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
 
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
-                                    overridePendingTransition(R.anim.slide_up_info, R.anim.slide_down_info);
+                        if (!globalUser.default_community.equals("")) {
+                            storagePref.savePreference("UserId", phoneNumber);
+                            GlobalValues.setCurrentUserEmail(globalUser.email);
+                            storagePref.savePreference("EmailId", globalUser.email);
+                            //storagePref.savePreference("SafePassword", password);
+                            GlobalValues.setCurrentUserName(globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
+                            storagePref.savePreference("FullName", globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
+                            GlobalValues.setCurrentUserUuid(phoneNumber);
+                            storagePref.savePreference("Image", phoneNumber);
+                            GlobalValues.setCommunityId(globalUser.default_community);
+                            storagePref.savePreference("CommunityID", globalUser.default_community);
 
-                                    if (!globalUser.default_community.equals("")) {
-                                        storagePref.savePreference("UserId", email);
-                                        GlobalValues.setCurrentUserEmail(globalUser.email);
-                                        storagePref.savePreference("EmailId", globalUser.email);
-                                        storagePref.savePreference("SafePassword", password);
-                                        GlobalValues.setCurrentUserName(globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
-                                        storagePref.savePreference("FullName", globalUser.title + ". " + globalUser.first_name + " " + globalUser.last_name);
-                                        GlobalValues.setCurrentUserUuid(fireauth.getCurrentUser().getUid());
-                                        storagePref.savePreference("Image", fireauth.getCurrentUser().getUid());
-                                        GlobalValues.setCommunityId(globalUser.default_community);
-                                        storagePref.savePreference("CommunityID", globalUser.default_community);
+                            dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members").child(phoneNumber);
+                            dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        Members members = dataSnapshot.getValue(Members.class);
 
-                                        dRefMembers = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Members").child(fireauth.getCurrentUser().getUid());
-                                        dRefMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        dRefSecutityRights = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Security").child(members.security_group);
+                                        dRefSecutityRights.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(DataSnapshot dataSnapshot) {
+
                                                 if (dataSnapshot.exists()) {
-                                                    Members members = dataSnapshot.getValue(Members.class);
-
-                                                    dRefSecutityRights = FirebaseDatabase.getInstance().getReference(GlobalValues.getCommunityId()).child("Security").child(members.security_group);
-                                                    dRefSecutityRights.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                                            if (dataSnapshot.exists()) {
-                                                                SecurityGroupSettings securityGroupSettings = dataSnapshot.getValue(SecurityGroupSettings.class);
-                                                                GlobalValues.setSecurityGroupSettings(securityGroupSettings);
-                                                                CommonFunctions.SaveObjectToSharedPreference(MainActivity.this, "securityGroupSettings", "secGroup", securityGroupSettings);
-                                                                Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
-                                                                startActivity(getCollaborated);
-                                                                progressModal.dismiss();
-                                                                finish();
-                                                                return;
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-
-                                                        }
-                                                    });
-                                                } else {
+                                                    SecurityGroupSettings securityGroupSettings = dataSnapshot.getValue(SecurityGroupSettings.class);
+                                                    GlobalValues.setSecurityGroupSettings(securityGroupSettings);
+                                                    CommonFunctions.SaveObjectToSharedPreference(MainActivity.this, "securityGroupSettings", "secGroup", securityGroupSettings);
+                                                    Intent getCollaborated = new Intent(MainActivity.this, GetCollaborated.class);
+                                                    startActivity(getCollaborated);
+                                                    progressModal.dismiss();
+                                                    finish();
                                                     return;
                                                 }
                                             }
@@ -189,49 +177,55 @@ public class MainActivity extends AppCompatActivity {
                                             }
                                         });
                                     } else {
-                                        Intent joinOrCreateCommunity = new Intent(MainActivity.this, JoinOrCreateCommunity.class);
-                                        startActivity(joinOrCreateCommunity);
-                                        progressModal.dismiss();
-                                        finish();
                                         return;
                                     }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            }
-
-                        });
-                    } else
-
-                    {
-                        Toast.makeText(MainActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        return;
+                                }
+                            });
+                        } else {
+                            storagePref.savePreference("OtpPhoneNumber", phoneNumber);
+                            Intent joinOrCreateCommunity = new Intent(MainActivity.this, JoinOrCreateCommunity.class);
+                            startActivity(joinOrCreateCommunity);
+                            progressModal.dismiss();
+                            finish();
+                            return;
+                        }
                     }
                 }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+
             });
         }
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case GlobalValues.PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //et_phone.setText(DeviceInfo.GetPhoneNumber(this, this));
+                } else {
+                    Toast.makeText(MainActivity.this, "Permission Denied. We can't get phone number.", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
     private boolean ValidateFormBeforeSubmit() {
         boolean response = true;
-        iv_userName_error = (ImageView) findViewById(R.id.iv_userName_error);
-        iv_password_error = (ImageView) findViewById(R.id.iv_password_error);
-        if (et_userName == null || et_userName.getText().toString().equals("")) {
-            iv_userName_error.setVisibility(View.VISIBLE);
+        if (et_phoneNumber == null || et_phoneNumber.getText().toString().equals("")) {
             response = false;
         } else {
-            iv_userName_error.setVisibility(View.INVISIBLE);
-        }
-
-        if (et_password == null || et_password.getText().toString().equals("")) {
-            iv_password_error.setVisibility(View.VISIBLE);
-            response = false;
-        } else {
-            iv_password_error.setVisibility(View.INVISIBLE);
+            iv_phoneNumber_error.setVisibility(View.INVISIBLE);
         }
 
         return response;

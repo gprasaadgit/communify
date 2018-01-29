@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gap22.community.apartment.Common.FontsOverride;
+import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Dao.CommunityInvitesDao;
 import com.gap22.community.apartment.Entities.CommunityInviteCode;
 import com.gap22.community.apartment.Entities.GlobalUser;
@@ -25,6 +26,7 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
     private TextView tview_error_message;
     private String communityId = "";
     private FirebaseAuth fireauth;
+    private StoragePreferences storagePref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,14 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
         FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/avenirltstd-book.ttf");
         setContentView(R.layout.activity_join_or_create_community);
 
+        storagePref = StoragePreferences.getInstance(this);
         et_invite_code = (EditText) findViewById(R.id.et_invite_code);
         tview_error_message = (TextView) findViewById(R.id.tview_error_message);
         fireauth = FirebaseAuth.getInstance();
     }
 
     public void btn_Join_onClickBtn(View v) {
+        final String storageUserId = storagePref.getPreference("OtpPhoneNumber");
         Query query = FirebaseDatabase.getInstance().getReference("INVITES").orderByChild("invite_code").equalTo(et_invite_code.getText().toString().trim());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -51,7 +55,7 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
                             communityId = post.getKey();
                         }
 
-                        Query globalUserQry = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(fireauth.getCurrentUser().getUid());
+                        Query globalUserQry = FirebaseDatabase.getInstance().getReference("USER-DIRECTORY").child(storageUserId);
                         globalUserQry.addListenerForSingleValueEvent(new ValueEventListener() {
 
                             @Override
@@ -59,7 +63,7 @@ public class JoinOrCreateCommunity extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     GlobalUser globalUser = dataSnapshot.getValue(GlobalUser.class);
                                     CommunityInvitesDao communityInvitesDao = new CommunityInvitesDao();
-                                    communityInvitesDao.CreateCommunityInvites(communityId, fireauth.getCurrentUser().getUid(), globalUser);
+                                    communityInvitesDao.CreateCommunityInvites(communityId, storageUserId, globalUser);
                                     tview_error_message.setText("Your invite is under security checks. Once the community administrator accepts, you will be getting notification.");
                                     tview_error_message.setVisibility(View.VISIBLE);
                                 }

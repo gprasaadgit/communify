@@ -170,37 +170,6 @@
                 </TableRow>
 
                 <TableRow android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:id="@+id/tview_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/act_signup_password"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow android:background="@drawable/bottom_gray_border">
-
-                    <EditText
-                        android:id="@+id/et_password"
-                        android:layout_width="match_parent"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/act_signup_password_hint"
-                        android:inputType="textPassword"
-                        android:text=""
-                        android:textSize="15sp" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="15dp">
                     <TextView
                         android:id="@+id/tview_phone"
                         android:layout_width="match_parent"

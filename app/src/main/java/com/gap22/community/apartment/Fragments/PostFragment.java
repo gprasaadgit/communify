@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.gap22.community.apartment.Common.CommonFunctions;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
 import com.gap22.community.apartment.Entities.Post;
@@ -35,11 +36,12 @@ import java.util.Date;
 public class PostFragment extends Fragment {
 
     ListView lview;
-    private DatabaseReference mDatabase,mpostresponse;
+    private DatabaseReference mDatabase, mpostresponse;
     private FirebaseAuth fireauth;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private StoragePreferences storagePref;
     private ProgressDialog progress;
+
     public PostFragment() {
         // Required empty public constructor
     }
@@ -61,13 +63,11 @@ public class PostFragment extends Fragment {
         storagePref = StoragePreferences.getInstance(getActivity());
 
 
-
-
-            if (GlobalValues.getSecurityGroupSettings().CanCreatePost==true) {
-                fab.setVisibility(View.VISIBLE);
-            } else {
-                fab.setVisibility(View.GONE);
-            }
+        if (GlobalValues.getSecurityGroupSettings().CanCreatePost == true) {
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.GONE);
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,26 +78,18 @@ public class PostFragment extends Fragment {
                                /* Intent i = new Intent(getActivity(), PollResultActivity.class);
                                 i.putExtras(bundle);*/
 
-                FragmentTransaction ft =getFragmentManager().beginTransaction();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.content_frame, CreatePost);
                 ft.addToBackStack(null);
                 ft.commit();
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
-String CommunityId = GlobalValues.getCommunityId();
+        String CommunityId = GlobalValues.getCommunityId();
         mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
         mpostresponse = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
 
         fireauth = FirebaseAuth.getInstance();
-
-
-
-
-
-
-
-
 
 
         progress = new ProgressDialog(getActivity());
@@ -107,7 +99,7 @@ String CommunityId = GlobalValues.getCommunityId();
         final FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), Post.class, R.layout.post_list_item, mDatabase) {
             @Override
             protected void populateView(View v, Object model, int position) {
-                    progress.dismiss();
+                progress.dismiss();
                 String postId = getRef(position).getKey();
                 Post p = (Post) model;
 
@@ -120,7 +112,7 @@ String CommunityId = GlobalValues.getCommunityId();
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             responsecount.setText(dataSnapshot.getChildrenCount() + " - Replies");
-                           // responsecount.setTextColor(Color.YELLOW);
+                            // responsecount.setTextColor(Color.YELLOW);
                         }
                     }
 
@@ -129,16 +121,15 @@ String CommunityId = GlobalValues.getCommunityId();
 
                     }
                 });
-                Date today = new Date();
+
+                /*Date today = new Date();
                 long diff = today.getTime() - p.created_date.getTime();
                 int days = (int) (diff / (1000 * 60 * 60 * 24));
                 int hours = (int) (diff / (1000 * 60 * 60));
                 int minutes = (int) (diff / (1000 * 60));
-                int seconds = (int) (diff / (1000));
-                ((TextView) v.findViewById(R.id.no_of_days)).setText(days + "Days ," + hours + "hours," + minutes + "minutes");
-
-
-                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/"+p.author +".jpg");
+                int seconds = (int) (diff / (1000));*/
+                ((TextView) v.findViewById(R.id.no_of_days)).setText(CommonFunctions.GetDaysByWords(p.created_date.getTime()));
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://communify-4b71c.appspot.com/" + p.author + ".jpg");
 
 // ImageView in your Activity
                 ImageView imageView = (ImageView) v.findViewById(R.id.img_user_image);
@@ -152,8 +143,6 @@ String CommunityId = GlobalValues.getCommunityId();
         };
 
 
-
-
         lview.setAdapter(adapter);
 
         lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,11 +151,11 @@ String CommunityId = GlobalValues.getCommunityId();
 
                 {
                     Post p = (Post) adapter.getItem(position);
-                    String postId= adapter.getRef(position).getKey();
+                    String postId = adapter.getRef(position).getKey();
                     Bundle bundle = new Bundle();
-                    bundle.putString("Post",p.content);
-                    bundle.putString("Title",p.title);
-                    bundle.putString("PostId",postId );
+                    bundle.putString("Post", p.content);
+                    bundle.putString("Title", p.title);
+                    bundle.putString("PostId", postId);
                     // bundle.putInt("ResponseCount",p.getResponses());
                     Fragment PostResponse = new PostResponses();
 
@@ -174,7 +163,7 @@ String CommunityId = GlobalValues.getCommunityId();
                                /* Intent i = new Intent(getActivity(), PollResultActivity.class);
                                 i.putExtras(bundle);*/
 
-                    FragmentTransaction ft =getFragmentManager().beginTransaction();
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.content_frame, PostResponse);
                     ft.addToBackStack(null);
                     ft.commit();
@@ -183,8 +172,6 @@ String CommunityId = GlobalValues.getCommunityId();
 
             }
         });
-
-
 
 
         // Firebase ref = new Firebase("https://<yourapp>.firebaseio.com");

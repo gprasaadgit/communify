@@ -1,5 +1,7 @@
 package com.gap22.community.apartment.Common;
 
+import android.Manifest;
+
 import com.gap22.community.apartment.Entities.Members;
 import com.gap22.community.apartment.Entities.SecurityGroupSettings;
 import com.github.underscore.Predicate;
@@ -22,6 +24,11 @@ public class GlobalValues {
     private static SecurityGroupSettings SecurityGroupSettings;
     private static FirebaseAuth authentication;
     private static List<Members> communityMembers = new ArrayList<Members>();
+    public static String WantPermission = Manifest.permission.READ_PHONE_STATE;
+    public static final int PERMISSION_REQUEST_CODE = 1;
+    public static String ACCOUNT_SID = "AC7700be57cfe831a28fb5a9d96126f10b";
+    public static String AUTH_TOKEN = "e6c05d19a9dc7078aa8163bf8c9924dc";
+
 
     private static void setFirebaseAuthentication(FirebaseAuth auth) {
         authentication = auth;
