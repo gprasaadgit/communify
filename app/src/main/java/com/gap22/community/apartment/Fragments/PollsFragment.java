@@ -123,8 +123,8 @@ public class PollsFragment extends Fragment {
 
 
 
-                        dialogBuilder.setTitle("Delete Post");
-                        dialogBuilder.setMessage("Are you sure to delete the Post ");
+                        dialogBuilder.setTitle("Delete Poll");
+                        dialogBuilder.setMessage("Are you sure to delete the Poll ");
                         dialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //do something with edt.getText().toString();
