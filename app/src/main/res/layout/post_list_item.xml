@@ -83,10 +83,21 @@
 
 
     <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@+id/no_of_days"
+        android:layout_alignStart="@+id/no_of_days"
+        android:layout_alignTop="@+id/short_message"
+        android:src="@drawable/navigate_arrow" />
+    <ImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/arrow"
         android:layout_centerVertical="true"
-        android:src="@drawable/navigate_arrow" />
+        android:src="@drawable/delete_red"
+        android:id="@+id/del" />
+
 
 </RelativeLayout>

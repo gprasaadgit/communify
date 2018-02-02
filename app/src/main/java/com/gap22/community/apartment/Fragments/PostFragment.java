@@ -1,6 +1,8 @@
 package com.gap22.community.apartment.Fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -19,6 +22,7 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.gap22.community.apartment.Common.CommonFunctions;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Dao.PostDao;
 import com.gap22.community.apartment.Entities.Post;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,8 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.Date;
 
 
 public class PostFragment extends Fragment {
@@ -60,6 +62,7 @@ public class PostFragment extends Fragment {
 
 
         FloatingActionButton fab = (FloatingActionButton) fragPostView.findViewById(R.id.fab_);
+
         storagePref = StoragePreferences.getInstance(getActivity());
 
 
@@ -85,7 +88,7 @@ public class PostFragment extends Fragment {
             }
         });
         lview = (ListView) fragPostView.findViewById(R.id.listView2);
-        String CommunityId = GlobalValues.getCommunityId();
+        final String CommunityId = GlobalValues.getCommunityId();
         mDatabase = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
         mpostresponse = FirebaseDatabase.getInstance().getReference(CommunityId.trim()).child("Post");
 
@@ -105,6 +108,50 @@ public class PostFragment extends Fragment {
 
                 ((TextView) v.findViewById(R.id.title)).setText(p.title);
                 ((TextView) v.findViewById(R.id.short_message)).setText(p.content);
+               final ImageView del = ((ImageView)v.findViewById(R.id.del));
+                if(GlobalValues.getSecurityGroupSettings().CanDeletePost==true)
+                {
+                   del.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    del.setVisibility(View.INVISIBLE);
+                }
+del.setTag(postId);
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+
+
+
+
+
+                        dialogBuilder.setTitle("Delete Post");
+                        dialogBuilder.setMessage("Are you sure to delete the Post ");
+                        dialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //do something with edt.getText().toString();
+
+
+                                PostDao postDao = new PostDao();
+                           String id = del.getTag().toString();
+                                postDao.DeletePost(CommunityId, id);
+
+                                Toast.makeText(getActivity(), "Response Submitted", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //pass
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog b = dialogBuilder.create();
+                        b.show();
+
+                    }
+                });
                 final TextView responsecount = ((TextView) v.findViewById(R.id.no_of_replies));
 
                 mpostresponse.child(postId).child("post_responses").addListenerForSingleValueEvent(new ValueEventListener() {

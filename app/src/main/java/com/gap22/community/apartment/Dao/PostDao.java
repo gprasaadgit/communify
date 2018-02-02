@@ -41,6 +41,18 @@ public class   PostDao {
         return response;
     }
 
+    public ActionResponse DeletePost(String communityId,String postid)
+    { ActionResponse response = new ActionResponse();
+        try {
+            dbReference.child(communityId).child("Post").child(postid).removeValue();
+        } catch (Exception e) {
+            response.error_message = e.getMessage();
+            response.success = false;
+        }
+
+        return response;
+
+    }
     public ActionResponse CreatePostResponse(String communityId, String postId, String postResponseId, PostResponses postResponse) {
         ActionResponse response = new ActionResponse();
         try {

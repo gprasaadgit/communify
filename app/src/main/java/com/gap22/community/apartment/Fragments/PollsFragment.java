@@ -1,6 +1,8 @@
 package com.gap22.community.apartment.Fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.gap22.community.apartment.Common.GlobalValues;
 import com.gap22.community.apartment.Common.StoragePreferences;
+import com.gap22.community.apartment.Dao.PollsDao;
 import com.gap22.community.apartment.Entities.Poll;
 import com.gap22.community.apartment.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +60,7 @@ public class PollsFragment extends Fragment {
         storagePref = StoragePreferences.getInstance(getActivity());
         progress = new ProgressDialog(getActivity());
 
-        String CommunityId = GlobalValues.getCommunityId();
+        final String CommunityId = GlobalValues.getCommunityId();
        {
 
             if (GlobalValues.getSecurityGroupSettings().CanCreatePoll==true)
@@ -98,6 +102,52 @@ public class PollsFragment extends Fragment {
                final Poll p = (Poll) model;
 
                 ((TextView) v.findViewById(R.id.title)).setText(p.question);
+
+
+                final ImageView del = ((ImageView)v.findViewById(R.id.del));
+                if(GlobalValues.getSecurityGroupSettings().CanDeletePoll==true)
+                {
+                    del.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    del.setVisibility(View.INVISIBLE);
+                }
+                del.setTag(pollId);
+                del.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+
+
+
+
+
+                        dialogBuilder.setTitle("Delete Post");
+                        dialogBuilder.setMessage("Are you sure to delete the Post ");
+                        dialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //do something with edt.getText().toString();
+
+
+                                PollsDao pollsDao = new PollsDao();
+                                String id = del.getTag().toString();
+                                pollsDao.DeletePoll(CommunityId, id);
+
+                                Toast.makeText(getActivity(), "Response Submitted", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //pass
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog b = dialogBuilder.create();
+                        b.show();
+
+                    }
+                });
               /*  if (p.getStatus().equalsIgnoreCase("Active")) {
                     ((TextView) v.findViewById(R.id.textView2)).setText("OPEN");
                 }
@@ -189,7 +239,7 @@ public class PollsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //if (!(GlobalValues.getSecurityGroupSettings().CanCreatePoll==true))
-                if(true)
+                if(GlobalValues.getSecurityGroupSettings().CanContributePoll == true)
                 { final Poll p = (Poll) adapter.getItem(position);
                     final int k = position;
                     final String pollid = adapter.getRef(position).getKey();

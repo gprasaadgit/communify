@@ -1,6 +1,8 @@
 package com.gap22.community.apartment.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -77,6 +79,16 @@ public class PostResponses extends Fragment {
 
         mmember = FirebaseDatabase.getInstance().getReference(CommunityId).child("Members");
 
+        if(GlobalValues.getSecurityGroupSettings().CanReplyPost == true)
+        {
+            Response.setVisibility(View.VISIBLE);
+            et_post_response_message.setVisibility(View.VISIBLE);
+        }
+        else
+        {Response.setVisibility(View.INVISIBLE);
+            et_post_response_message.setVisibility(View.INVISIBLE);
+
+        }
 
         FirebaseListAdapter adapter = new FirebaseListAdapter(getActivity(), com.gap22.community.apartment.Entities.PostResponses.class, R.layout.viewpostresponse, mDatabase)
         {
@@ -93,9 +105,47 @@ public class PostResponses extends Fragment {
 
                 final TextView response = (TextView)v.findViewById(R.id.text_User_Response);
                 final  ImageView edit =(ImageView) v.findViewById(R.id.img_Edit_Comment);
+                edit.setTag(getRef(position).getKey());
                 edit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        final String postId = v.getTag().toString();
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+
+                       final EditText resp = new EditText(getContext());
+                        resp.setText(response.getText());
+
+                        dialogBuilder.setView(resp);
+
+
+
+                        dialogBuilder.setTitle("Edit Response");
+                        dialogBuilder.setMessage("Enter text below");
+                        dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //do something with edt.getText().toString();
+
+                                final String srt = resp .getText().toString();
+                                PostDao postDao = new PostDao();
+                                Date createdDate = new Date();
+                               // KeyGenerator keyGen = new KeyGenerator();
+                                com.gap22.community.apartment.Entities.PostResponses postResponse = new com.gap22.community.apartment.Entities.PostResponses(fireauth.getCurrentUser().getUid(), IPAddress.getMACAddress("wlan0"), IPAddress.getMACAddress("eth0"), createdDate, srt , com.gap22.community.apartment.Entities.PostResponses.Status.Approved, "", "");
+                                postDao.CreatePostResponse(CommunityId, pollId, postId, postResponse);
+
+                                Toast.makeText(getActivity(), "Response Submitted", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //pass
+                                dialog.cancel();
+                            }
+                        });
+                        AlertDialog b = dialogBuilder.create();
+                        b.show();
+
+
                         
                     }
                 });

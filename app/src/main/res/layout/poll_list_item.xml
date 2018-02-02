@@ -117,11 +117,22 @@
         android:progress="72" />
 
 
-
-    <ImageView android:layout_width="20dp"
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/navigate_arrow"
+        android:layout_alignEnd="@+id/pb_option1"
+        android:layout_alignRight="@+id/pb_option1"
+        android:layout_alignTop="@+id/del"
+        android:src="@drawable/navigate_arrow" />
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"/>
+        android:layout_toRightOf="@+id/arrow"
+        android:layout_centerVertical="true"
+        android:src="@drawable/delete_red"
+        android:id="@+id/del" />
+
 
 </RelativeLayout>

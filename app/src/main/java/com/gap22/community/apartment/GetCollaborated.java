@@ -91,6 +91,16 @@ public class GetCollaborated extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_get_collaborated_drawer, menu);
+        MenuItem invite = menu.findItem(R.id.nav_manage_invites);
+        if(GlobalValues.getSecurityGroupSettings().CanAcceptInvites == true)
+        {
+            invite.setVisible(true);
+        }
+        else
+        {
+            invite.setVisible(false);
+        }
+
         return false;
     }
 

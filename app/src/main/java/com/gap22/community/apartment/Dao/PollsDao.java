@@ -1,7 +1,7 @@
 package com.gap22.community.apartment.Dao;
 
-import com.gap22.community.apartment.Entities.Poll;
 import com.gap22.community.apartment.Entities.ActionResponse;
+import com.gap22.community.apartment.Entities.Poll;
 import com.gap22.community.apartment.Entities.PollResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +42,17 @@ public class PollsDao {
         return response;
     }
 
+    public ActionResponse DeletePoll(String communityId, String pollId) {
+        ActionResponse response = new ActionResponse();
+        try {
+            dbReference.child(communityId).child("Poll").child(pollId).removeValue();
+        } catch (Exception e) {
+            response.error_message = e.getMessage();
+            response.success = false;
+        }
+
+        return response;
+    }
     public ActionResponse CreatePollResponse(String communityId, String pollId, String memberId, PollResponse pollResponse) {
         ActionResponse response = new ActionResponse();
         try {
